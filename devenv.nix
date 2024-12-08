@@ -222,6 +222,7 @@ in
       package = pkgs.bash;
       description = "A workaround to use a more modern version of ESLint.";
       exec = ''
+        bun install
         eslint src/
       '';
     };

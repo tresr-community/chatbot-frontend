@@ -144,19 +144,3 @@ jobs:
           bun install
           bun run build
           wrangler deploy --minify --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}
-
-      #- id: publish_worker
-      #  name: Publish worker using Wrangler
-      #  uses: cloudflare/wrangler-action@v3
-      #  with:
-      #    apiToken: ${{ env.CLOUDFLARE_TOKEN_WRANGLER }}
-      #    packageManager: bun
-      #    preCommands: |
-      #      echo "Running preCommands for ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }} environment"
-      #      bun install
-      #      bun run build
-      #      echo "Finished running preCommands for ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }} environment"
-      #    command: deploy --minify --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}
-      #    postCommands: |
-      #      echo "Running postCommands for ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }} environment"
-      #      echo "Finished running postCommands for ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }} environment"

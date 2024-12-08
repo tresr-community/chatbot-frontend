@@ -99,6 +99,12 @@ jobs:
         run: |
           devenv gc
 
+      - id: devenv_bun_install
+        name: Bun install
+        shell: devenv shell --quiet bash -- -e {0}
+        run: |
+          bun install
+
       - id: devenv_test
         name: Devenv test
         run: |
