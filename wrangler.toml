@@ -73,9 +73,7 @@ preview_bucket_name = "nftreasure-community-chatbot-preview"
 # Ref: https://developers.cloudflare.com/workers/about/routes/
 routes = [
 	{ pattern = "preview.chat.nftreasure.community", custom_domain = true },
-	{ pattern = "preview.chat.nftreasure.community/quotes", zone_name = "nftreasure.community" },
-	{ pattern = "preview.chat.nftreasure.community/fullscreen", zone_name = "nftreasure.community" },
-	{ pattern = "preview.chat.nftreasure.community/widget", zone_name = "nftreasure.community" },
+	{ pattern = "preview.chat.nftreasure.community/*", zone_name = "nftreasure.community" },
 ]
 
 [env.preview.build]
@@ -103,9 +101,7 @@ preview_bucket_name = "nftreasure-community-chatbot-preview"
 # Ref: https://developers.cloudflare.com/workers/about/routes/
 routes = [
 	{ pattern = "chat.nftreasure.community", custom_domain = true },
-	{ pattern = "chat.nftreasure.community/quotes", zone_name = "nftreasure.community" },
-	{ pattern = "chat.nftreasure.community/fullscreen", zone_name = "nftreasure.community" },
-	{ pattern = "chat.nftreasure.community/widget", zone_name = "nftreasure.community" },
+	{ pattern = "chat.nftreasure.community/*", zone_name = "nftreasure.community" },
 ]
 
 [env.production.build]
