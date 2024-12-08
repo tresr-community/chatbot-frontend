@@ -1,0 +1,28 @@
+---
+// Pulls a random crypto quote from the API.
+---
+
+<script is:inline>
+  async function fetchQuote() {
+    try {
+      const url = new URL("/api/crypto", window.location.origin);
+
+      const response = await fetch(url);
+      /** @type {string[]} */
+      const quotes = await response.json();
+
+      const quoteElement = document.getElementById("quoteText");
+      if (!quoteElement) return;
+
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteElement.textContent = quotes[randomIndex];
+    } catch (error) {
+      console.error("Failed to fetch quote:", error);
+    }
+  }
+
+  setTimeout(() => {
+    fetchQuote();
+    setInterval(fetchQuote, 5000);
+  }, 5000);
+</script>

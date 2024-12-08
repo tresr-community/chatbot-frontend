@@ -71,7 +71,7 @@ jobs:
   ##################################################
 
   worker:
-    name: Build Worker frontend
+    name: Deploy Worker frontend
 
     runs-on: ubuntu-latest
 

@@ -8,7 +8,7 @@ import Body from "./Body.astro";
 import PWA from "../components/PWA.astro";
 import Theme from "../components/Theme.astro";
 import ChatBot from "../components/ChatBot.astro";
-import Quotes from "../components/Quotes.astro";
+import Crypto from "../components/Crypto.astro";
 
 interface Props {
   title?: string;
@@ -54,7 +54,7 @@ const {
       <PWA />
       <Theme />
 
-      {enableQuotes && <Quotes />}
+      {enableQuotes && <Crypto />}
       <ChatBot
         title={title}
         type={chatbotType}
