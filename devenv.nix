@@ -13,7 +13,6 @@ let
     caddy
     certbot-full
     direnv
-    eslint
     figlet
     git
     hello
@@ -101,6 +100,7 @@ in
       ".git/"
       ".vscode/"
       ".dist/"
+      ".wrangler/"
     ];
     hooks = {
       actionlint.enable = true;
@@ -113,7 +113,14 @@ in
       convco.enable = true;
       deadnix.enable = true;
       editorconfig-checker.enable = true;
-      eslint.enable = true;
+      eslint.enable = false;
+      eslint-hack = {
+        enable = true;
+        name = "eslint-hack";
+        entry = "eslint-check";
+        files = "^src/.*$";
+        pass_filenames = false;
+      };
       markdownlint = {
         enable = true;
         settings = {
@@ -138,19 +145,12 @@ in
       pre-commit-hook-ensure-sops.enable = true;
       prettier = {
         enable = true;
-        excludes = [ ];
         settings = {
-          use-tabs = false;
-          no-bracket-spacing = false;
-          no-semi = false;
-          single-quote = false;
-          tab-width = 2;
-          trailing-comma = "es5";
+          configPath = ".prettierrc.yaml";
         };
       };
       pretty-format-json = {
         enable = false;
-        excludes = [ ];
       };
       revive = {
         enable = true;
@@ -158,11 +158,9 @@ in
       };
       ripsecrets = {
         enable = true;
-        excludes = [ ];
       };
       shellcheck = {
         enable = true;
-        excludes = [ ];
       };
       shfmt.enable = true;
       staticcheck.enable = true;
@@ -216,6 +214,16 @@ in
           ];
         };
       };
+    };
+  };
+
+  scripts = {
+    eslint-check = {
+      package = pkgs.bash;
+      description = "A workaround to use a more modern version of ESLint.";
+      exec = ''
+        eslint src/
+      '';
     };
   };
 

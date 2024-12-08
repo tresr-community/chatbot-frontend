@@ -1,0 +1,31 @@
+/* Base Container */
+.chatbotUI-container {
+  @apply flex flex-col overflow-hidden;
+  @apply bg-background z-30;
+}
+
+.dark .chatbotUI-container {
+  @apply bg-dark-background;
+}
+
+/* Modifiers */
+.chatbotUI-container--widget {
+  @apply fixed w-96 max-w-sm;
+  @apply bottom-10 right-5;
+  @apply rounded-lg shadow-lg;
+  @apply transform transition-all duration-300 ease-in-out;
+  @apply z-[9999];
+  height: 500px;
+}
+
+.chatbotUI-container--fullscreen {
+  @apply w-full;
+}
+
+/* Mobile Optimization */
+@media (max-width: 640px) {
+  .chatbotUI-container--widget {
+    @apply w-full h-full bottom-0;
+    @apply rounded-none;
+  }
+}

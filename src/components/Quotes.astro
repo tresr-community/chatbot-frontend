@@ -1,0 +1,29 @@
+---
+// No server-side fetch needed
+---
+
+<script is:inline>
+  async function fetchQuote() {
+    try {
+      const url = new URL("/api/quotes", window.location.origin);
+      url.searchParams.set("type", "crypto");
+
+      const response = await fetch(url);
+      /** @type {string[]} */
+      const quotes = await response.json();
+
+      const quoteElement = document.getElementById("quoteText");
+      if (!quoteElement) return;
+
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteElement.textContent = quotes[randomIndex];
+    } catch (error) {
+      console.error("Failed to fetch quote:", error);
+    }
+  }
+
+  setTimeout(() => {
+    fetchQuote();
+    setInterval(fetchQuote, 5000);
+  }, 5000);
+</script>

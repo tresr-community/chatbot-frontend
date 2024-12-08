@@ -11,20 +11,22 @@ It is made with :heart: _love_ :heart: for the NFTREASURE Community.
 ## How to run locally
 
 ```bash
-# Get the dependencies
-just -q init
+# Build
+bun run build
 
-# Login to Cloudflare
-just -q login
+# Preview (Frontend only)
+bun run preview
 
-# Build the local workers
-just -q build
+# Or,
 
-# Start the local workers
-just -q start
-
-# Stop the local workers
-just -q stop
+# Preview (Frontend and Backend via Caddy)
+#   1. Make sure the backend is running in one terminal.
+#   2. Start the Worker in another terminal
+bun run preview
+#   3. Start Caddy in another terminal
+./scripts/caddy start
+#   4. Stop Caddy when done
+./scripts/caddy stop
 ```
 
 ## How to test locally

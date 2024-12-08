@@ -1,0 +1,53 @@
+---
+interface Props {
+  welcomeMessage: string;
+  enableSpeechBubble: boolean;
+  enableLoadingSpinner: boolean;
+}
+
+const {
+  welcomeMessage = "Welcome Message goes here",
+  enableSpeechBubble = true,
+  enableLoadingSpinner = true,
+} = Astro.props;
+---
+
+<div class="bg-container">
+  <div class="content">
+    <!-- Dark Mode Toggle Button -->
+    <button id="modeToggle" type="button" class="theme-switcher-button">
+      🌜
+    </button>
+
+    <!-- NFTREASURE Logo -->
+    <img src="/images/NFTREASURE.png" alt="NFTREASURE" class="logo" />
+
+    <!-- Ron Jay Image & Speech Bubble if enabled-->
+    {
+      enableSpeechBubble && (
+        <div class="container-ron-jay">
+          <img src="/images/ron_jay.png" alt="Ron Jay" class="image-ron-jay" />
+          <div id="speech-bubble" class="speech-bubble">
+            <div id="quoteText">{welcomeMessage}</div>
+          </div>
+        </div>
+      )
+    }
+
+    <!-- Loading Spinner if enabled -->
+    {
+      enableLoadingSpinner && (
+        <div
+          id="chatbot-loading-spinner"
+          class="chatbotUI-loader htmx-indicator"
+          data-minimum-duration="1000"
+        />
+      )
+    }
+
+    <!-- The Chatbot Widget Container -->
+    <div id="chatbot-container"></div>
+  </div>
+  <!-- content -->
+</div>
+<!-- bg-container -->

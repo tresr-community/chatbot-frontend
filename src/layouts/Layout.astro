@@ -1,0 +1,71 @@
+---
+// Layouts
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import Body from "./Body.astro";
+
+// Components
+import PWA from "../components/PWA.astro";
+import Theme from "../components/Theme.astro";
+import ChatBot from "../components/ChatBot.astro";
+import Quotes from "../components/Quotes.astro";
+
+interface Props {
+  title?: string;
+  footerMessage?: string;
+  welcomeMessage?: string;
+  chatbotType?: string;
+  chatbotStyle?: string;
+  chatbotApiVersion?: string;
+  chatbotApiBackend?: string;
+  chatbotShowButton?: boolean;
+  enableSpeechBubble?: boolean;
+  enableLoadingSpinner?: boolean;
+  enableQuotes?: boolean;
+}
+
+const {
+  title = "Header Message goes here",
+  footerMessage = "Footer Message goes here",
+  welcomeMessage = "Welcome Message goes here",
+  chatbotType = "widget",
+  chatbotStyle = "light",
+  chatbotApiVersion = "v1",
+  chatbotApiBackend = "chatbot",
+  chatbotShowButton = true,
+  enableSpeechBubble = true,
+  enableLoadingSpinner = true,
+  enableQuotes = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Header title={title} />
+  </head>
+  <body>
+    <Body
+      welcomeMessage={welcomeMessage}
+      enableSpeechBubble={enableSpeechBubble}
+      enableLoadingSpinner={enableLoadingSpinner}
+    />
+    <scripts>
+      <PWA />
+      <Theme />
+
+      {enableQuotes && <Quotes />}
+      <ChatBot
+        title={title}
+        type={chatbotType}
+        style={chatbotStyle}
+        apiVersion={chatbotApiVersion}
+        apiBackend={chatbotApiBackend}
+        showButton={chatbotShowButton}
+      />
+    </scripts>
+    <footer>
+      <Footer footerMessage={footerMessage} />
+    </footer>
+  </body>
+</html>

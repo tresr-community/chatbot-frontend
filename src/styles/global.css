@@ -1,0 +1,19 @@
+/*
+Common styles
+*/
+@import "common.css";
+
+/*
+Styles for home page
+*/
+@import "home.css";
+
+/*
+Styles for Avatar and Message bubbles
+*/
+@import "avatar.css";
+
+/*
+Styles for the ChatBot mode
+*/
+@import "chatbot.css";

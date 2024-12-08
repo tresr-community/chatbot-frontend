@@ -1,0 +1,30 @@
+---
+// Layouts
+import Layout from "../layouts/Layout.astro";
+
+const chatbotShowButton = false;
+const enableQuotes = false;
+
+// Config
+import {
+  title,
+  footerMessage,
+  welcomeMessage,
+  chatbotType,
+  chatbotStyle,
+  chatbotApiVersion,
+  chatbotApiBackend,
+} from "../config";
+---
+
+<Layout
+  title={title}
+  footerMessage={footerMessage}
+  welcomeMessage={welcomeMessage}
+  chatbotType={chatbotType}
+  chatbotStyle={chatbotStyle}
+  chatbotApiVersion={chatbotApiVersion}
+  chatbotApiBackend={chatbotApiBackend}
+  chatbotShowButton={chatbotShowButton}
+  enableQuotes={enableQuotes}
+/>
