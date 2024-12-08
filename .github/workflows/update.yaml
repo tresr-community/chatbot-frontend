@@ -97,7 +97,7 @@ jobs:
 
       - id: bun_update
         name: Bun update
-        shell: devenv shell bash -- -e {0}
+        shell: devenv shell --quiet bash -- -e {0}
         run: |
           bun install
           git add bun.lockb
