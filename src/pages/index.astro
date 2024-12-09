@@ -2,6 +2,11 @@
 // Layouts
 import Layout from "../layouts/Layout.astro";
 
+// ChatBot Configuration
+const chatbotType = "widget";
+const chatbotStyle = "light";
+const chatbotShowButton = true;
+const enableLoadingSpinner = true;
 const enableQuotes = true;
 
 // Config
@@ -9,11 +14,8 @@ import {
   title,
   footerMessage,
   welcomeMessage,
-  chatbotType,
-  chatbotStyle,
   chatbotApiVersion,
   chatbotApiBackend,
-  chatbotShowButton,
 } from "../config";
 ---
 
@@ -26,5 +28,6 @@ import {
   chatbotApiVersion={chatbotApiVersion}
   chatbotApiBackend={chatbotApiBackend}
   chatbotShowButton={chatbotShowButton}
+  enableLoadingSpinner={enableLoadingSpinner}
   enableQuotes={enableQuotes}
 />

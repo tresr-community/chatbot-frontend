@@ -1,32 +1,21 @@
 ---
 // Props
 interface Props {
-  title: string;
-  type: string;
-  style: string;
-  apiVersion: string;
-  apiBackend: string;
+  type: "widget" | "fullscreen";
+  style: "light" | "dark";
+  apiVersion: "v1" | "v2";
+  apiBackend: "grok" | "chatbot" | "google-ai-studio";
   showButton: boolean;
 }
 
-const { title, type, style, apiVersion, apiBackend, showButton } = Astro.props;
+const { type, style, apiVersion, apiBackend, showButton } = Astro.props;
 ---
 
-<script is:inline>
-  console.log("Widget");
-  console.log({ title });
-  console.log({ type });
-  console.log({ style });
-  console.log({ apiVersion });
-  console.log({ apiBackend });
-  console.log({ showButton });
-</script>
-
-<div>
-  <h1>{title}</h1>
-  <p>Type: {type}</p>
-  <p>Style: {style}</p>
-  <p>API Version: {apiVersion}</p>
-  <p>API Backend: {apiBackend}</p>
-  <p>Show Button: {showButton}</p>
-</div>
+<script
+  src="/js/chatbot.js"
+  data-chatbot-type={type}
+  data-chatbot-style={style}
+  data-chatbot-api-version={apiVersion}
+  data-chatbot-api-backend={apiBackend}
+  data-chatbot-show-button={showButton}
+  defer></script>

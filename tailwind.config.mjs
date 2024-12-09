@@ -42,10 +42,6 @@ export default {
     "hide",
     "hidden",
 
-    // State classes
-    "htmx-indicator",
-    "htmx-request",
-
     // Flex classes that we use
     "flex-row",
     "flex-row-reverse",

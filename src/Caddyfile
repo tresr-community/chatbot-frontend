@@ -85,7 +85,7 @@ localhost:9000 {
 
 	# Frontend routes
 	@frontend-routes {
-		path / /fullscreen /widget /quotes /api/quotes*
+		path / /fullscreen /widget /quotes /api/crypto /api/outage
 	}
 	handle @frontend-routes {
 		reverse_proxy localhost:9100 {

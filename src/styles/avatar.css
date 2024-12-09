@@ -42,6 +42,8 @@
     @apply flex-1 max-w-xs px-4 py-2 my-2 break-words rounded-lg shadow;
     @apply bg-title-color text-light;
     @apply z-50;
+    width: fit-content;
+    max-width: 75%;
   }
 
   .dark .messageBubble {

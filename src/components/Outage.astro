@@ -8,8 +8,15 @@
       const url = new URL("/api/outage", window.location.origin);
 
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       /** @type {string[]} */
       const quotes = await response.json();
+
+      if (!Array.isArray(quotes) || quotes.length === 0) {
+        throw new Error("Invalid outage quote data: not an array or empty.");
+      }
 
       const quoteElement = document.getElementById("quoteText");
       if (!quoteElement) return;

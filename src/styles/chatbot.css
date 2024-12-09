@@ -1,31 +1,313 @@
-/* Base Container */
-.chatbotUI-container {
-  @apply flex flex-col overflow-hidden;
-  @apply bg-background z-30;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
 }
 
-.dark .chatbotUI-container {
-  @apply bg-dark-background;
+@layer components {
 }
 
-/* Modifiers */
-.chatbotUI-container--widget {
-  @apply fixed w-96 max-w-sm;
-  @apply bottom-10 right-5;
-  @apply rounded-lg shadow-lg;
-  @apply transform transition-all duration-300 ease-in-out;
-  @apply z-[9999];
-  height: 500px;
-}
+@layer utilities {
+  /*
+  ChatBot Container
+  */
 
-.chatbotUI-container--fullscreen {
-  @apply w-full;
-}
+  .chatbotUI-container {
+    @apply flex flex-col overflow-hidden;
+    @apply bg-background z-30;
+  }
 
-/* Mobile Optimization */
-@media (max-width: 640px) {
+  /* Dark Mode */
+  .dark .chatbotUI-container {
+    @apply bg-dark-background;
+  }
+
+  /* Show the ChatBot Container */
+  .chatbotUI-container.show {
+    @apply opacity-100 scale-100 !important;
+    @apply visible !important;
+  }
+
+  /* Hide the ChatBot Container */
+  .chatbotUI-container.hide {
+    @apply opacity-0 scale-0 !important;
+    @apply hidden !important;
+  }
+
+  /*
+  ChatBot Widget Mode
+  */
+
   .chatbotUI-container--widget {
-    @apply w-full h-full bottom-0;
-    @apply rounded-none;
+    @apply fixed w-96 max-w-sm;
+    @apply bottom-10 right-5;
+    @apply rounded-lg shadow-lg;
+    @apply transform transition-all duration-300 ease-in-out;
+    @apply z-[9999];
+    height: 500px;
+  }
+
+  /* Dark Mode */
+  .dark .chatbotUI-container--widget {
+    @apply bg-dark-background;
+  }
+
+  /* Show the Widget Container */
+  .chatbotUI-container--widget.show {
+    @apply opacity-100 scale-100 !important;
+    @apply visible !important;
+  }
+
+  /* Hide the Widget Container */
+  .chatbotUI-container--widget.hide {
+    @apply opacity-0 scale-0 !important;
+    @apply hidden !important;
+  }
+
+  /*
+  Fullscreen Mode
+  */
+
+  .chatbotUI-container--fullscreen {
+    @apply w-full h-screen;
+    @apply flex flex-col;
+    @apply opacity-100 scale-100 !important;
+    @apply visible !important;
+    height: 100%;
+    min-height: 95vh;
+  }
+
+  /*
+  Mobile Optimization
+  */
+
+  @media (max-width: 640px) {
+    /* Widget Mode */
+    .chatbotUI-container--widget {
+      @apply w-full h-full bottom-0;
+      @apply rounded-none;
+    }
+  }
+
+  /*
+  Chatbot UI toggle button for the widget
+  */
+
+  .chatbotUI-toggle-button {
+    @apply fixed bottom-10 right-5;
+    @apply p-2;
+    @apply rounded-full shadow-lg;
+    @apply text-sm text-white bg-primary;
+    @apply transform transition-all duration-300 ease-in-out;
+    @apply z-[9999];
+  }
+
+  /* Dark Mode */
+  .dark .chatbotUI-toggle-button {
+    @apply bg-dark-primary;
+  }
+
+  /* Show the toggle button */
+  .chatbotUI-toggle-button.show {
+    @apply opacity-100 !important;
+    @apply visible !important;
+  }
+
+  /* Hide the toggle button */
+  .chatbotUI-toggle-button.hide {
+    @apply opacity-0 !important;
+    @apply hidden !important;
+  }
+
+  /*
+  Header for the chat container
+  */
+
+  .chatbotUI-header {
+    @apply p-2 text-sm font-semibold;
+    @apply text-center bg-primary text-title-color;
+    @apply flex items-center justify-between;
+  }
+
+  /* Dark Mode */
+  .dark .chatbotUI-header {
+    @apply bg-dark-primary text-dark-title-color;
+  }
+
+  /*
+  Close Button for Widget Mode
+  */
+
+  .chatbotUI-close-button {
+    @apply p-2;
+    @apply rounded-full shadow-lg;
+    @apply text-sm text-white bg-primary;
+    @apply text-title-color hover:text-gray-300;
+    @apply cursor-pointer;
+  }
+
+  /*
+  Chat Body
+  */
+
+  .chatbotUI-body {
+    @apply flex-grow;
+    @apply overflow-y-auto;
+  }
+
+  /*
+  Chat Messages
+  */
+
+  .chatbotUI-messages {
+    @apply overflow-y-auto;
+    @apply p-2 space-y-1;
+  }
+
+  /*
+  Chat Input Form
+  */
+
+  .chatbotUI-input-form {
+    @apply flex items-center;
+    @apply bg-gray-200;
+    @apply dark:bg-gray-700 rounded-lg;
+    @apply border border-gray-300 dark:border-gray-600;
+    @apply w-full;
+    @apply sticky bottom-0;
+    @apply z-[9999];
+    @apply px-2 py-2;
+    @apply space-x-2 space-y-2;
+  }
+
+  /*
+  Chat Input Box
+  */
+
+  .chatbotUI-input-box {
+    @apply flex-grow px-3 py-2 rounded-l-lg;
+    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500;
+    @apply placeholder-gray-500 dark:placeholder-gray-400;
+    @apply border border-gray-300 dark:border-gray-600; /* Keep border styles */
+  }
+
+  .dark .chatbotUI-input-box {
+    @apply bg-dark-background text-dark-title-color;
+  }
+
+  /* Send Button */
+  .chatbotUI-send-button {
+    @apply p-2 rounded-full shadow-lg;
+    @apply text-white;
+    @apply bg-primary;
+    @apply hover:bg-dark-primary;
+    @apply cursor-pointer font-bold;
+    @apply transition duration-300 ease-in-out;
+    @apply whitespace-nowrap;
+  }
+
+  /* Dark Mode */
+  .dark .chatbotUI-send-button {
+    @apply text-white;
+    @apply bg-dark-primary;
+    @apply hover:bg-primary;
+  }
+
+  /* Bitcoin Loader */
+  .chatbotUI-loader {
+    /* Base styles */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+
+    /* Size */
+    width: 100px;
+    height: 100px;
+
+    /* Center the content (Bitcoin symbol) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 3D effects */
+    -webkit-backface-visibility: hidden; /* Hide backface */
+    -moz-backface-visibility: hidden; /* Hide backface */
+    backface-visibility: hidden; /* Hide backface */
+    transform-style: preserve-3d;
+
+    /* Animation */
+    animation: spin_coin 3s infinite linear;
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Front of the Coin */
+  .chatbotUI-loader::before {
+    /* Appearance */
+    background: linear-gradient(gold, orange);
+    color: white;
+    content: "₿";
+    font-size: 5rem;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+
+    /* Center the logo */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Visibility */
+    z-index: 9999;
+  }
+
+  /* Back of the Coin */
+  .chatbotUI-loader::after {
+    /* Appearance */
+    background: linear-gradient(gold, orange);
+    content: "₿";
+    color: white;
+    font-size: 5rem;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+
+    /* Center the logo */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%) rotateY(180deg);
+
+    /* Visibility */
+    z-index: 9999;
+  }
+
+  /* Show the Loader */
+  .chatbotUI-loader.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Hide the Loader */
+  .chatbotUI-loader.hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* Spin the coin */
+  @keyframes spin_coin {
+    100% {
+      transform: translate(-50%, -50%) rotateY(360deg);
+    }
   }
 }

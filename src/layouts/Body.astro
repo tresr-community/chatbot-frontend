@@ -1,14 +1,16 @@
 ---
 interface Props {
   welcomeMessage: string;
-  enableSpeechBubble: boolean;
+  enableQuotes: boolean;
   enableLoadingSpinner: boolean;
+  chatbotShowButton: boolean;
 }
 
 const {
   welcomeMessage = "Welcome Message goes here",
-  enableSpeechBubble = true,
+  enableQuotes = true,
   enableLoadingSpinner = true,
+  chatbotShowButton = true,
 } = Astro.props;
 ---
 
@@ -19,13 +21,11 @@ const {
       🌜
     </button>
 
-    <!-- NFTREASURE Logo -->
-    <img src="/images/NFTREASURE.png" alt="NFTREASURE" class="logo" />
-
-    <!-- Ron Jay Image & Speech Bubble if enabled-->
+    <!-- Ron Jay Image & Speech Bubble Quotes if enabled-->
     {
-      enableSpeechBubble && (
+      enableQuotes && (
         <div class="container-ron-jay">
+          <img src="/images/NFTREASURE.png" alt="NFTREASURE" class="logo" />
           <img src="/images/ron_jay.png" alt="Ron Jay" class="image-ron-jay" />
           <div id="speech-bubble" class="speech-bubble">
             <div id="quoteText">{welcomeMessage}</div>
@@ -37,16 +37,25 @@ const {
     <!-- Loading Spinner if enabled -->
     {
       enableLoadingSpinner && (
-        <div
-          id="chatbot-loading-spinner"
-          class="chatbotUI-loader htmx-indicator"
-          data-minimum-duration="1000"
-        />
+        <div id="chatbot-loading-spinner" class="chatbotUI-loader" />
       )
     }
 
-    <!-- The Chatbot Widget Container -->
-    <div id="chatbot-container"></div>
+    <!-- The Chatbot Toggle Button if enabled -->
+    {
+      chatbotShowButton && (
+        <div id="chatbot-show-button-container">
+          <button
+            id="chatbot-toggle"
+            type="button"
+            class="chatbotUI-toggle-button show"
+          >
+            💬
+          </button>
+          <div id="chatbot-container" class="chatbotUI-container hide" />
+        </div>
+      )
+    } else {(<div id="chatbot-container" class="chatbotUI-container show" />)}
   </div>
   <!-- content -->
 </div>

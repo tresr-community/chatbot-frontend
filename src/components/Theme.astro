@@ -2,14 +2,15 @@
 
 ---
 
-<!-- Client side script -->
-<script>
+<script is:inline>
   // Theme toggle functionality
   const themeToggle = document.getElementById("modeToggle");
 
-  function updateTheme(isDark: boolean) {
+  function updateTheme(isDark) {
     document.documentElement.classList.toggle("dark", isDark);
-    themeToggle!.textContent = isDark ? "🌞" : "🌜";
+    if (themeToggle) {
+      themeToggle.textContent = isDark ? "🌞" : "🌜";
+    }
   }
 
   // Initialize theme

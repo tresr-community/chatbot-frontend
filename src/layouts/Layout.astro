@@ -14,12 +14,11 @@ interface Props {
   title?: string;
   footerMessage?: string;
   welcomeMessage?: string;
-  chatbotType?: string;
-  chatbotStyle?: string;
-  chatbotApiVersion?: string;
-  chatbotApiBackend?: string;
+  chatbotType?: "widget" | "fullscreen";
+  chatbotStyle?: "light" | "dark";
+  chatbotApiVersion?: "v1" | "v2";
+  chatbotApiBackend?: "grok" | "chatbot" | "google-ai-studio";
   chatbotShowButton?: boolean;
-  enableSpeechBubble?: boolean;
   enableLoadingSpinner?: boolean;
   enableQuotes?: boolean;
 }
@@ -33,7 +32,6 @@ const {
   chatbotApiVersion = "v1",
   chatbotApiBackend = "chatbot",
   chatbotShowButton = true,
-  enableSpeechBubble = true,
   enableLoadingSpinner = true,
   enableQuotes = false,
 } = Astro.props;
@@ -46,9 +44,10 @@ const {
   </head>
   <body>
     <Body
-      welcomeMessage={welcomeMessage}
-      enableSpeechBubble={enableSpeechBubble}
+      chatbotShowButton={chatbotShowButton}
       enableLoadingSpinner={enableLoadingSpinner}
+      enableQuotes={enableQuotes}
+      welcomeMessage={welcomeMessage}
     />
     <scripts>
       <PWA />
@@ -56,16 +55,19 @@ const {
 
       {enableQuotes && <Crypto />}
       <ChatBot
-        title={title}
-        type={chatbotType}
-        style={chatbotStyle}
-        apiVersion={chatbotApiVersion}
         apiBackend={chatbotApiBackend}
+        apiVersion={chatbotApiVersion}
         showButton={chatbotShowButton}
+        style={chatbotStyle}
+        type={chatbotType}
       />
     </scripts>
-    <footer>
-      <Footer footerMessage={footerMessage} />
-    </footer>
+    {
+      enableQuotes && (
+        <footer>
+          <Footer footerMessage={footerMessage} />
+        </footer>
+      )
+    }
   </body>
 </html>
