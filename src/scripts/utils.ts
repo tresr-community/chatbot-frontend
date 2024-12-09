@@ -7,6 +7,7 @@ Common Utilities
 import type {ChatbotConfig} from "./types";
 import {marked} from "marked";
 import DOMPurify from "dompurify";
+import {emojify} from "node-emoji";
 
 export const ChatbotUtils = {
   /*
@@ -244,9 +245,11 @@ export const ChatbotUtils = {
     const messageBubble = document.createElement("div");
     messageBubble.classList.add("messageBubble");
 
-    // Convert Markdown to HTML and sanitize
-    // Ensure marked.parse is awaited if it's asynchronous
-    const htmlMessage = DOMPurify.sanitize(await marked.parse(message));
+    // Parse any Emoji or Markdown and sanitize
+    const messageWithEmojis = emojify(message);
+    const htmlMessage = DOMPurify.sanitize(
+      await marked.parse(messageWithEmojis)
+    );
     messageBubble.innerHTML = htmlMessage;
 
     if (sender === "user") {
