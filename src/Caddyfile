@@ -85,7 +85,7 @@ localhost:9000 {
 
 	# Frontend routes
 	@frontend-routes {
-		path / /fullscreen /widget /quotes /api/crypto /api/outage
+		path / /fullscreen /widget /quotes /api/*
 	}
 	handle @frontend-routes {
 		reverse_proxy localhost:9100 {
@@ -101,9 +101,9 @@ localhost:9000 {
 	###########################################################################
 
 	@backend-api {
-		path /api/*
+		path /ai/*
 	}
-	handle @backend-api {
+	handle @backend-ai {
 		reverse_proxy localhost:9200 {
 			header_up Host {host}
 			header_up X-Real-IP {remote_host}
