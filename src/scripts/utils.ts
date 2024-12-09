@@ -5,6 +5,8 @@ Common Utilities
 */
 
 import type {ChatbotConfig} from "./types";
+import {marked} from "marked";
+import DOMPurify from "dompurify";
 
 export const ChatbotUtils = {
   /*
@@ -224,7 +226,7 @@ export const ChatbotUtils = {
   /*
   Add a message to the chat.
   */
-  addMessageToChat(sender: "user" | "bot", message: string) {
+  async addMessageToChat(sender: "user" | "bot", message: string) {
     console.debug("Adding message from:", sender);
     const chatMessages = document.getElementById("chatbot-messages");
 
@@ -240,8 +242,12 @@ export const ChatbotUtils = {
     avatarImg.classList.add("avatarImg");
 
     const messageBubble = document.createElement("div");
-    messageBubble.innerHTML = message.replace(/\n/g, "<br/>");
     messageBubble.classList.add("messageBubble");
+
+    // Convert Markdown to HTML and sanitize
+    // Ensure marked.parse is awaited if it's asynchronous
+    const htmlMessage = DOMPurify.sanitize(await marked.parse(message));
+    messageBubble.innerHTML = htmlMessage;
 
     if (sender === "user") {
       messageContainer.classList.add("flex-row");
