@@ -75,10 +75,10 @@ const ChatbotUtils = {
       return null;
     }
 
-    // Verify that the chatbot style is either "light" or "dark"
+    // Verify that the chatbot style is either "light" or "dark" or default to "light"
     if (!["light", "dark"].includes(scriptTag.dataset.chatbotStyle)) {
-      console.error("Chatbot style not specified. Aborting chatbot load.");
-      return null;
+      console.warn("Chatbot style not specified. Defaulting to light.");
+      scriptTag.dataset.chatbotStyle = "light";
     }
 
     // Verify that the chatbot API version is specified
@@ -99,6 +99,9 @@ const ChatbotUtils = {
 
     // Verify that the chatbot enable loading spinner is specified or default to true
     if (!scriptTag.dataset.chatbotEnableLoadingSpinner) {
+      console.debug(
+        "Chatbot enable loading spinner not specified. Defaulting to true."
+      );
       scriptTag.dataset.chatbotEnableLoadingSpinner = "true";
     }
 
@@ -109,9 +112,8 @@ const ChatbotUtils = {
       apiVersion: scriptTag.dataset.chatbotApiVersion,
       apiBackend: scriptTag.dataset.chatbotApiBackend,
       style: scriptTag.dataset.chatbotStyle,
-      showButton: scriptTag.dataset.chatbotShowButton === "true",
-      enableLoadingSpinner:
-        scriptTag.dataset.chatbotEnableLoadingSpinner === "true",
+      showButton: scriptTag.dataset.chatbotShowButton,
+      enableLoadingSpinner: scriptTag.dataset.chatbotEnableLoadingSpinner,
     };
   },
 
@@ -332,7 +334,7 @@ const ChatbotUtils = {
   },
 
   async showLoader() {
-    console.debug("Showing spinning loader...");
+    console.debug("Showing loading spinner ₿...");
     const loader = document.getElementById("chatbot-loading-spinner");
     if (loader) {
       loader.classList.add("show");
@@ -343,7 +345,7 @@ const ChatbotUtils = {
   },
 
   hideLoader() {
-    console.debug("Hiding spinning loader...");
+    console.debug("Hiding loader spinner ₿...");
     const loader = document.getElementById("chatbot-loading-spinner");
     if (loader) {
       loader.classList.remove("show");
@@ -400,7 +402,10 @@ const Chatbot = {
     try {
       // Show a spinning loader if enabled
       if (config.enableLoadingSpinner === "true") {
+        console.debug("Loading spinner is being enabled");
         await ChatbotUtils.showLoader();
+      } else {
+        console.debug("Loading spinner is globally disabled");
       }
 
       if (config.type === "widget") {
@@ -413,9 +418,12 @@ const Chatbot = {
     } finally {
       // Hide the spinning loader after a timeout if enabled
       if (config.enableLoadingSpinner === "true") {
+        console.debug("Loading spinner is being disabled");
         setTimeout(() => {
           ChatbotUtils.hideLoader();
         }, 2500);
+      } else {
+        console.debug("Loading spinner is globally disabled");
       }
     }
   },

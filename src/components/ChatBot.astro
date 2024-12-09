@@ -6,9 +6,17 @@ interface Props {
   apiVersion: "v1" | "v2";
   apiBackend: "grok" | "chatbot" | "google-ai-studio";
   showButton: boolean;
+  enableLoadingSpinner: boolean;
 }
 
-const { type, style, apiVersion, apiBackend, showButton } = Astro.props;
+const {
+  type,
+  style,
+  apiVersion,
+  apiBackend,
+  showButton,
+  enableLoadingSpinner,
+} = Astro.props;
 ---
 
 <script
@@ -18,4 +26,5 @@ const { type, style, apiVersion, apiBackend, showButton } = Astro.props;
   data-chatbot-api-version={apiVersion}
   data-chatbot-api-backend={apiBackend}
   data-chatbot-show-button={showButton}
+  data-chatbot-enable-loading-spinner={enableLoadingSpinner}
   defer></script>
