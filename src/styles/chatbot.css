@@ -44,10 +44,11 @@
   .chatbotUI-container--widget {
     @apply bg-white dark:bg-dark-background;
     @apply fixed w-96 max-w-sm;
-    @apply bottom-10 right-5;
+    @apply bottom-16 right-5;
     @apply rounded-lg shadow-lg;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
+    @apply p-2;
     height: 500px;
   }
 
@@ -103,11 +104,11 @@
 
   .chatbotUI-toggle-button {
     @apply fixed bottom-20 right-5;
-    @apply p-2;
     @apply rounded-full shadow-lg;
     @apply text-sm text-white bg-primary;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
+    @apply p-2;
   }
 
   /* Dark Mode */
@@ -195,20 +196,24 @@
   */
 
   .chatbotUI-input-box {
-    @apply flex-grow px-3 py-2 rounded-l-lg;
+    @apply flex-grow;
+    @apply px-2 py-2 rounded-l-lg;
     @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
     @apply focus:outline-none focus:ring-2 focus:ring-blue-500;
     @apply placeholder-gray-500 dark:placeholder-gray-400;
-    @apply border border-gray-300 dark:border-gray-600; /* Keep border styles */
+    @apply border border-gray-300 dark:border-gray-600;
   }
 
   .dark .chatbotUI-input-box {
     @apply bg-dark-background text-dark-title-color;
   }
 
-  /* Send Button */
+  /*
+  Send Button
+  */
+
   .chatbotUI-send-button {
-    @apply p-2 rounded-full shadow-lg;
+    @apply px-2 py-2 rounded-full shadow-lg;
     @apply text-white;
     @apply bg-primary;
     @apply hover:bg-dark-primary;
