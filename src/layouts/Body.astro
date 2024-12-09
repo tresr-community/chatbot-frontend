@@ -1,4 +1,11 @@
 ---
+// Global Style
+import "../styles/global.css";
+
+// Components
+import Widget from "../components/Widget.astro";
+import Fullscreen from "../components/Fullscreen.astro";
+
 interface Props {
   welcomeMessage: string;
   enableQuotes: boolean;
@@ -12,16 +19,17 @@ const {
   enableLoadingSpinner = true,
   chatbotShowButton = true,
 } = Astro.props;
+
+// If show button is true, then we need to hide the chatbot container
+const isChatWidgetOpen = chatbotShowButton ? false : true;
 ---
 
 <div class="bg-container">
   <div class="content">
-    <!-- Dark Mode Toggle Button -->
     <button id="modeToggle" type="button" class="theme-switcher-button">
       🌜
     </button>
 
-    <!-- Ron Jay Image & Speech Bubble Quotes if enabled-->
     {
       enableQuotes && (
         <div class="container-ron-jay">
@@ -34,29 +42,22 @@ const {
       )
     }
 
-    <!-- Loading Spinner if enabled -->
     {
       enableLoadingSpinner && (
         <div id="chatbot-loading-spinner" class="chatbotUI-loader" />
       )
     }
 
-    <!-- The Chatbot Toggle Button if enabled -->
     {
-      chatbotShowButton && (
-        <div id="chatbot-show-button-container">
-          <button
-            id="chatbot-toggle"
-            type="button"
-            class="chatbotUI-toggle-button show"
-          >
-            💬
-          </button>
-          <div id="chatbot-container" class="chatbotUI-container hide" />
+      chatbotShowButton ? (
+        <div id="chatbot-container">
+          <Widget isOpen={isChatWidgetOpen} />
+        </div>
+      ) : (
+        <div id="chatbot-container">
+          <Fullscreen />
         </div>
       )
-    } else {(<div id="chatbot-container" class="chatbotUI-container show" />)}
+    }
   </div>
-  <!-- content -->
 </div>
-<!-- bg-container -->

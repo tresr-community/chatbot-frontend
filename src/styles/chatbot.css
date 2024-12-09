@@ -27,12 +27,14 @@
   .chatbotUI-container.show {
     @apply opacity-100 scale-100 !important;
     @apply visible !important;
+    display: block !important;
   }
 
   /* Hide the ChatBot Container */
   .chatbotUI-container.hide {
     @apply opacity-0 scale-0 !important;
     @apply hidden !important;
+    display: none !important;
   }
 
   /*
@@ -40,6 +42,7 @@
   */
 
   .chatbotUI-container--widget {
+    @apply bg-white dark:bg-dark-background;
     @apply fixed w-96 max-w-sm;
     @apply bottom-10 right-5;
     @apply rounded-lg shadow-lg;
@@ -57,12 +60,15 @@
   .chatbotUI-container--widget.show {
     @apply opacity-100 scale-100 !important;
     @apply visible !important;
+    display: flex !important;
+    flex-direction: column;
   }
 
   /* Hide the Widget Container */
   .chatbotUI-container--widget.hide {
     @apply opacity-0 scale-0 !important;
     @apply hidden !important;
+    display: none !important;
   }
 
   /*
@@ -70,6 +76,7 @@
   */
 
   .chatbotUI-container--fullscreen {
+    @apply bg-white dark:bg-dark-background;
     @apply w-full h-screen;
     @apply flex flex-col;
     @apply opacity-100 scale-100 !important;
@@ -95,7 +102,7 @@
   */
 
   .chatbotUI-toggle-button {
-    @apply fixed bottom-10 right-5;
+    @apply fixed bottom-20 right-5;
     @apply p-2;
     @apply rounded-full shadow-lg;
     @apply text-sm text-white bg-primary;
@@ -112,12 +119,14 @@
   .chatbotUI-toggle-button.show {
     @apply opacity-100 !important;
     @apply visible !important;
+    display: block;
   }
 
   /* Hide the toggle button */
   .chatbotUI-toggle-button.hide {
     @apply opacity-0 !important;
     @apply hidden !important;
+    display: none;
   }
 
   /*

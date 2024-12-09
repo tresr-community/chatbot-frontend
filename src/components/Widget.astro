@@ -1,10 +1,28 @@
 ---
+interface Props {
+  isOpen: boolean;
+}
 
+const {isOpen} = Astro.props;
 ---
 
-<div id="chatbot-fullscreen" class="chatbotUI-container--fullscreen">
+<!-- Widget Button -->
+<button
+  id="chatbot-toggle-button"
+  aria-label="Open chat"
+  class:list={["chatbotUI-toggle-button", isOpen ? "hide" : "show"]}
+>
+  💬
+</button>
+
+<!-- Widget Container -->
+<div
+  id="chatbot-widget"
+  class:list={["chatbotUI-container--widget", isOpen ? "show" : "hide"]}
+>
   <div class="chatbotUI-header">
     <h3 class="chatbotUI-title">Chat with Ron</h3>
+    <button id="chatbot-close-button" aria-label="Close chat">×</button>
   </div>
 
   <div id="chatbot-body" class="chatbotUI-body">

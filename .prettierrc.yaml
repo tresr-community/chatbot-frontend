@@ -6,7 +6,7 @@ overrides:
     options:
       parser: astro
 
-bracketSpacing: true
+bracketSpacing: false
 endOfLine: lf
 printWidth: 80
 semi: true

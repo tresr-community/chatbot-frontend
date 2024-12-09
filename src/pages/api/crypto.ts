@@ -1,4 +1,4 @@
-import type { APIRoute } from "astro";
+import type {APIRoute} from "astro";
 
 const QUOTES: string[] = [
   "Lost in the crypto maze? Let's find that lambo together, degen!",
@@ -60,6 +60,6 @@ export const GET: APIRoute = async () => {
 
   return new Response(JSON.stringify(quotesArray), {
     status: 200,
-    headers: { "Content-Type": "application/json" },
+    headers: {"Content-Type": "application/json"},
   });
 };

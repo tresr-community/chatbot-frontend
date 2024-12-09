@@ -1,4 +1,7 @@
 ---
+// Global Style
+import "../styles/global.css";
+
 // Layouts
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
@@ -55,6 +58,7 @@ const {
 
       {enableQuotes && <Crypto />}
       <ChatBot
+        title={title}
         apiBackend={chatbotApiBackend}
         apiVersion={chatbotApiVersion}
         showButton={chatbotShowButton}

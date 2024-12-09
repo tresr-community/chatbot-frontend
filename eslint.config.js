@@ -5,7 +5,7 @@ import jsonc from "eslint-plugin-jsonc";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import { fileURLToPath } from "url";
+import {fileURLToPath} from "url";
 import path from "path";
 
 export default tseslint.config(
@@ -58,10 +58,7 @@ export default tseslint.config(
       },
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
-      ],
+      "@typescript-eslint/no-unused-vars": ["warn", {argsIgnorePattern: "^_"}],
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/explicit-function-return-type": "off",
       "prettier/prettier": "error",
@@ -163,7 +160,7 @@ export default tseslint.config(
     },
     rules: {
       "no-unused-vars": "warn",
-      "no-console": ["warn", { allow: ["warn", "error", "debug"] }],
+      "no-console": ["warn", {allow: ["warn", "error", "debug"]}],
     },
   }
 );
