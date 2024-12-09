@@ -1,8 +1,6 @@
 # ChatBot Frontend
 
-The Astro frontend for the ChatBot.
-
-This repository contains the source files for the Ron Jay [ChatBot](https://chat.nftreasure.community)
+This repository contains the source files for the Ron Jay [ChatBot](https://chat.nftreasure.community) frontend.
 
 This is an unofficial chatbot for the NFTREASURE Community and is not affiliated with the NFTREASURE project.
 
@@ -35,9 +33,9 @@ There are a few URLs that you can use to test the chatbot locally depending on t
 
 ### Caddy
 
-The caddy server is used to proxy the chatbot requests to the correct worker.
+Caddy Server can be used to proxy the chatbot requests to the correct worker.
 
-Access Caddy at: [https://localhost:9000](https://localhost:9000)
+One you have started the script from this repository, access Caddy at: [https://localhost:9000](https://localhost:9000)
 
 ### Frontend
 
@@ -45,7 +43,7 @@ The frontend worker is the main entry point for the chatbot. It is responsible f
 
 Access to the Frontend Worker is via Caddy at: [https://localhost:9000](https://localhost:9000) -> [http://localhost:9100](http://localhost:9100)
 
-The frontend worker embeds the UI Widget worker on he main page behind a button.
+The frontend worker embeds the UI Widget worker on the main page behind a button or offers a fullscreen page at /fullscreen.
 
 ### Backend
 

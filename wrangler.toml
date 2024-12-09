@@ -42,9 +42,6 @@ local = true
 
 # Ref: https://developers.cloudflare.com/workers/about/routes/
 routes = [
-	# Connect via Caddy
-    { pattern = "localhost:9000/*", zone_name = "localhost" },
-    # Connect via Worker
 	{ pattern = "localhost:9100/*", zone_name = "localhost" },
 ]
 
