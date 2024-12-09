@@ -86,7 +86,7 @@ TITLE = "NFTREASURE Community ChatBot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_VERSION = "v1"
-AI_BACKEND = "google-ai-studio"
+AI_BACKEND = "grok"
 ALLOWED_ORIGINS = '{ "allowed_origins": ["https://preview.nftreasure.community","https://preview.chat.nftreasure.community"] }'
 
 [[env.preview.r2_buckets]]
