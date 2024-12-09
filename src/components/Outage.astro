@@ -1,0 +1,35 @@
+---
+// Pulls a random outage quote from the API.
+---
+
+<script is:inline>
+  async function fetchQuote() {
+    try {
+      const url = new URL("/api/outage", window.location.origin);
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      /** @type {string[]} */
+      const quotes = await response.json();
+
+      if (!Array.isArray(quotes) || quotes.length === 0) {
+        throw new Error("Invalid outage quote data: not an array or empty.");
+      }
+
+      const quoteElement = document.getElementById("quoteText");
+      if (!quoteElement) return;
+
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteElement.textContent = quotes[randomIndex];
+    } catch (error) {
+      console.error("Failed to fetch quote:", error);
+    }
+  }
+
+  setTimeout(() => {
+    fetchQuote();
+    setInterval(fetchQuote, 5000);
+  }, 5000);
+</script>

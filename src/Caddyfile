@@ -1,0 +1,118 @@
+###########################################################################
+# Global
+###########################################################################
+{
+	local_certs
+	auto_https disable_redirects
+	admin localhost:2019 {
+		origins localhost localhost:9000 localhost:2019
+	}
+	log {
+		output file caddy.log
+		format console
+		level INFO
+	}
+}
+
+localhost:9000 {
+	log {
+		output file caddy.log
+		format console
+		level INFO
+	}
+
+	tls internal
+
+	# Global headers for CORS
+	header {
+		Service-Worker-Allowed "/"
+		Access-Control-Allow-Origin "https://localhost:9000"
+		Access-Control-Allow-Methods "GET, POST, OPTIONS"
+		Access-Control-Allow-Headers "Content-Type, Origin, Accept"
+		Access-Control-Max-Age "86400"
+		Vary "Origin"
+	}
+
+	# Handle OPTIONS preflight requests
+	@options {
+		method OPTIONS
+	}
+	handle @options {
+		header {
+			Access-Control-Allow-Origin "https://localhost:9000"
+			Access-Control-Allow-Methods "GET, POST, OPTIONS"
+			Access-Control-Allow-Headers "Content-Type, Origin, Accept"
+			Access-Control-Max-Age "86400"
+			Vary "Origin"
+		}
+		respond 204
+	}
+
+	encode gzip zstd
+
+	###########################################################################
+	# Health Check
+	###########################################################################
+
+	handle /health {
+		reverse_proxy localhost:2019
+		rewrite * /reverse_proxy/upstreams
+	}
+
+	###########################################################################
+	# Frontend Worker (Astro)
+	###########################################################################
+
+	# Static assets
+	@static {
+		path /favicon.ico /_astro/* /images/* /manifest.json
+	}
+	handle @static {
+		reverse_proxy localhost:9100
+	}
+
+	# PWA Service Worker
+	@service-worker {
+		path /sw.js
+	}
+	handle @service-worker {
+		header {
+			Service-Worker-Allowed "/"
+			Content-Type "application/javascript"
+		}
+		reverse_proxy localhost:9100
+	}
+
+	# Frontend routes
+	@frontend-routes {
+		path / /fullscreen /widget /quotes /api/*
+	}
+	handle @frontend-routes {
+		reverse_proxy localhost:9100 {
+			header_up Host {host}
+			header_up X-Real-IP {remote_host}
+			header_up X-Forwarded-Host localhost:9000
+			header_up X-Forwarded-Proto https
+		}
+	}
+
+	###########################################################################
+	# Backend Worker (workers-rs)
+	###########################################################################
+
+	@backend-ai {
+		path /ai/*
+	}
+	handle @backend-ai {
+		reverse_proxy localhost:9200 {
+			header_up Host {host}
+			header_up X-Real-IP {remote_host}
+			header_up X-Forwarded-Host localhost:9000
+			header_up X-Forwarded-Proto https
+			# Preserve CORS headers from backend
+			header_down Access-Control-Allow-Origin "https://localhost:9000"
+			header_down Access-Control-Allow-Methods "GET, POST, OPTIONS"
+			header_down Access-Control-Allow-Headers "Content-Type, Origin, Accept"
+		}
+	}
+}

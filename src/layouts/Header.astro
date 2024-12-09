@@ -1,0 +1,21 @@
+---
+// Global Style
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+
+const {title} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+<meta name="generator" content={Astro.generator} />
+<link
+  href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+  rel="stylesheet"
+/>
+<link rel="manifest" href="/manifest.json" />
+<title>{title}</title>

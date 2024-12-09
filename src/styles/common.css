@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+}
+
+@layer components {
+}
+
+@layer utilities {
+  /* Body */
+  body {
+    @apply flex flex-col;
+    @apply bg-center bg-no-repeat bg-cover;
+    @apply font-sans antialiased;
+    @apply bg-background text-primary;
+    @apply z-0;
+  }
+
+  .dark body {
+    @apply bg-dark-background text-dark-primary;
+  }
+
+  /* Background */
+  .bg-container {
+    background-image: url("/images/banner.jpg");
+    background-attachment: fixed;
+    @apply bg-center bg-no-repeat bg-cover;
+    @apply flex flex-col flex-1;
+    @apply w-full;
+    @apply z-10;
+  }
+
+  .dark .bg-container {
+    background-image: url("/images/banner.jpg");
+    background-attachment: fixed;
+    @apply z-10;
+  }
+
+  .bg-container::before {
+    content: "";
+    @apply absolute inset-0;
+    @apply bg-[rgba(4,28,101,0.788)];
+    @apply flex flex-col flex-1;
+    @apply z-10;
+  }
+
+  /* Content */
+  .content {
+    @apply relative;
+    @apply z-20;
+    @apply flex flex-col flex-1;
+  }
+
+  /*
+  The switcher button allows changing from light to dark themes.
+  */
+  .theme-switcher-button {
+    @apply transition duration-150 ease-in-out;
+    @apply hover:bg-opacity-90 focus:ring-2 focus:ring-offset-2 focus:outline-none;
+    @apply fixed p-2 transition-colors duration-300 rounded-full cursor-pointer top-4 right-4;
+    @apply bg-dark-light text-light;
+    @apply z-50;
+  }
+
+  .dark .theme-switcher-button {
+    @apply hover:bg-opacity-75;
+    @apply bg-light text-dark-light;
+  }
+
+  /* Logo and Images */
+  .logo {
+    @apply fixed w-20 top-2 left-2 sm:w-48 md:w-48 lg:w-48 xl:w-48 2xl:w-48;
+    @apply z-50;
+  }
+}

@@ -1,0 +1,63 @@
+---
+// Global Style
+import "../styles/global.css";
+
+// Components
+import Widget from "../components/Widget.astro";
+import Fullscreen from "../components/Fullscreen.astro";
+
+interface Props {
+  welcomeMessage: string;
+  enableQuotes: boolean;
+  enableLoadingSpinner: boolean;
+  chatbotShowButton: boolean;
+}
+
+const {
+  welcomeMessage = "Welcome Message goes here",
+  enableQuotes = true,
+  enableLoadingSpinner = true,
+  chatbotShowButton = true,
+} = Astro.props;
+
+// If show button is true, then we need to hide the chatbot container
+const isChatWidgetOpen = chatbotShowButton ? false : true;
+---
+
+<div class="bg-container">
+  <div class="content">
+    <button id="modeToggle" type="button" class="theme-switcher-button">
+      🌜
+    </button>
+
+    {
+      enableQuotes && (
+        <div class="container-ron-jay">
+          <img src="/images/NFTREASURE.png" alt="NFTREASURE" class="logo" />
+          <img src="/images/ron_jay.png" alt="Ron Jay" class="image-ron-jay" />
+          <div id="speech-bubble" class="speech-bubble">
+            <div id="quoteText">{welcomeMessage}</div>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      enableLoadingSpinner && (
+        <div id="chatbot-loading-spinner" class="chatbotUI-loader" />
+      )
+    }
+
+    {
+      chatbotShowButton ? (
+        <div id="chatbot-container">
+          <Widget isOpen={isChatWidgetOpen} />
+        </div>
+      ) : (
+        <div id="chatbot-container">
+          <Fullscreen />
+        </div>
+      )
+    }
+  </div>
+</div>

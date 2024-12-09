@@ -1,0 +1,24 @@
+{
+  "background_color": "#ffffff",
+  "description": "Chat with Ron Jay about crypto",
+  "display": "standalone",
+  "icons": [
+    {
+      "purpose": "any maskable",
+      "sizes": "192x192",
+      "src": "/images/support.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any maskable",
+      "sizes": "512x512",
+      "src": "/images/support.png",
+      "type": "image/png"
+    }
+  ],
+  "name": "Chat with Ron Jay",
+  "scope": "/fullscreen",
+  "short_name": "ChatBot",
+  "start_url": "/fullscreen",
+  "theme_color": "#F0C854"
+}

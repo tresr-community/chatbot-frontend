@@ -1,0 +1,57 @@
+---
+const CORS_HEADERS = {
+  // TODO: Make this locked down to ALLOWED_ORIGINS only.
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
+  "Access-Control-Allow-Headers":
+    "Origin, X-Requested-With, Content-Type, Accept, sentry-trace, baggage",
+  "Access-Control-Max-Age": "86400",
+  Vary: "Origin",
+};
+
+// Handle preflight OPTIONS request with proper validation
+if (Astro.request.method === "OPTIONS") {
+  // Check if this is a CORS preflight request
+  if (
+    Astro.request.headers.get("Origin") !== null &&
+    Astro.request.headers.get("Access-Control-Request-Method") !== null &&
+    Astro.request.headers.get("Access-Control-Request-Headers") !== null
+  ) {
+    // Return CORS preflight response with dynamic Allow-Headers
+    return new Response(null, {
+      headers: {
+        ...CORS_HEADERS,
+        "Access-Control-Allow-Headers":
+          Astro.request.headers.get("Access-Control-Request-Headers") ||
+          CORS_HEADERS["Access-Control-Allow-Headers"],
+      },
+    });
+  } else {
+    // Handle standard OPTIONS request
+    return new Response(null, {
+      headers: {
+        Allow: "GET, HEAD, POST, OPTIONS",
+      },
+    });
+  }
+}
+
+// For all other requests, add CORS headers to the response
+const response = Astro.response;
+Object.entries(CORS_HEADERS).forEach(([key, value]) => {
+  response.headers.set(key, value);
+});
+
+const origin = Astro.request.headers.get("Origin");
+if (origin) {
+  response.headers.set("Access-Control-Allow-Origin", origin);
+}
+
+// Add Vary header for proper caching
+response.headers.append("Vary", "Origin");
+
+// Add security headers
+response.headers.set("X-Content-Type-Options", "nosniff");
+response.headers.set("X-Frame-Options", "DENY");
+response.headers.set("X-XSS-Protection", "1; mode=block");
+---

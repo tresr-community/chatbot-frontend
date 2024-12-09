@@ -1,0 +1,37 @@
+---
+// No frontmatter needed.
+---
+
+<script is:inline>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((registration) => {
+          console.log(
+            "ServiceWorker registration successful with scope:",
+            registration.scope
+          );
+
+          // Handle updates
+          registration.addEventListener("updatefound", () => {
+            const newWorker = registration.installing;
+            if (newWorker) {
+              newWorker.addEventListener("statechange", () => {
+                if (newWorker.state === "installed") {
+                  if (registration.active) {
+                    console.log("New content is available; please refresh.");
+                  } else {
+                    console.log("Content is cached for offline use.");
+                  }
+                }
+              });
+            }
+          });
+        })
+        .catch((err) => {
+          console.error("ServiceWorker registration failed: ", err);
+        });
+    });
+  }
+</script>

@@ -1,0 +1,32 @@
+---
+// Layouts
+import Layout from "../layouts/Layout.astro";
+
+// Cloudflare Environment Variables
+const env = Astro.locals.runtime.env;
+const title = env.TITLE;
+const footerMessage = env.FOOTER_MESSAGE;
+const welcomeMessage = env.WELCOME_MESSAGE;
+const chatbotApiVersion = env.AI_VERSION;
+const chatbotApiBackend = env.AI_BACKEND;
+
+// ChatBot Configuration
+const chatbotType = "widget";
+const chatbotStyle = "light";
+const chatbotShowButton = true;
+const enableLoadingSpinner = true;
+const enableQuotes = true;
+---
+
+<Layout
+  title={title}
+  footerMessage={footerMessage}
+  welcomeMessage={welcomeMessage}
+  chatbotType={chatbotType}
+  chatbotStyle={chatbotStyle}
+  chatbotApiVersion={chatbotApiVersion}
+  chatbotApiBackend={chatbotApiBackend}
+  chatbotShowButton={chatbotShowButton}
+  enableLoadingSpinner={enableLoadingSpinner}
+  enableQuotes={enableQuotes}
+/>

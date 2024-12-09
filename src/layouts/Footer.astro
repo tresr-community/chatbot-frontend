@@ -1,0 +1,14 @@
+---
+// Global Style
+import "../styles/global.css";
+
+interface Props {
+  footerMessage: string;
+}
+
+const {footerMessage} = Astro.props;
+---
+
+<footer class="footer-message">
+  <p>{footerMessage}</p>
+</footer>

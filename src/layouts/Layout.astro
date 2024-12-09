@@ -1,0 +1,77 @@
+---
+// Global Style
+import "../styles/global.css";
+
+// Layouts
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import Body from "./Body.astro";
+
+// Components
+import PWA from "../components/PWA.astro";
+import Theme from "../components/Theme.astro";
+import ChatBot from "../components/ChatBot.astro";
+import Crypto from "../components/Crypto.astro";
+
+interface Props {
+  title?: string;
+  footerMessage?: string;
+  welcomeMessage?: string;
+  chatbotType?: "widget" | "fullscreen";
+  chatbotStyle?: "light" | "dark";
+  chatbotApiVersion?: string;
+  chatbotApiBackend?: string;
+  chatbotShowButton?: boolean;
+  enableLoadingSpinner?: boolean;
+  enableQuotes?: boolean;
+}
+
+const {
+  title = "Header Message goes here",
+  footerMessage = "Footer Message goes here",
+  welcomeMessage = "Welcome Message goes here",
+  chatbotType = "widget",
+  chatbotStyle = "light",
+  chatbotApiVersion = "v1",
+  chatbotApiBackend = "chatbot",
+  chatbotShowButton = true,
+  enableLoadingSpinner = true,
+  enableQuotes = false,
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <Header title={title} />
+  </head>
+  <body>
+    <Body
+      chatbotShowButton={chatbotShowButton}
+      enableLoadingSpinner={enableLoadingSpinner}
+      enableQuotes={enableQuotes}
+      welcomeMessage={welcomeMessage}
+    />
+    <scripts>
+      <PWA />
+      <Theme />
+
+      {enableQuotes && <Crypto />}
+      <ChatBot
+        title={title}
+        apiBackend={chatbotApiBackend}
+        apiVersion={chatbotApiVersion}
+        showButton={chatbotShowButton}
+        style={chatbotStyle}
+        type={chatbotType}
+        enableLoadingSpinner={enableLoadingSpinner}
+      />
+    </scripts>
+    {
+      enableQuotes && (
+        <footer>
+          <Footer footerMessage={footerMessage} />
+        </footer>
+      )
+    }
+  </body>
+</html>

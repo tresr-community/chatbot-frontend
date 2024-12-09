@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  type: "widget" | "fullscreen";
+  style: "light" | "dark";
+  apiVersion: string;
+  apiBackend: string;
+  showButton?: boolean;
+  enableLoadingSpinner?: boolean;
+}
+---
+
+<script src="../scripts/init.ts"></script>
+
+<script is:inline define:vars={{props: Astro.props}}>
+  // Wait for DOMContentLoaded to ensure initChatbot is available
+  document.addEventListener("DOMContentLoaded", () => {
+    // Obtain the origin server as the baseUrl.
+    const baseUrl = window.location.origin;
+
+    const config = {
+      type: props.type,
+      style: props.style,
+      apiBackend: props.apiBackend,
+      apiVersion: props.apiVersion,
+      enableLoadingSpinner: props.enableLoadingSpinner,
+      showButton: props.showButton,
+      baseUrl: baseUrl,
+    };
+
+    if (typeof window.initChatbot === "function") {
+      window.initChatbot(config);
+    } else {
+      console.error("initChatbot is not a function");
+    }
+  });
+</script>
