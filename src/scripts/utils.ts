@@ -80,13 +80,7 @@ export const ChatbotUtils = {
       return null;
     }
 
-    // There are two backends, one for the manual API and one for the AI.
-    // The manual API is used for the manual chatbot and the AI backend is used for external AI services.
-    const chatbotURL =
-      config.apiBackend == "chatbot"
-        ? `${config.baseUrl}/api/${config.apiVersion}/${config.apiBackend}`
-        : `${config.baseUrl}/ai/${config.apiVersion}/${config.apiBackend}`;
-
+    const chatbotURL = `${config.baseUrl}/ai/${config.apiVersion}/${config.apiBackend}`;
     console.debug("Using ChatBot API URL:", chatbotURL);
     return chatbotURL;
   },

@@ -100,7 +100,7 @@ localhost:9000 {
 	# Backend Worker (workers-rs)
 	###########################################################################
 
-	@backend-api {
+	@backend-ai {
 		path /ai/*
 	}
 	handle @backend-ai {

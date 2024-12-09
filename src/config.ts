@@ -17,4 +17,4 @@ export const welcomeMessage = "Hi, I'm Ron Jay.";
 
 // ChatBot Configuration
 export const chatbotApiVersion = "v1";
-export const chatbotApiBackend = "chatbot";
+export const chatbotApiBackend = "google-ai-studio";
