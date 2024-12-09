@@ -19,8 +19,8 @@ interface Props {
   welcomeMessage?: string;
   chatbotType?: "widget" | "fullscreen";
   chatbotStyle?: "light" | "dark";
-  chatbotApiVersion?: "v1" | "v2";
-  chatbotApiBackend?: "grok" | "chatbot" | "google-ai-studio";
+  chatbotApiVersion?: string;
+  chatbotApiBackend?: string;
   chatbotShowButton?: boolean;
   enableLoadingSpinner?: boolean;
   enableQuotes?: boolean;
@@ -40,7 +40,6 @@ const {
 } = Astro.props;
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
     <Header title={title} />
