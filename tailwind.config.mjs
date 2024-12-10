@@ -61,6 +61,7 @@ export default {
         "nftreasure-navy": "#020617", // slate-950
         "nftreasure-gold": "#fcd34d", // amber-300
         "nftreasure-cream": "#94a3b8", // stone-400
+        "nftreasure-gray": "#111827", // gray-900
 
         // Light Theme
         "nftreasure-primary": "#fcd34d", // amber-300
@@ -92,7 +93,7 @@ export default {
         "nftreasure-input-bg": "#ffffff",
         "nftreasure-input-bg-dark": "#1e293b", // slate-800
         "nftreasure-input-border": "#d1d5db", // gray-300
-        "nftreasure-input-border-dark": "#4b5563", // gray-600
+        "nftreasure-input-border-dark": "#111827", // gray-900
         "nftreasure-input-text": "#111827", // gray-900
         "nftreasure-input-text-dark": "#ffffff",
         "nftreasure-placeholder": "#6b7280", // gray-500

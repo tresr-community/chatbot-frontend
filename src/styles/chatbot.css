@@ -142,15 +142,15 @@
   .chatbotUI-header {
     @apply p-2 text-sm font-semibold;
     @apply text-center;
-    @apply bg-nftreasure-primary;
-    @apply text-nftreasure-title-color;
+    @apply bg-nftreasure-gold;
+    @apply text-nftreasure-navy;
     @apply flex items-center justify-between;
   }
 
   /* Dark Mode */
   .dark .chatbotUI-header {
-    @apply bg-nftreasure-dark-primary;
-    @apply text-nftreasure-dark-title-color;
+    @apply bg-nftreasure-gray;
+    @apply text-nftreasure-cream;
   }
 
   /*
@@ -201,15 +201,20 @@
   .chatbotUI-input-form {
     @apply flex items-center;
     @apply bg-nftreasure-bubble-bg;
-    @apply dark:bg-nftreasure-dark-light;
     @apply rounded-lg;
     @apply border border-nftreasure-input-border;
-    @apply dark:border-nftreasure-input-border-dark;
     @apply w-full;
     @apply sticky bottom-0;
     @apply z-[9999];
     @apply px-2 py-2;
     @apply space-x-2 space-y-2;
+  }
+
+  /* Dark Mode */
+  .dark .chatbotUI-input-form {
+    @apply border-nftreasure-input-border-dark;
+    @apply bg-nftreasure-dark-light;
+    @apply border-nftreasure-input-border-dark;
   }
 
   /*
@@ -220,21 +225,19 @@
     @apply flex-grow;
     @apply px-2 py-2 rounded-l-lg;
     @apply bg-nftreasure-input-bg;
-    @apply dark:bg-nftreasure-input-bg-dark;
     @apply text-nftreasure-input-text;
-    @apply dark:text-nftreasure-input-text-dark;
     @apply focus:outline-none focus:ring-2;
     @apply focus:ring-nftreasure-link;
     @apply placeholder-nftreasure-placeholder;
-    @apply dark:placeholder-nftreasure-placeholder-dark;
     @apply border;
     @apply border-nftreasure-input-border;
-    @apply dark:border-nftreasure-input-border-dark;
   }
 
   .dark .chatbotUI-input-box {
     @apply bg-nftreasure-dark-background;
-    @apply text-nftreasure-dark-title-color;
+    @apply border-nftreasure-input-border-dark;
+    @apply placeholder-nftreasure-placeholder-dark;
+    @apply text-nftreasure-input-text-dark;
   }
 
   /*

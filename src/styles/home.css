@@ -35,8 +35,6 @@
   /* Speech Bubble with Ron Jay quotes */
   .speech-bubble {
     @apply relative;
-    @apply bg-nftreasure-bubble-bg;
-    @apply dark:bg-nftreasure-dark-bubble-bg;
     @apply p-4 sm:p-6 md:p-8;
     @apply rounded-[2rem];
     @apply shadow-lg;
@@ -48,7 +46,15 @@
     @apply absolute;
     @apply left-[calc(125vh*0.4)] sm:left-[calc(200vh*0.4)];
     @apply bottom-[20%] sm:bottom-[30%] md:bottom-[30%] lg:bottom-[30%];
+    @apply bg-nftreasure-bubble-bg;
+    @apply text-nftreasure-bubble-text;
     --bg-light: theme("colors.nftreasure-bubble-bg");
+  }
+
+  /* Dark Mode Speech Bubble */
+  .dark .speech-bubble {
+    @apply bg-nftreasure-dark-bubble-bg;
+    @apply text-nftreasure-dark-bubble-text;
     --bg-dark-light: theme("colors.nftreasure-dark-bubble-bg");
   }
 
@@ -84,13 +90,13 @@
   .footer-message {
     @apply fixed inset-x-0 bottom-0 w-full p-2 italic font-semibold text-center md:p-4;
     @apply text-sm md:text-lg xl:text-xl;
-    @apply text-nftreasure-dark-text-color;
-    @apply bg-nftreasure-primary;
+    @apply bg-nftreasure-gold;
+    @apply text-nftreasure-navy;
     @apply z-50;
   }
 
   .dark .footer-message {
-    @apply text-nftreasure-dark-text-color;
-    @apply bg-nftreasure-dark-primary;
+    @apply bg-nftreasure-navy;
+    @apply text-nftreasure-gold;
   }
 }
