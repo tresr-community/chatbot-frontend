@@ -17,7 +17,7 @@
     }
   ],
   "name": "Chat with Ron Jay",
-  "scope": "/fullscreen",
+  "scope": "/",
   "short_name": "ChatBot",
   "start_url": "/fullscreen",
   "theme_color": "#F0C854"

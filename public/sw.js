@@ -3,9 +3,9 @@ const CACHE_NAME = "chatbot-cache-v1";
 const urlsToCache = [
   "/",
   "/manifest.json",
+  "/fullscreen",
+  "/images/user.png",
   "/images/support.png",
-  "/images/ron_jay.png",
-  "/images/NFTREASURE.png",
 ];
 
 self.addEventListener("install", (event) => {
@@ -29,22 +29,25 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    (async () => {
-      const cachedResponse = await caches.match(event.request);
+  if (event.request.url.startsWith("chrome-extension://")) {
+    return;
+  }
 
-      // Return cached version if available, but fetch from network in background
-      const networkFetch = fetch(event.request).then((response) => {
-        // Update the cache with the fresh version
-        const cacheClone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, cacheClone);
+  if (event.request.mode === "navigate") {
+    return event.respondWith(fetch(event.request));
+  } else {
+    event.respondWith(
+      (async () => {
+        const cachedResponse = await caches.match(event.request);
+        const networkFetch = fetch(event.request).then((response) => {
+          const cacheClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, cacheClone);
+          });
+          return response;
         });
-        return response;
-      });
-
-      // Immediately return cached version if available
-      return cachedResponse || networkFetch;
-    })()
-  );
+        return cachedResponse || networkFetch;
+      })()
+    );
+  }
 });
