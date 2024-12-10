@@ -34,7 +34,7 @@
   }
 
   .messageBubble-container {
-    @apply m-2.5 p-2.5 relative overflow-y-auto flex flex-row;
+    @apply m-2.5 p-2.5 relative overflow-y-auto;
     @apply z-40;
   }
 
