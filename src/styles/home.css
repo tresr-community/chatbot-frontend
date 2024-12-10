@@ -35,7 +35,6 @@
   /* Speech Bubble with Ron Jay quotes */
   .speech-bubble {
     @apply relative;
-    @apply bg-light dark:bg-dark-light;
     @apply p-4 sm:p-6 md:p-8;
     @apply rounded-[2rem];
     @apply shadow-lg;
@@ -47,8 +46,16 @@
     @apply absolute;
     @apply left-[calc(125vh*0.4)] sm:left-[calc(200vh*0.4)];
     @apply bottom-[20%] sm:bottom-[30%] md:bottom-[30%] lg:bottom-[30%];
-    --bg-light: theme("colors.light");
-    --bg-dark-light: theme("colors.dark-light");
+    @apply bg-nftreasure-bubble-bg;
+    @apply text-nftreasure-bubble-text;
+    --bg-light: theme("colors.nftreasure-bubble-bg");
+  }
+
+  /* Dark Mode Speech Bubble */
+  .dark .speech-bubble {
+    @apply bg-nftreasure-dark-bubble-bg;
+    @apply text-nftreasure-dark-bubble-text;
+    --bg-dark-light: theme("colors.nftreasure-dark-bubble-bg");
   }
 
   /* Speech Bubble Tail */
@@ -75,18 +82,21 @@
   #quoteText {
     @apply text-sm sm:text-base md:text-lg lg:text-xl;
     @apply leading-relaxed;
-    @apply text-primary dark:text-white;
+    @apply text-nftreasure-bubble-text;
+    @apply dark:text-nftreasure-dark-bubble-text;
   }
 
   /* Footer */
   .footer-message {
     @apply fixed inset-x-0 bottom-0 w-full p-2 italic font-semibold text-center md:p-4;
     @apply text-sm md:text-lg xl:text-xl;
-    @apply text-white bg-primary;
+    @apply bg-nftreasure-gold;
+    @apply text-nftreasure-navy;
     @apply z-50;
   }
 
   .dark .footer-message {
-    @apply text-white bg-dark-primary;
+    @apply bg-nftreasure-navy;
+    @apply text-nftreasure-gold;
   }
 }

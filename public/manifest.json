@@ -1,24 +1,79 @@
 {
   "background_color": "#ffffff",
-  "description": "Chat with Ron Jay about crypto",
+  "categories": ["social", "communication", "cryptocurrency"],
+  "description": "Chat with Ron Jay about crypto, NFTs, and blockchain technology. Get insights, trading tips, and stay updated with the latest crypto trends.",
   "display": "standalone",
   "icons": [
     {
-      "purpose": "any maskable",
+      "purpose": "any",
       "sizes": "192x192",
-      "src": "/images/support.png",
+      "src": "/images/pwa/manifest-icon-192.maskable.png",
       "type": "image/png"
     },
     {
-      "purpose": "any maskable",
+      "purpose": "maskable",
+      "sizes": "192x192",
+      "src": "/images/pwa/manifest-icon-192.maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
       "sizes": "512x512",
-      "src": "/images/support.png",
+      "src": "/images/pwa/manifest-icon-512.maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "/images/pwa/manifest-icon-512.maskable.png",
       "type": "image/png"
     }
   ],
+  "launch_handler": {
+    "navigate_existing_client": "always",
+    "route_to": "new-client",
+    "client_mode": "navigate-existing"
+  },
   "name": "Chat with Ron Jay",
-  "scope": "/fullscreen",
+  "orientation": "portrait",
+  "prefer_related_applications": false,
+  "protocol_handlers": [
+    {
+      "protocol": "web+chat",
+      "url": "/fullscreen?chat=%s"
+    }
+  ],
+  "scope": "/",
+  "screenshots": [
+    {
+      "form_factor": "wide",
+      "label": "iPad Pro Screenshot",
+      "sizes": "2048x2732",
+      "src": "/images/pwa/apple-splash-2048-2732.png",
+      "type": "image/png"
+    },
+    {
+      "form_factor": "narrow",
+      "label": "iPhone Screenshot",
+      "sizes": "1290x2796",
+      "src": "/images/pwa/apple-splash-1290-2796.png",
+      "type": "image/png"
+    }
+  ],
   "short_name": "ChatBot",
+  "shortcuts": [
+    {
+      "icons": [
+        {
+          "sizes": "192x192",
+          "src": "/images/pwa/manifest-icon-192.maskable.png",
+          "type": "image/png"
+        }
+      ],
+      "name": "ChatBot",
+      "url": "/fullscreen"
+    }
+  ],
   "start_url": "/fullscreen",
   "theme_color": "#F0C854"
 }

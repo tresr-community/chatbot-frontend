@@ -14,8 +14,6 @@ account_id = "6d6a8fb1f9f3f38b7374d4974c0743cf"
 
 workers_dev = false
 
-usage_model = "bundled"
-
 compatibility_date = "2024-12-01"
 
 main = "./dist/_worker.js/index.js"
@@ -51,6 +49,7 @@ command = "bun run build"
 
 [env.development.vars]
 
+DEBUG = true
 TITLE = "NFTREASURE Community ChatBot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -114,7 +113,7 @@ command = "bun run build"
 [env.production.vars]
 
 TITLE = "NFTREASURE Community ChatBot (Production)"
-FOOTER_MESSAGE = "*** PRODUCTION ENVIRONMENT ***"
+FOOTER_MESSAGE = "Ron Jay, serving the NFTREASURE Community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_BACKEND = "google-ai-studio"
 AI_VERSION = "v1"

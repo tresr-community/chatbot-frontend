@@ -15,12 +15,13 @@
 
   .chatbotUI-container {
     @apply flex flex-col overflow-hidden;
-    @apply bg-background z-30;
+    @apply bg-nftreasure-background;
+    @apply z-30;
   }
 
   /* Dark Mode */
   .dark .chatbotUI-container {
-    @apply bg-dark-background;
+    @apply bg-nftreasure-dark-background;
   }
 
   /* Show the ChatBot Container */
@@ -42,7 +43,8 @@
   */
 
   .chatbotUI-container--widget {
-    @apply bg-white dark:bg-dark-background;
+    @apply bg-nftreasure-input-bg;
+    @apply dark:bg-nftreasure-dark-background;
     @apply fixed w-96 max-w-sm;
     @apply bottom-16 right-5;
     @apply rounded-lg shadow-lg;
@@ -54,7 +56,7 @@
 
   /* Dark Mode */
   .dark .chatbotUI-container--widget {
-    @apply bg-dark-background;
+    @apply bg-nftreasure-dark-background;
   }
 
   /* Show the Widget Container */
@@ -77,7 +79,8 @@
   */
 
   .chatbotUI-container--fullscreen {
-    @apply bg-white dark:bg-dark-background;
+    @apply bg-nftreasure-input-bg;
+    @apply dark:bg-nftreasure-dark-background;
     @apply w-full h-screen;
     @apply flex flex-col;
     @apply opacity-100 scale-100 !important;
@@ -105,7 +108,9 @@
   .chatbotUI-toggle-button {
     @apply fixed bottom-20 right-5;
     @apply rounded-full shadow-lg;
-    @apply text-sm text-white bg-primary;
+    @apply text-sm;
+    @apply text-nftreasure-dark-text-color;
+    @apply bg-nftreasure-primary;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
     @apply p-2;
@@ -113,7 +118,7 @@
 
   /* Dark Mode */
   .dark .chatbotUI-toggle-button {
-    @apply bg-dark-primary;
+    @apply bg-nftreasure-dark-primary;
   }
 
   /* Show the toggle button */
@@ -136,13 +141,16 @@
 
   .chatbotUI-header {
     @apply p-2 text-sm font-semibold;
-    @apply text-center bg-primary text-title-color;
+    @apply text-center;
+    @apply bg-nftreasure-gold;
+    @apply text-nftreasure-navy;
     @apply flex items-center justify-between;
   }
 
   /* Dark Mode */
   .dark .chatbotUI-header {
-    @apply bg-dark-primary text-dark-title-color;
+    @apply bg-nftreasure-gray;
+    @apply text-nftreasure-cream;
   }
 
   /*
@@ -152,8 +160,10 @@
   .chatbotUI-close-button {
     @apply p-2;
     @apply rounded-full shadow-lg;
-    @apply text-sm text-white bg-primary;
-    @apply text-title-color hover:text-gray-300;
+    @apply text-sm;
+    @apply bg-nftreasure-primary;
+    @apply text-nftreasure-title-color;
+    @apply hover:text-nftreasure-light;
     @apply cursor-pointer;
   }
 
@@ -175,20 +185,36 @@
     @apply p-2 space-y-1;
   }
 
+  /* Markdown Links in Chat */
+  .chatbotUI-messages a {
+    @apply text-nftreasure-link;
+    @apply hover:text-nftreasure-link-hover;
+    @apply dark:text-nftreasure-link-dark;
+    @apply dark:hover:text-nftreasure-link-hover-dark;
+    @apply transition-colors duration-200;
+  }
+
   /*
   Chat Input Form
   */
 
   .chatbotUI-input-form {
     @apply flex items-center;
-    @apply bg-gray-200;
-    @apply dark:bg-gray-700 rounded-lg;
-    @apply border border-gray-300 dark:border-gray-600;
+    @apply bg-nftreasure-bubble-bg;
+    @apply rounded-lg;
+    @apply border border-nftreasure-input-border;
     @apply w-full;
     @apply sticky bottom-0;
     @apply z-[9999];
     @apply px-2 py-2;
     @apply space-x-2 space-y-2;
+  }
+
+  /* Dark Mode */
+  .dark .chatbotUI-input-form {
+    @apply border-nftreasure-input-border-dark;
+    @apply bg-nftreasure-dark-light;
+    @apply border-nftreasure-input-border-dark;
   }
 
   /*
@@ -198,14 +224,20 @@
   .chatbotUI-input-box {
     @apply flex-grow;
     @apply px-2 py-2 rounded-l-lg;
-    @apply bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
-    @apply focus:outline-none focus:ring-2 focus:ring-blue-500;
-    @apply placeholder-gray-500 dark:placeholder-gray-400;
-    @apply border border-gray-300 dark:border-gray-600;
+    @apply bg-nftreasure-input-bg;
+    @apply text-nftreasure-input-text;
+    @apply focus:outline-none focus:ring-2;
+    @apply focus:ring-nftreasure-link;
+    @apply placeholder-nftreasure-placeholder;
+    @apply border;
+    @apply border-nftreasure-input-border;
   }
 
   .dark .chatbotUI-input-box {
-    @apply bg-dark-background text-dark-title-color;
+    @apply bg-nftreasure-dark-background;
+    @apply border-nftreasure-input-border-dark;
+    @apply placeholder-nftreasure-placeholder-dark;
+    @apply text-nftreasure-input-text-dark;
   }
 
   /*
@@ -214,9 +246,9 @@
 
   .chatbotUI-send-button {
     @apply px-2 py-2 rounded-full shadow-lg;
-    @apply text-white;
-    @apply bg-primary;
-    @apply hover:bg-dark-primary;
+    @apply text-nftreasure-dark-text-color;
+    @apply bg-nftreasure-primary;
+    @apply hover:bg-nftreasure-dark-primary;
     @apply cursor-pointer font-bold;
     @apply transition duration-300 ease-in-out;
     @apply whitespace-nowrap;
@@ -224,9 +256,9 @@
 
   /* Dark Mode */
   .dark .chatbotUI-send-button {
-    @apply text-white;
-    @apply bg-dark-primary;
-    @apply hover:bg-primary;
+    @apply text-nftreasure-dark-text-color;
+    @apply bg-nftreasure-dark-primary;
+    @apply hover:bg-nftreasure-primary;
   }
 
   /* Bitcoin Loader */
@@ -261,8 +293,11 @@
   /* Front of the Coin */
   .chatbotUI-loader::before {
     /* Appearance */
-    background: linear-gradient(gold, orange);
-    color: white;
+    background: linear-gradient(
+      theme("colors.nftreasure-loader-start"),
+      theme("colors.nftreasure-loader-end")
+    );
+    color: theme("colors.nftreasure-dark-text-color");
     content: "₿";
     font-size: 5rem;
     border-radius: 50%;
@@ -285,9 +320,12 @@
   /* Back of the Coin */
   .chatbotUI-loader::after {
     /* Appearance */
-    background: linear-gradient(gold, orange);
+    background: linear-gradient(
+      theme("colors.nftreasure-loader-start"),
+      theme("colors.nftreasure-loader-end")
+    );
     content: "₿";
-    color: white;
+    color: theme("colors.nftreasure-dark-text-color");
     font-size: 5rem;
     border-radius: 50%;
     width: 100%;

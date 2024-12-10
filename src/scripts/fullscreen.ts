@@ -6,19 +6,18 @@ Fullscreen
 
 import type {ChatbotConfig} from "./types";
 
-import {Chatbot} from "./chatbot";
+import {ChatbotUtils} from "./utils";
 
 export function setupFullscreen(config: ChatbotConfig) {
-  // Setup event listeners
   const sendButton = document.getElementById(
     "chatbot-send-button"
   ) as HTMLButtonElement;
   const inputBox = document.getElementById("chatbot-input") as HTMLInputElement;
 
-  // Setup the send button
+  // Setup the send button and input box.
   if (sendButton && inputBox) {
     console.debug("Setting up send button...");
-    Chatbot.setupSendButton(config, sendButton, inputBox);
+    ChatbotUtils.setupSendButton(config, sendButton, inputBox);
   } else {
     console.error("Send button or input box not found");
   }

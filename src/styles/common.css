@@ -14,12 +14,14 @@
     @apply flex flex-col;
     @apply bg-center bg-no-repeat bg-cover;
     @apply font-sans antialiased;
-    @apply bg-background text-primary;
+    @apply bg-nftreasure-background;
+    @apply text-nftreasure-text-color;
     @apply z-0;
   }
 
   .dark body {
-    @apply bg-dark-background text-dark-primary;
+    @apply bg-nftreasure-dark-background;
+    @apply text-nftreasure-dark-text-color;
   }
 
   /* Background */
@@ -41,7 +43,7 @@
   .bg-container::before {
     content: "";
     @apply absolute inset-0;
-    @apply bg-[rgba(4,28,101,0.788)];
+    @apply bg-nftreasure-overlay;
     @apply flex flex-col flex-1;
     @apply z-10;
   }
@@ -60,13 +62,15 @@
     @apply transition duration-150 ease-in-out;
     @apply hover:bg-opacity-90 focus:ring-2 focus:ring-offset-2 focus:outline-none;
     @apply fixed p-2 transition-colors duration-300 rounded-full cursor-pointer top-4 right-4;
-    @apply bg-dark-light text-light;
+    @apply bg-nftreasure-dark-light;
+    @apply text-nftreasure-light;
     @apply z-50;
   }
 
   .dark .theme-switcher-button {
     @apply hover:bg-opacity-75;
-    @apply bg-light text-dark-light;
+    @apply bg-nftreasure-light;
+    @apply text-nftreasure-dark-light;
   }
 
   /* Logo and Images */

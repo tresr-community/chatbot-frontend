@@ -39,24 +39,71 @@
   }
 
   .messageBubble {
-    @apply flex-1 max-w-xs px-4 py-2 my-2 break-words rounded-lg shadow;
-    @apply bg-title-color text-light;
+    @apply px-4 py-2 my-2 break-words rounded-lg shadow;
+    @apply flex flex-col;
+    @apply bg-nftreasure-bubble-bg;
+    @apply text-nftreasure-bubble-text;
     @apply z-50;
     width: fit-content;
-    max-width: 75%;
+    max-width: 90%;
   }
 
   .dark .messageBubble {
-    @apply bg-dark-bubble text-dark-text-color;
+    @apply bg-nftreasure-dark-bubble-bg;
+    @apply text-nftreasure-dark-bubble-text;
   }
 
   /* Message bubble for left-side conversation */
   .messageBubble-left {
     @apply flex self-start justify-center w-auto ml-0 mr-auto messageBubble left-6;
+    @apply flex-col;
   }
 
   /* Message bubble for right-side conversation */
   .messageBubble-right {
     @apply flex self-start justify-center w-auto ml-auto mr-0 messageBubble right-6;
+    @apply flex-col-reverse;
+  }
+
+  /*
+  Typing indicator
+  */
+
+  .typing-bubble {
+    padding: 12px 16px !important;
+    min-width: 60px;
+    min-height: 32px;
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: typingAnimation 1.4s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typingAnimation {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
   }
 }

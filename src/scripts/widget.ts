@@ -7,19 +7,18 @@ Widget
 import type {ChatbotConfig} from "./types";
 
 import {ChatbotUtils} from "./utils";
-import {Chatbot} from "./chatbot";
+
 export function setupWidget(config: ChatbotConfig) {
-  // Setup event listeners
+  const toggleButton = document.getElementById("chatbot-toggle-button");
   const container = document.getElementById("chatbot-container");
   const widget = document.getElementById("chatbot-widget");
-  const toggleButton = document.getElementById("chatbot-toggle-button");
   const closeButton = document.getElementById("chatbot-close-button");
   const sendButton = document.getElementById(
     "chatbot-send-button"
   ) as HTMLButtonElement;
   const inputBox = document.getElementById("chatbot-input") as HTMLInputElement;
 
-  // Setup the toggle button
+  // Setup the toggle button, container, and widget.
   if (toggleButton && container && widget) {
     console.debug("Setting up toggle button...");
 
@@ -76,7 +75,7 @@ export function setupWidget(config: ChatbotConfig) {
   // Setup the send button
   if (sendButton && inputBox) {
     console.debug("Setting up send button...");
-    Chatbot.setupSendButton(config, sendButton, inputBox);
+    ChatbotUtils.setupSendButton(config, sendButton, inputBox);
   } else {
     console.error("Send button or input box not found");
   }
