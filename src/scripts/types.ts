@@ -6,4 +6,5 @@ export interface ChatbotConfig {
   showButton?: boolean;
   enableLoadingSpinner?: boolean;
   baseUrl: string;
+  debug?: boolean;
 }

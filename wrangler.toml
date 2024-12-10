@@ -51,6 +51,7 @@ command = "bun run build"
 
 [env.development.vars]
 
+DEBUG = true
 TITLE = "NFTREASURE Community ChatBot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."

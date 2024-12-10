@@ -11,6 +11,13 @@ import {emojify} from "node-emoji";
 
 export const ChatbotUtils = {
   /*
+  Variables
+  */
+
+  // State tracker for the typing indicator.
+  isTypingIndicatorEnabled: false,
+
+  /*
   Get Config extracts the configuration data from the script tags.
   */
   getConfig() {
@@ -62,6 +69,12 @@ export const ChatbotUtils = {
       scriptTag.dataset.chatbotEnableLoadingSpinner = "true";
     }
 
+    // Verify that the chatbot debug is specified or default to false
+    if (!scriptTag.dataset.chatbotDebug) {
+      console.debug("Chatbot debug not specified. Defaulting to false.");
+      scriptTag.dataset.chatbotDebug = "false";
+    }
+
     const scriptUrl = new URL(scriptTag.src);
     return {
       type: scriptTag.dataset.chatbotType,
@@ -71,6 +84,7 @@ export const ChatbotUtils = {
       style: scriptTag.dataset.chatbotStyle,
       showButton: scriptTag.dataset.chatbotShowButton,
       enableLoadingSpinner: scriptTag.dataset.chatbotEnableLoadingSpinner,
+      debug: scriptTag.dataset.chatbotDebug,
     };
   },
 
@@ -92,8 +106,17 @@ export const ChatbotUtils = {
   Toggle Typing Indicator toggles the typing indicator.
   */
   toggleTypingIndicator(show: boolean) {
+    if (this.isTypingIndicatorEnabled === show) {
+      console.debug("Typing indicator is already in the desired state:", show);
+      return;
+    } else {
+      console.debug("Toggling typing indicator to:", show);
+    }
+
     const chatMessages = document.getElementById("chatbot-messages");
-    const existingIndicator = document.getElementById("typing-indicator");
+    const typingIndicators = document.querySelectorAll(
+      ".typing-indicator-container"
+    );
     const inputElement = document.getElementById(
       "chatbot-input"
     ) as HTMLInputElement;
@@ -103,9 +126,8 @@ export const ChatbotUtils = {
       return;
     }
 
-    if (existingIndicator) {
-      existingIndicator.remove();
-    }
+    // Remove only typing indicators
+    typingIndicators.forEach((indicator) => indicator.remove());
 
     inputElement.placeholder = show
       ? "Ron Jay is typing..."
@@ -114,13 +136,18 @@ export const ChatbotUtils = {
     if (show) {
       const typingIndicator = document.createElement("div");
       typingIndicator.id = "typing-indicator";
-      typingIndicator.className = "messageBubble-container flex-row-reverse";
+      typingIndicator.className =
+        "messageBubble-container flex-row typing-indicator-container";
 
-      const dotsContainer = document.createElement("div");
-      dotsContainer.className = "typing-indicator";
+      const bubbleContainer = document.createElement("div");
+      bubbleContainer.className =
+        "messageBubble messageBubble-right typing-bubble !flex !flex-row !items-center gap-1";
 
+      // Create three dots for the animation
       for (let i = 0; i < 3; i++) {
-        dotsContainer.appendChild(document.createElement("span"));
+        const dot = document.createElement("div");
+        dot.className = "typing-dot inline-block";
+        bubbleContainer.appendChild(dot);
       }
 
       const avatarImg = document.createElement("img");
@@ -128,82 +155,13 @@ export const ChatbotUtils = {
       avatarImg.className = "avatarImg avatarImg-right";
 
       typingIndicator.appendChild(avatarImg);
-      typingIndicator.appendChild(dotsContainer);
+      typingIndicator.appendChild(bubbleContainer);
       chatMessages.appendChild(typingIndicator);
 
       this.scrollToBottom();
     }
-  },
 
-  /*
-  Setup Common Event Listeners.
-  */
-  setupCommonEventListeners(container: HTMLElement, config: ChatbotConfig) {
-    console.debug("Setting up event listeners...");
-    const chatbotAPI = this.constructChatbotAPI(config);
-    if (!chatbotAPI) {
-      console.error("Chatbot API URL is not set");
-      return;
-    }
-
-    // Handle form submission
-    const form = container.querySelector("#chatbot-input-form");
-    if (!form) {
-      console.error("Chat input form not found");
-      return;
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      console.debug("Form submitted");
-
-      const input = form.querySelector("#chatbot-input") as HTMLInputElement;
-      if (!input) {
-        console.error("Chat input not found");
-        return;
-      }
-
-      const message = input.value.trim();
-      if (!message) return;
-
-      input.value = "";
-      input.disabled = true;
-
-      // Add user message and show typing indicator
-      this.addMessageToChat("user", message);
-      this.toggleTypingIndicator(true);
-
-      try {
-        await this.sendMessage(chatbotAPI, message);
-      } catch (error) {
-        console.error("Error sending message:", error);
-        this.addMessageToChat(
-          "bot",
-          "Sorry, there was an error sending your message."
-        );
-      } finally {
-        this.toggleTypingIndicator(false);
-        input.disabled = false;
-        input.focus();
-      }
-    });
-
-    /*
-    Handle when the user presses the Enter key.
-    */
-    const input = container.querySelector("#chatbot-input");
-    if (input) {
-      input.addEventListener("keypress", (e: Event) => {
-        const keyEvent = e as KeyboardEvent;
-        if (keyEvent.key === "Enter" && !keyEvent.shiftKey) {
-          e.preventDefault();
-          const sendButton = container.querySelector("#chatbot-send-button");
-          if (sendButton) {
-            (sendButton as HTMLElement).click();
-          }
-        }
-      });
-    }
+    this.isTypingIndicatorEnabled = show;
   },
 
   /*
@@ -274,9 +232,9 @@ export const ChatbotUtils = {
   Send a message to the chatbot API.
   */
   async sendMessage(chatbotAPI: string, message: string) {
-    console.debug("Sending message:", message);
-    const friendlyMessage =
-      "Sorry degen, the chatbot service is currently unavailable.";
+    console.debug("Sending message to ChatBot API:", message);
+    let reply = null;
+    let error = null;
 
     try {
       const response = await fetch(chatbotAPI, {
@@ -288,33 +246,35 @@ export const ChatbotUtils = {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        error = `HTTP error! status: ${response.status}`;
+      } else {
+        const data = await response.json();
+        if (data.error) {
+          error = data.error;
+        }
+
+        if (data.reply) {
+          reply = data.reply;
+        } else {
+          reply = "No response from chatbot";
+        }
       }
 
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      this.addMessageToChat("bot", data.reply || "No response from chatbot");
+      // Return the reply from the chatbot API and an error if there is one.
+      return {reply: reply, error: error};
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";
+
       console.error("Error in sendMessage:", error);
-      this.addMessageToChat("bot", `${friendlyMessage} (${errorMessage})`);
-      const outageQuote = await this.fetchOutageQuote();
-      if (outageQuote) {
-        this.addMessageToChat("bot", outageQuote);
-      } else {
-        console.warn("Failed to obtain outage quote");
-        this.addMessageToChat(
-          "bot",
-          "Ron Jay is currently experiencing technical difficulties."
-        );
-      }
+
+      return {reply, error: errorMessage};
     }
   },
 
+  /*
+  Show the loading spinner.
+  */
   async showLoader() {
     console.debug("Showing loading spinner ₿...");
     const loader = document.getElementById("chatbot-loading-spinner");
@@ -326,6 +286,9 @@ export const ChatbotUtils = {
     }
   },
 
+  /*
+  Hide the loading spinner.
+  */
   hideLoader() {
     console.debug("Hiding loader spinner ₿...");
     const loader = document.getElementById("chatbot-loading-spinner");
@@ -361,6 +324,125 @@ export const ChatbotUtils = {
     } catch (error) {
       console.error("Failed to fetch outage quote:", error);
       return null;
+    }
+  },
+
+  /*
+  Setup the send button.
+  */
+  setupSendButton(
+    config: ChatbotConfig,
+    sendButton: HTMLButtonElement,
+    inputBox: HTMLInputElement
+  ) {
+    // Where are we sending the message?
+    const chatbotAPI = ChatbotUtils.constructChatbotAPI(config);
+    if (!chatbotAPI) {
+      console.error("Chatbot API URL is not set");
+      return;
+    }
+
+    // Handle when the send button is clicked.
+    sendButton.addEventListener("click", async (e) => {
+      e.preventDefault();
+      console.debug("Submitting Chat Message...");
+
+      const message = inputBox.value.trim();
+      if (!message) return;
+
+      inputBox.value = "";
+      inputBox.disabled = true;
+
+      try {
+        // First, add the user message to the chat window.
+        await ChatbotUtils.addMessageToChat.call(ChatbotUtils, "user", message);
+
+        // Then show a typing indicator to show the user something is happening.
+        ChatbotUtils.toggleTypingIndicator(true);
+
+        if (config.debug === true) {
+          console.warn("START: Simulating slow AI response...");
+          // Introduce an artificial delay to simulate a slow response from the AI backend.
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+          console.warn("END: Simulating slow AI response...");
+        } else {
+          console.warn("DEBUG IS DISABLED, SKIPPING SLOW AI RESPONSE...");
+          console.warn(config);
+        }
+
+        // Then try to send message to the chatbot API.
+        const {reply, error} = await ChatbotUtils.sendMessage.call(
+          ChatbotUtils,
+          chatbotAPI,
+          message
+        );
+
+        // Then add the reply to the chat window if there is one.
+        if (reply) {
+          await ChatbotUtils.addMessageToChat.call(ChatbotUtils, "bot", reply);
+        }
+
+        // If there was an error, send the error to the console
+        // but send an outage quote to the chat window for the lols.
+        if (error) {
+          console.error("Error during message send:", error);
+          const outageQuote = await ChatbotUtils.fetchOutageQuote();
+          if (outageQuote) {
+            await ChatbotUtils.addMessageToChat.call(
+              ChatbotUtils,
+              "bot",
+              outageQuote
+            );
+          } else {
+            console.warn("Failed to obtain outage quote");
+            await ChatbotUtils.addMessageToChat.call(
+              ChatbotUtils,
+              "bot",
+              "Ron Jay is currently experiencing technical difficulties."
+            );
+          }
+        }
+      } catch (error: unknown) {
+        console.error("Error sending message:", error);
+
+        // First, hide the typing indicator.
+        ChatbotUtils.toggleTypingIndicator(false);
+
+        // Then, add an error message to the chat window.
+        const errorMessage =
+          error instanceof Error ? error.message : "Unknown error";
+        ChatbotUtils.addMessageToChat.call(
+          ChatbotUtils,
+          "bot",
+          `Sorry degen, the chatbot service is currently unavailable. (${errorMessage})`
+        );
+
+        const outageQuote = await ChatbotUtils.fetchOutageQuote();
+        if (outageQuote) {
+          await ChatbotUtils.addMessageToChat.call(
+            ChatbotUtils,
+            "bot",
+            outageQuote
+          );
+        }
+      } finally {
+        // Finally, hide the typing indicator and re-enable the input box.
+        ChatbotUtils.toggleTypingIndicator(false);
+        inputBox.disabled = false;
+        inputBox.focus();
+      }
+    });
+
+    // Handle the Enter key press to submit the form
+    if (inputBox) {
+      inputBox.addEventListener("keypress", (e: KeyboardEvent) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          if (sendButton) {
+            sendButton.click();
+          }
+        }
+      });
     }
   },
 };

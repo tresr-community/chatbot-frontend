@@ -8,6 +8,7 @@ interface Env {
   AI_VERSION: string;
   AI_BACKEND: string;
   ALLOWED_ORIGINS: string;
+  DEBUG: boolean;
 }
 
 declare namespace App {

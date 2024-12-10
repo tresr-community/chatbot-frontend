@@ -7,6 +7,7 @@ interface Props {
   apiBackend: string;
   showButton?: boolean;
   enableLoadingSpinner?: boolean;
+  debug?: boolean;
 }
 ---
 
@@ -26,6 +27,7 @@ interface Props {
       enableLoadingSpinner: props.enableLoadingSpinner,
       showButton: props.showButton,
       baseUrl: baseUrl,
+      debug: props.debug,
     };
 
     if (typeof window.initChatbot === "function") {

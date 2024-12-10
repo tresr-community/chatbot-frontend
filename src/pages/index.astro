@@ -9,6 +9,7 @@ const footerMessage = env.FOOTER_MESSAGE;
 const welcomeMessage = env.WELCOME_MESSAGE;
 const chatbotApiVersion = env.AI_VERSION;
 const chatbotApiBackend = env.AI_BACKEND;
+const debug = env.DEBUG;
 
 // ChatBot Configuration
 const chatbotType = "widget";
@@ -29,4 +30,5 @@ const enableQuotes = true;
   chatbotShowButton={chatbotShowButton}
   enableLoadingSpinner={enableLoadingSpinner}
   enableQuotes={enableQuotes}
+  debug={debug}
 />
