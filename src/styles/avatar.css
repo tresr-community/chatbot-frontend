@@ -40,14 +40,16 @@
 
   .messageBubble {
     @apply flex-1 max-w-xs px-4 py-2 my-2 break-words rounded-lg shadow;
-    @apply bg-title-color text-light;
+    @apply bg-nftreasure-bubble-bg;
+    @apply text-nftreasure-bubble-text;
     @apply z-50;
     width: fit-content;
     max-width: 75%;
   }
 
   .dark .messageBubble {
-    @apply bg-dark-bubble text-dark-text-color;
+    @apply bg-nftreasure-dark-bubble-bg;
+    @apply text-nftreasure-dark-bubble-text;
   }
 
   /* Message bubble for left-side conversation */

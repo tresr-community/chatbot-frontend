@@ -57,26 +57,61 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Light Theme Colors
-        primary: "#DAA520", // Golden color, resembling gold coins
-        light: "#F0EAD6", // Light cream, for backgrounds, like aged maps
-        "text-color": "#122239", // Dark navy blue, for high readability on light backgrounds
-        "border-color": "#CDBA96", // Soft gold, for subtle borders
-        "title-color": "#1E3A5F", // Dark navy blue, for titles
-        background: "#F0EAD6", // Light cream background
-        border: "#CDBA96", // Soft gold borders
-        bubble: "#F3E5AB", // Light golden background for chat bubbles or highlights
+        // Base Colors
+        "nftreasure-navy": "#020617", // slate-950
+        "nftreasure-gold": "#fcd34d", // amber-300
+        "nftreasure-cream": "#94a3b8", // stone-400
 
-        // Dark Theme Colors
-        "dark-primary": "#122239", // Dark navy blue, as primary color
-        "dark-light": "#2A416D", // Slightly lighter navy for variety in dark theme elements
-        "dark-text-color": "#FFFFFF", // White, for readability on dark navy backgrounds
-        "dark-border-color": "#4D5B7C", // Darker shade of navy for borders
-        "dark-title-color": "#F3E5AB", // Golden color for titles to pop against dark backgrounds
-        "dark-background": "#2A416D", // Dark navy as background
-        "dark-border": "#4D5B7C", // Darker navy for borders
-        "dark-bubble": "#DAA520", // Gold, like golden coins, for chat bubbles or highlights
+        // Light Theme
+        "nftreasure-primary": "#fcd34d", // amber-300
+        "nftreasure-light": "#94a3b8", // stone-400
+        "nftreasure-background": "#94a3b8", // stone-400
+        "nftreasure-border": "#fcd34d", // amber-300
+        "nftreasure-title-color": "#020617", // slate-950
+        "nftreasure-text-color": "#020617", // slate-950
+        "nftreasure-border-color": "#fcd34d", // amber-300
+
+        // Speech Bubble Light
+        "nftreasure-bubble-bg": "#f5f5f4", // stone-100
+        "nftreasure-bubble-text": "#020617", // slate-950
+
+        // Dark Theme
+        "nftreasure-dark-primary": "#020617", // slate-950
+        "nftreasure-dark-light": "#1e293b", // slate-800
+        "nftreasure-dark-title-color": "#fcd34d", // amber-300
+        "nftreasure-dark-border-color": "#fcd34d", // amber-300
+        "nftreasure-dark-background": "#020617", // slate-950
+        "nftreasure-dark-text-color": "#ffffff",
+        "nftreasure-dark-border": "#1e293b", // slate-800
+
+        // Speech Bubble Dark
+        "nftreasure-dark-bubble-bg": "#fcd34d", // amber-300
+        "nftreasure-dark-bubble-text": "#020617", // slate-950
+
+        // UI Elements
+        "nftreasure-input-bg": "#ffffff",
+        "nftreasure-input-bg-dark": "#1e293b", // slate-800
+        "nftreasure-input-border": "#d1d5db", // gray-300
+        "nftreasure-input-border-dark": "#4b5563", // gray-600
+        "nftreasure-input-text": "#111827", // gray-900
+        "nftreasure-input-text-dark": "#ffffff",
+        "nftreasure-placeholder": "#6b7280", // gray-500
+        "nftreasure-placeholder-dark": "#9ca3af", // gray-400
+
+        // Links
+        "nftreasure-link": "#3b82f6", // blue-500
+        "nftreasure-link-hover": "#1d4ed8", // blue-700
+        "nftreasure-link-dark": "#60a5fa", // blue-400
+        "nftreasure-link-hover-dark": "#93c5fd", // blue-300
+
+        // Loader
+        "nftreasure-loader-start": "#fcd34d", // amber-300
+        "nftreasure-loader-end": "#fbbf24", // amber-400
+
+        // Overlay
+        "nftreasure-overlay": "rgba(4,28,101,0.788)",
       },
+
       fontFamily: {
         sans: [
           "Jost",
