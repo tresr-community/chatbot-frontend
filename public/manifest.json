@@ -40,7 +40,7 @@
   "protocol_handlers": [
     {
       "protocol": "web+chat",
-      "url": "/fullscreen"
+      "url": "/fullscreen?chat=%s"
     }
   ],
   "scope": "/",
