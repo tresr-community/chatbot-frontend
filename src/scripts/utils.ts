@@ -365,9 +365,6 @@ export const ChatbotUtils = {
           // Introduce an artificial delay to simulate a slow response from the AI backend.
           await new Promise((resolve) => setTimeout(resolve, 5000));
           console.warn("END: Simulating slow AI response...");
-        } else {
-          console.warn("DEBUG IS DISABLED, SKIPPING SLOW AI RESPONSE...");
-          console.warn(config);
         }
 
         // Then try to send message to the chatbot API.
