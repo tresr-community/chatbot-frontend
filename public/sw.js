@@ -1,6 +1,5 @@
 const CACHE_NAME = "chatbot-cache-v1";
 
-// Add the files you want to cache
 const urlsToCache = [
   "/",
   "/manifest.json",
@@ -15,10 +14,37 @@ self.addEventListener("install", (event) => {
   );
 });
 
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches
-      .match(event.request)
-      .then((response) => response || fetch(event.request))
+    (async () => {
+      const cachedResponse = await caches.match(event.request);
+
+      // Return cached version if available, but fetch from network in background
+      const networkFetch = fetch(event.request).then((response) => {
+        // Update the cache with the fresh version
+        const cacheClone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, cacheClone);
+        });
+        return response;
+      });
+
+      // Immediately return cached version if available
+      return cachedResponse || networkFetch;
+    })()
   );
 });
