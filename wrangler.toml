@@ -114,7 +114,7 @@ command = "bun run build"
 [env.production.vars]
 
 TITLE = "NFTREASURE Community ChatBot (Production)"
-FOOTER_MESSAGE = "*** PRODUCTION ENVIRONMENT ***"
+FOOTER_MESSAGE = "Ron Jay, serving the NFTREASURE Community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_BACKEND = "google-ai-studio"
 AI_VERSION = "v1"
