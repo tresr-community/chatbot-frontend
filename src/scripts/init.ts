@@ -5,6 +5,7 @@ Initialize
 */
 
 import type {ChatbotConfig} from "./types";
+
 import {Chatbot} from "./chatbot";
 
 declare global {

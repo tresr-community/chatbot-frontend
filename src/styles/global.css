@@ -14,6 +14,8 @@ Styles for Avatar and Message bubbles
 @import "avatar.css";
 
 /*
-Styles for the ChatBot mode
+Styles for the ChatBot in Widget and Fullscreen mode.
 */
-@import "chatbot.css";
+@import "chatbot-common.css";
+@import "chatbot-fullscreen.css";
+@import "chatbot-widget.css";

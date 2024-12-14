@@ -1,0 +1,46 @@
+---
+// Styles
+import "../styles/chatbot.css";
+
+// Components
+import Widget from "../components/Widget.astro";
+import ChatBot from "../components/ChatBot.astro";
+
+// Data attributes
+export interface Props {
+  title?: string;
+  style?: "light" | "dark";
+  apiVersion?: string;
+  apiBackend?: string;
+  debug?: boolean;
+}
+
+const {
+  title = "ChatBot",
+  style = "light",
+  apiVersion = "v1",
+  apiBackend = "chatbot",
+  debug = false,
+} = Astro.props;
+
+const chatbotShowButton = true;
+const chatbotType = "widget";
+const enableLoadingSpinner = false;
+---
+
+<div id="chatbot-container">
+  <Widget isOpen={false} />
+</div>
+
+<scripts>
+  <ChatBot
+    type={chatbotType}
+    showButton={chatbotShowButton}
+    enableLoadingSpinner={enableLoadingSpinner}
+    debug={debug as boolean}
+    title={title}
+    style={style as "light" | "dark"}
+    apiVersion={apiVersion}
+    apiBackend={apiBackend}
+  />
+</scripts>
