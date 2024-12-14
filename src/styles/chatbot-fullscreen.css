@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+}
+
+@layer components {
+}
+
+@layer utilities {
+  /*
+  ChatBot Fullscreen Mode
+  */
+
+  .chatbotUI-container--fullscreen {
+    @apply bg-nftreasure-input-bg;
+    @apply dark:bg-nftreasure-dark-background;
+    @apply w-full h-screen;
+    @apply flex flex-col;
+    @apply opacity-100 scale-100 !important;
+    @apply visible !important;
+    height: 100%;
+    min-height: 95vh;
+  }
+}

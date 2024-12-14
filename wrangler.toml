@@ -54,7 +54,7 @@ TITLE = "NFTREASURE Community ChatBot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_VERSION = "v1"
-AI_BACKEND = "grok"
+AI_BACKEND = "chatbot"
 ALLOWED_ORIGINS = '{ "allowed_origins": ["https://localhost", "https://localhost:9000", "https://localhost:9100"] }'
 
 [[env.development.r2_buckets]]
@@ -115,7 +115,7 @@ command = "bun run build"
 TITLE = "NFTREASURE Community ChatBot (Production)"
 FOOTER_MESSAGE = "Ron Jay, serving the NFTREASURE Community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
-AI_BACKEND = "google-ai-studio"
+AI_BACKEND = "grok"
 AI_VERSION = "v1"
 ALLOWED_ORIGINS = '{ "allowed_origins": ["https://nftreasure.community","https://chat.nftreasure.community"] }'
 

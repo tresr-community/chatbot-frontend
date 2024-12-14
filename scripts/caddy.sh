@@ -5,7 +5,7 @@ set -euo pipefail
 ACTION=${1:-"start"}
 
 # Path to your Caddyfile
-CADDYFILE_PATH="$(pwd)/src/Caddyfile"
+CADDYFILE_PATH="$(pwd)/src/caddy/Caddyfile"
 
 # The Docker image of Caddy
 CADDY_DOCKER_IMAGE="docker.io/caddy:latest"

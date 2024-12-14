@@ -1,0 +1,41 @@
+<!doctype html>
+
+<!--
+  This is an example of how to embed the ChatBot in a static HTML page.
+
+  URL Parameters:
+  - title: The title of the ChatBot
+  - style: The style of the ChatBot (light or dark)
+  - apiVersion: The version of the API to use
+  - apiBackend: The backend to use
+  - debug: Whether to enable debug mode
+-->
+
+<html lang="en">
+  <head>
+    <title>ChatBot Embed Test</title>
+  </head>
+
+  <body>
+    <h1>Chatbot</h1>
+    <p>This is a test page that embeds the ChatBot</p>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container"></div>
+
+    <footer>
+      <p>This is an example footer</p>
+    </footer>
+  </body>
+
+  <script
+    src="https://localhost:9000/embed"
+    title="Chatbot"
+    style="dark"
+    apiVersion="v1"
+    apiBackend="chatbot"
+    debug="true"
+    type="module"
+    defer
+  ></script>
+</html>

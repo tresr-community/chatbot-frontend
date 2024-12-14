@@ -60,14 +60,32 @@ localhost:9000 {
 	}
 
 	###########################################################################
+	# Manual HTML test page
+	###########################################################################
+
+	handle /test/* {
+		uri strip_prefix /test
+		root * src/caddy/static
+		file_server {
+			browse
+		}
+	}
+
+	###########################################################################
 	# Frontend Worker (Astro)
 	###########################################################################
 
-	# Static assets
+	# Static assets in the public or dist folder.
 	@static {
 		path /favicon.ico /_astro/* /images/* /manifest.json
 	}
 	handle @static {
+		header {
+			Access-Control-Allow-Origin "*"
+			Access-Control-Allow-Methods "GET, OPTIONS"
+			Access-Control-Allow-Headers "Content-Type"
+			Access-Control-Max-Age "86400"
+		}
 		reverse_proxy localhost:9100
 	}
 
@@ -85,7 +103,7 @@ localhost:9000 {
 
 	# Frontend routes
 	@frontend-routes {
-		path / /fullscreen /widget /quotes /api/*
+		path /api/* /embed /fullscreen /
 	}
 	handle @frontend-routes {
 		reverse_proxy localhost:9100 {

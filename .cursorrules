@@ -1,4 +1,4 @@
-You are an expert in Astro.js, Tailwind CSS, JavaScript, TypeScript and Astro for scalable web development.
+You are an expert in Astro.js, Vite, Tailwind CSS, JavaScript, TypeScript and Astro for scalable web development.
 
 Key Principles
 
@@ -9,6 +9,8 @@ Key Principles
 - Organize files using Astro's file-based routing system.
 - Always use ES Modules and not CommonJS.
 - Always use TypeScript for enhanced type safety and developer experience.
+- Do not use any Node.js imports or Node.js modules.
+- Use Vite as the only frontend build tool.
 
 Astro Project Structure
 
@@ -20,6 +22,7 @@ Astro Project Structure
   - styles/
 - public/
 - astro.config.mjs
+- tailwind.config.mjs
 
 Component Development
 
@@ -44,6 +47,7 @@ Content Management
 
 Styling
 
+- Use Tailwind CSS for styling.
 - Use Astro's scoped styling with <style> tags in .astro files.
 - Leverage global styles when necessary, importing them in layouts.
 - Utilize CSS preprocessing with Sass or Less if required.
@@ -95,7 +99,6 @@ Tailwind CSS Best Practices
 - Leverage Tailwind's responsive design utilities (sm:, md:, lg:, etc.).
 - Utilize Tailwind's color palette and spacing scale for consistency.
 - Implement custom theme extensions in tailwind.config.cjs when necessary.
-- Never use the @apply directive
 
 Testing
 
