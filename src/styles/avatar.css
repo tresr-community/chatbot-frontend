@@ -62,7 +62,7 @@
   /* Message bubble for right-side conversation */
   .messageBubble-right {
     @apply flex self-start justify-center w-auto ml-auto mr-0 messageBubble right-6;
-    @apply flex-col-reverse;
+    @apply flex-col;
   }
 
   /*
