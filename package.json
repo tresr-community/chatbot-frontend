@@ -31,7 +31,7 @@
     "@tailwindcss/typography": "0.5.15",
     "@types/postcss-import": "14.0.3",
     "@typescript-eslint/eslint-plugin": "8.18.1",
-    "@typescript-eslint/utils": "8.18.1",
+    "@typescript-eslint/utils": "8.18.2",
     "autoprefixer": "10.4.20",
     "cssnano": "7.0.6",
     "eslint": "9.17.0",
