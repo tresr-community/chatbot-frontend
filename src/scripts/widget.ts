@@ -18,6 +18,13 @@ export function setupWidget(config: ChatbotConfig) {
   ) as HTMLButtonElement;
   const inputBox = document.getElementById("chatbot-input") as HTMLInputElement;
 
+  // Check if the font has loaded and apply it to the widget toggle
+  document.fonts.ready.then(function () {
+    if (toggleButton) {
+      toggleButton.style.fontFamily = "Noto Color Emoji, sans-serif";
+    }
+  });
+
   // Setup the toggle button, container, and widget.
   if (toggleButton && container && widget) {
     console.debug("Setting up toggle button...");

@@ -39,9 +39,9 @@ in
   cachix = {
     pull = [
       "pre-commit-hooks"
-      "nftreasure-community"
+      "tresr-community"
     ];
-    push = "nftreasure-community";
+    push = "tresr-community";
   };
 
   devenv = {

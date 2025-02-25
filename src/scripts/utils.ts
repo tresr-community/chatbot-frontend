@@ -98,7 +98,7 @@ export const ChatbotUtils = {
     }
 
     const chatbotURL = `${config.baseUrl}/ai/${config.apiVersion}/${config.apiBackend}`;
-    console.debug("Using ChatBot API URL:", chatbotURL);
+    console.debug("Using chatbot API URL:", chatbotURL);
     return chatbotURL;
   },
 
@@ -232,7 +232,7 @@ export const ChatbotUtils = {
   Send a message to the chatbot API.
   */
   async sendMessage(chatbotAPI: string, message: string) {
-    console.debug("Sending message to ChatBot API:", message);
+    console.debug("Sending message to chatbot API:", message);
     let reply = null;
     let error = null;
 

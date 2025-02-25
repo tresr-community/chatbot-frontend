@@ -17,6 +17,14 @@
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   updateTheme(prefersDark);
 
+  // Check if the font has loaded and apply it to the theme toggle
+  document.fonts.ready.then(function () {
+    console.log("Fonts are loaded");
+    if (themeToggle) {
+      themeToggle.style.fontFamily = "Noto Color Emoji, sans-serif";
+    }
+  });
+
   themeToggle?.addEventListener("click", () => {
     const isDark = document.documentElement.classList.toggle("dark");
     updateTheme(isDark);

@@ -8,7 +8,7 @@
 # Global settings
 ##################################################
 
-name = "nftreasure-community-chatbot-frontend"
+name = "tresr-community-chatbot-frontend"
 
 account_id = "6d6a8fb1f9f3f38b7374d4974c0743cf"
 
@@ -50,7 +50,7 @@ command = "bun run build"
 [env.development.vars]
 
 DEBUG = true
-TITLE = "NFTREASURE Community ChatBot (Development)"
+TITLE = "tresr community chatbot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_VERSION = "v1"
@@ -60,8 +60,8 @@ ALLOWED_ORIGINS = '{ "allowed_origins": ["https://localhost", "https://localhost
 [[env.development.r2_buckets]]
 
 binding = "R2_ASSETS"
-bucket_name = "nftreasure-community-chatbot-preview"
-preview_bucket_name = "nftreasure-community-chatbot-preview"
+bucket_name = "tresr-community-chatbot-preview"
+preview_bucket_name = "tresr-community-chatbot-preview"
 
 #####################################################
 # Preview environment
@@ -71,8 +71,8 @@ preview_bucket_name = "nftreasure-community-chatbot-preview"
 
 # Ref: https://developers.cloudflare.com/workers/about/routes/
 routes = [
-	{ pattern = "preview.chat.nftreasure.community", custom_domain = true },
-	{ pattern = "preview.chat.nftreasure.community/*", zone_name = "nftreasure.community" },
+	{ pattern = "preview.chat.tresr.community", custom_domain = true },
+	{ pattern = "preview.chat.tresr.community/*", zone_name = "tresr.community" },
 ]
 
 [env.preview.build]
@@ -81,18 +81,18 @@ command = "bun run build"
 
 [env.preview.vars]
 
-TITLE = "NFTREASURE Community ChatBot (Preview)"
+TITLE = "tresr community chatbot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_VERSION = "v1"
 AI_BACKEND = "grok"
-ALLOWED_ORIGINS = '{ "allowed_origins": ["https://preview.nftreasure.community","https://preview.chat.nftreasure.community"] }'
+ALLOWED_ORIGINS = '{ "allowed_origins": ["https://preview.tresr.community","https://preview.chat.tresr.community"] }'
 
 [[env.preview.r2_buckets]]
 
 binding = "R2_ASSETS"
-bucket_name = "nftreasure-community-chatbot-preview"
-preview_bucket_name = "nftreasure-community-chatbot-preview"
+bucket_name = "tresr-community-chatbot-preview"
+preview_bucket_name = "tresr-community-chatbot-preview"
 
 #####################################################
 # Production environment
@@ -102,8 +102,8 @@ preview_bucket_name = "nftreasure-community-chatbot-preview"
 
 # Ref: https://developers.cloudflare.com/workers/about/routes/
 routes = [
-	{ pattern = "chat.nftreasure.community", custom_domain = true },
-	{ pattern = "chat.nftreasure.community/*", zone_name = "nftreasure.community" },
+	{ pattern = "chat.tresr.community", custom_domain = true },
+	{ pattern = "chat.tresr.community/*", zone_name = "tresr.community" },
 ]
 
 [env.production.build]
@@ -112,15 +112,15 @@ command = "bun run build"
 
 [env.production.vars]
 
-TITLE = "NFTREASURE Community ChatBot (Production)"
-FOOTER_MESSAGE = "Ron Jay, serving the NFTREASURE Community since 2024."
+TITLE = "tresr community chatbot (Production)"
+FOOTER_MESSAGE = "Ron Jay, serving the tresr community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_BACKEND = "grok"
 AI_VERSION = "v1"
-ALLOWED_ORIGINS = '{ "allowed_origins": ["https://nftreasure.community","https://chat.nftreasure.community"] }'
+ALLOWED_ORIGINS = '{ "allowed_origins": ["https://tresr.community","https://chat.tresr.community"] }'
 
 [[env.production.r2_buckets]]
 
 binding = "R2_ASSETS"
-bucket_name = "nftreasure-community-chatbot"
-preview_bucket_name = "nftreasure-community-chatbot"
+bucket_name = "tresr-community-chatbot"
+preview_bucket_name = "tresr-community-chatbot"

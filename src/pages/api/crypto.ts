@@ -47,7 +47,7 @@ const QUOTES: string[] = [
   "I miss the days when 'hash' was just something I had for breakfast.",
   "My retirement plan is a cold wallet in a hot market.",
   "You say 'market correction', I say 'discount shopping'.",
-  "My other car was a NFT.",
+  "My other car was an NFT.",
   "If you don't believe it or don't get it, I don't have the time to try to convince you, sorry. - Satoshi Nakamoto",
   "Every time a coin gets listed, an angel gets its wings.",
   "Crypto: where the predictions are made up and the market cap doesn't matter.",
