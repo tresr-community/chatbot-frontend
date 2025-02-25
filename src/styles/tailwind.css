@@ -422,7 +422,7 @@
   .chatbotUI-messages {
     @apply overflow-y-auto;
     @apply !m-0 !p-4;
-    @apply space-y-6;
+    @apply !space-y-8;
   }
 
   /* Markdown Links in Chat */
@@ -657,6 +657,8 @@
     @apply p-2;
     min-height: 75vh;
     max-height: 75vh;
+    min-width: 10vw;
+    max-width: 10vw;
   }
 
   /* Dark Mode */
