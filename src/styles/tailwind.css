@@ -183,78 +183,46 @@
   /* Speech Bubble */
   .speech-bubble {
     @apply absolute;
-    @apply px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14;
-    @apply py-6 sm:py-8 md:py-10 lg:py-12 xl:py-14;
-    @apply rounded-[2rem];
+    @apply rounded-tl-xl rounded-tr-xl rounded-br-xl;
     @apply shadow-lg;
-    @apply ml-[-50px] sm:ml-[-100px];
-    @apply flex-1;
-    @apply max-w-[calc(100%-60px)] sm:max-w-[calc(100%-100px)] md:max-w-[calc(100%-180px)] lg:max-w-[calc(100%-250px)] xl:max-w-[calc(100%-320px)];
-    @apply min-h-[60px] sm:min-h-[80px] md:min-h-[100px];
+    @apply !m-0 !p-4;
+    @apply bg-tresr-bubble-bg text-tresr-bubble-text;
+    @apply dark:bg-tresr-dark-bubble-bg dark:text-tresr-dark-bubble-text;
     @apply z-30;
-    @apply left-[calc(125vh*0.4)] sm:left-[calc(200vh*0.4)];
-    @apply bottom-[20%] sm:bottom-[30%] md:bottom-[30%] lg:bottom-[30%];
     @apply flex items-center justify-center;
-    background-color: var(--color-tresr-bubble-bg);
-    color: var(--color-tresr-bubble-text);
+    animation: fadeIn 0.5s ease-in;
+    left: 45%;
+    bottom: 40%;
+    transform: translateY(-50%);
+    max-width: 50%;
+    min-width: 200px;
   }
 
-  /* Dark Mode Speech Bubble */
-  .dark .speech-bubble {
-    background-color: var(--color-tresr-dark-bubble-bg);
-    color: var(--color-tresr-dark-bubble-text);
-  }
-
-  .speech-bubble:after {
+  /* Tail for Speech Bubble */
+  .speech-bubble::after {
     content: "";
     position: absolute;
-    left: 0;
-    top: 50%;
     width: 0;
     height: 0;
-    border: 44px solid transparent;
-    border-right-color: #00aabb;
-    border-left: 0;
-    margin-top: -44px;
-    margin-left: -44px;
-  }
-
-  /* Text inside bubble */
-  #quoteText {
-    @apply text-sm sm:text-base md:text-lg lg:text-xl;
-    @apply leading-relaxed;
-    @apply text-tresr-bubble-text;
-    @apply dark:text-tresr-dark-bubble-text;
-    @apply text-center;
-  }
-
-  /* Footer */
-  .footer-message {
-    content: "";
-    background-color: var(--color-tresr-bubble-bg);
-    color: var(--color-tresr-bubble-text);
-    /*
-    @apply border-b-15;
-    @apply border-l-0;
-    @apply border-r-15;
-    @apply border-t-15;
-    @apply h-4;
-    @apply w-4;
-    top: 50%;
-    left: -15px;
-    width: 0;
-    height: 0;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-right: 15px solid var(--bg-light);
-    transform: translateY(-50%);
-    */
+    border: 10px solid transparent;
+    border-top-color: var(--color-tresr-bubble-bg);
+    bottom: -20px;
+    left: 20%;
   }
 
   /* Dark mode tail */
-  .dark .speech-bubble::before {
-    background-color: var(--color-tresr-dark-bubble-bg);
-    color: var(--color-tresr-dark-bubble-text);
+  .dark .speech-bubble::after {
+    border-top-color: var(--color-tresr-dark-bubble-bg);
+  }
+
+  /* Fade in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* Text inside bubble */
@@ -268,6 +236,9 @@
 
   /* Footer */
   .footer-message {
+    content: "";
+    background-color: var(--color-tresr-bubble-bg);
+    color: var(--color-tresr-bubble-text);
     @apply fixed inset-x-0 bottom-0 w-full p-2 italic font-semibold text-center md:p-4;
     @apply text-sm md:text-lg xl:text-xl;
     @apply bg-tresr-gold;
@@ -295,8 +266,8 @@
   /* Left aligned avatar */
   .avatarImg-left {
     @apply rounded-full;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
 
     /* Responsive sizes */
     @apply sm:w-16 sm:h-16;
@@ -306,7 +277,9 @@
     @apply 2xl:w-16 2xl:h-16;
 
     /* Left aligned */
-    @apply float-left mr-2 clear-left;
+    @apply float-left clear-left mr-2;
+    @apply flex-row;
+    @apply self-start;
   }
 
   /* Right aligned avatar */
@@ -324,67 +297,64 @@
 
     /* Right aligned */
     @apply float-right clear-right ml-2;
+    @apply flex-row-reverse;
+    @apply self-end;
   }
 
   .messageBubble-container {
-    @apply m-2.5 p-2.5 relative overflow-y-auto;
-    @apply z-40;
+    @apply flex;
+    @apply items-start;
+    @apply gap-2.5 ml-4 mr-4;
+  }
+
+  .messageBubble {
+    @apply leading-relaxed shadow;
+    @apply flex flex-col;
+    @apply bg-tresr-bubble-bg;
+    @apply text-tresr-bubble-text;
+    @apply dark:bg-tresr-dark-bubble-bg;
+    @apply dark:text-tresr-dark-bubble-text;
+    @apply z-50;
+    min-width: 25%;
+    max-width: 75%;
+  }
+
+  .dark .messageBubble {
+    @apply bg-tresr-dark-bubble-bg;
+    @apply text-tresr-dark-bubble-text;
+  }
+
+  .messageBubble-left p,
+  .messageBubble-right p {
+    @apply !m-0 !p-4;
   }
 
   /* Message bubble for left-side conversation */
   .messageBubble-left {
-    @apply px-4 py-2 my-2 break-words rounded-lg shadow;
-    @apply flex flex-col;
-    @apply bg-tresr-bubble-bg;
-    @apply text-tresr-bubble-text;
-    @apply z-50;
-    width: fit-content;
-    max-width: 90%;
-
-    /* Align to the left */
-    @apply flex self-start justify-center w-auto ml-0 mr-auto left-6;
-    @apply flex-col;
-  }
-
-  .dark .messageBubble-left {
-    @apply bg-tresr-dark-bubble-bg;
-    @apply text-tresr-dark-bubble-text;
+    @apply rounded-tl-xl rounded-tr-xl rounded-br-xl;
+    @apply self-start;
   }
 
   /* Message bubble for right-side conversation */
   .messageBubble-right {
-    @apply px-4 py-2 my-2 break-words rounded-lg shadow;
-    @apply flex flex-col;
-    @apply bg-tresr-bubble-bg;
-    @apply text-tresr-bubble-text;
-    @apply z-50;
-    width: fit-content;
-    max-width: 90%;
-
-    /* Align to the right */
-    @apply flex self-start justify-center w-auto ml-auto mr-0 right-6;
-    @apply flex-col;
-  }
-
-  .dark .messageBubble-right {
-    @apply bg-tresr-dark-bubble-bg;
-    @apply text-tresr-dark-bubble-text;
+    @apply rounded-tr-xl rounded-bl-xl rounded-tl-xl;
+    @apply self-end;
   }
 
   /*
   Typing indicator
   */
   .typing-bubble {
-    @apply p-2;
+    @apply !m-0 !p-4;
     @apply min-w-16;
     @apply min-h-8;
-    @apply flex;
+    @apply flex-row;
     @apply items-center;
     @apply gap-2;
   }
 
   .typing-dot {
-    @apply w-2 h-2;
+    @apply w-3 h-3;
     @apply bg-current;
     @apply rounded-full;
     opacity: 0.4;
@@ -394,11 +364,11 @@
   }
 
   .typing-dot:nth-child(2) {
-    animation-delay: 0.2s;
+    animation-delay: 0.3s;
   }
 
   .typing-dot:nth-child(3) {
-    animation-delay: 0.4s;
+    animation-delay: 0.6s;
   }
 
   @keyframes typingAnimation {
@@ -426,8 +396,8 @@
   */
 
   .chatbotUI-header {
-    @apply py-6 px-6;
-    @apply h-10;
+    @apply !m-0 !p-4;
+    @apply h-16;
     @apply text-sm font-semibold;
     @apply text-center;
     @apply bg-tresr-gold;
@@ -441,22 +411,18 @@
     @apply text-tresr-cream;
   }
 
-  /*
-  Chat Body
-  */
-
+  /* Chat Body */
   .chatbotUI-body {
     @apply flex-grow;
     @apply overflow-y-auto;
+    @apply !m-0 !p-4;
   }
 
-  /*
-  Chat Messages
-  */
-
+  /* Chat Messages */
   .chatbotUI-messages {
     @apply overflow-y-auto;
-    @apply p-2 space-y-1;
+    @apply !m-0 !p-4;
+    @apply space-y-6;
   }
 
   /* Markdown Links in Chat */
@@ -473,8 +439,8 @@
   */
 
   .chatbotUI-input-form {
-    @apply py-4 px-4;
-    @apply h-8;
+    @apply !m-0 !p-4;
+    @apply h-16;
     @apply flex items-center;
     @apply bg-tresr-bubble-bg;
     @apply rounded-lg;
@@ -497,8 +463,9 @@
   */
 
   .chatbotUI-input-box {
+    @apply !m-0 !p-4;
     @apply flex-grow;
-    @apply px-2 py-2 rounded-l-lg;
+    @apply rounded-l-lg;
     @apply bg-tresr-input-bg;
     @apply text-tresr-input-text;
     @apply focus:outline-none focus:ring-2;
@@ -515,25 +482,27 @@
     @apply text-tresr-input-text-dark;
   }
 
-  /*
-  Send Button
-  */
-
+  /* Send Button in light mode */
   .chatbotUI-send-button {
-    @apply px-2 py-2 rounded-full shadow-lg;
-    @apply text-tresr-dark-text-color;
-    @apply bg-tresr-primary;
-    @apply hover:bg-tresr-dark-primary;
+    @apply !m-0 !p-4;
+    @apply !rounded-full shadow-lg;
     @apply cursor-pointer font-bold;
     @apply transition duration-300 ease-in-out;
     @apply whitespace-nowrap;
+    /* Colors */
+    @apply hover:!bg-tresr-gold;
+    @apply hover:!text-tresr-navy;
+    @apply !bg-tresr-navy;
+    @apply !text-tresr-gold;
   }
 
-  /* Dark Mode */
+  /* Send Button in dark mode */
   .dark .chatbotUI-send-button {
-    @apply text-tresr-dark-text-color;
-    @apply bg-tresr-dark-primary;
-    @apply hover:bg-tresr-primary;
+    /* Colors */
+    @apply hover:!bg-tresr-gold;
+    @apply hover:!text-tresr-navy;
+    @apply !bg-tresr-navy;
+    @apply !text-tresr-gold;
   }
 
   /* Bitcoin Loader */
@@ -546,8 +515,12 @@
     z-index: 9999;
 
     /* Size */
-    width: 100px;
-    height: 100px;
+    width: 10vw;
+    height: 10vw;
+    max-width: 100px;
+    max-height: 100px;
+    min-width: 50px;
+    min-height: 50px;
 
     /* Center the content (Bitcoin symbol) */
     display: flex;
@@ -682,7 +655,8 @@
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
     @apply p-2;
-    height: 500px;
+    min-height: 75vh;
+    max-height: 75vh;
   }
 
   /* Dark Mode */
@@ -705,12 +679,7 @@
     display: none;
   }
 
-  /*
-  ########################
-  Mobile Optimization
-  ########################
-  */
-
+  /* Mobile Optimization */
   @media (max-width: 640px) {
     /* Widget Mode */
     .chatbotUI-container--widget {
@@ -719,15 +688,10 @@
     }
   }
 
-  /*
-  ########################
-  Chatbot UI toggle button for the widget
-  ########################
-  */
-
+  /* Chatbot UI toggle button for the widget */
   .chatbotUI-toggle-button {
     @apply fixed bottom-20 right-5;
-    @apply rounded-full shadow-lg;
+    @apply rounded-full shadow-sm;
     @apply text-sm;
     @apply text-tresr-dark-text-color;
     @apply bg-tresr-primary;
@@ -757,15 +721,10 @@
     display: none;
   }
 
-  /*
-  ########################
-  Close Button for Widget Mode
-  ########################
-  */
-
+  /* Close Button for Widget Mode */
   .chatbotUI-close-button {
     @apply p-2;
-    @apply rounded-full shadow-lg;
+    @apply rounded-full shadow-sm;
     @apply text-sm;
     @apply bg-tresr-primary;
     @apply text-tresr-title-color;
