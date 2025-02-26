@@ -179,14 +179,6 @@ export const ChatbotUtils = {
     if (chatBody) {
       requestAnimationFrame(() => {
         chatBody.scrollTop = chatBody.scrollHeight;
-        console.debug(
-          "scrollHeight:",
-          chatBody?.scrollHeight,
-          "clientHeight:",
-          chatBody?.clientHeight,
-          "scrollTop:",
-          chatBody?.scrollTop
-        );
       });
     }
     /*
