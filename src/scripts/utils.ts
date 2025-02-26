@@ -128,6 +128,8 @@ export const ChatbotUtils = {
       case "show":
         {
           console.debug("Showing typing indicator...");
+          inputElement.placeholder = "Ron is typing...";
+          inputElement.disabled = true;
 
           const avatarImg = document.createElement("img");
           avatarImg.src = "/images/support.png";
@@ -147,8 +149,6 @@ export const ChatbotUtils = {
           typingIndicator.appendChild(avatarImg);
           typingIndicator.appendChild(bubbleContainer);
           chatMessages.appendChild(typingIndicator);
-
-          this.scrollToBottom();
         }
 
         break;
@@ -156,6 +156,7 @@ export const ChatbotUtils = {
       case "hide":
         console.debug("Hiding typing indicator...");
         inputElement.placeholder = "Enter your message for Ron";
+        inputElement.disabled = false;
 
         typingIndicators.forEach((indicator) => indicator.remove());
 
@@ -174,18 +175,26 @@ export const ChatbotUtils = {
   Scroll to the bottom of the chat messages.
   */
   scrollToBottom() {
-    const chatMessages = document.getElementById("chatbot-messages");
     const chatBody = document.getElementById("chatbot-body");
-    const chatContainer = document.getElementById("chatbot-container");
-
-    requestAnimationFrame(() => {
-      if (chatMessages) {
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        chatMessages.style.minHeight = chatMessages.style.height;
-      }
-      if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
-      if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
-    });
+    if (chatBody) {
+      requestAnimationFrame(() => {
+        chatBody.scrollTop = chatBody.scrollHeight;
+        console.debug(
+          "scrollHeight:",
+          chatBody?.scrollHeight,
+          "clientHeight:",
+          chatBody?.clientHeight,
+          "scrollTop:",
+          chatBody?.scrollTop
+        );
+      });
+    }
+    /*
+    const chatMessages = document.getElementById("chatbot-messages");
+    if (chatMessages && chatMessages.lastElementChild) {
+      chatMessages.lastElementChild.scrollIntoView({behavior: "smooth"});
+    }
+    */
   },
 
   /*

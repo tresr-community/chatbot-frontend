@@ -126,7 +126,7 @@
   .theme-switcher-button {
     @apply transition duration-150 ease-in-out;
     @apply hover:bg-tresr-dark-light/90 focus:ring-2 focus:ring-offset-2 focus:outline-none;
-    @apply fixed p-2 transition-colors duration-300 rounded-full cursor-pointer top-4 right-4;
+    @apply fixed p-4 transition-colors duration-300 rounded-full cursor-pointer top-4 right-4;
     @apply bg-tresr-dark-light;
     @apply text-tresr-light;
     @apply z-50;
@@ -239,7 +239,7 @@
     content: "";
     background-color: var(--color-tresr-bubble-bg);
     color: var(--color-tresr-bubble-text);
-    @apply fixed inset-x-0 bottom-0 w-full p-2 italic font-semibold text-center md:p-4;
+    @apply fixed inset-x-0 bottom-0 w-full p-4 italic font-semibold text-center md:p-4;
     @apply text-sm md:text-lg xl:text-xl;
     @apply bg-tresr-gold;
     @apply text-tresr-navy;
@@ -308,6 +308,7 @@
   }
 
   .messageBubble {
+    @apply !m-2 !p-2;
     @apply leading-relaxed shadow;
     @apply flex flex-col;
     @apply bg-tresr-bubble-bg;
@@ -398,11 +399,12 @@
   .chatbotUI-header {
     @apply !m-0 !p-4;
     @apply h-16;
+    @apply flex;
     @apply text-sm font-semibold;
-    @apply text-center;
     @apply bg-tresr-gold;
     @apply text-tresr-navy;
-    @apply flex items-center justify-between;
+    @apply justify-between;
+    @apply items-center;
   }
 
   /* Dark Mode */
@@ -414,15 +416,13 @@
   /* Chat Body */
   .chatbotUI-body {
     @apply flex-grow;
-    @apply overflow-y-auto;
     @apply !m-0 !p-4;
+    @apply overflow-y-auto;
   }
 
   /* Chat Messages */
   .chatbotUI-messages {
-    @apply overflow-y-auto;
     @apply !m-0 !p-4;
-    @apply !space-y-8;
   }
 
   /* Markdown Links in Chat */
@@ -434,21 +434,20 @@
     @apply transition-colors duration-200;
   }
 
-  /*
-  Chat Input Form
-  */
-
+  /* Chat Input Form */
   .chatbotUI-input-form {
     @apply !m-0 !p-4;
     @apply h-16;
-    @apply flex items-center;
+    @apply flex;
+    @apply text-sm font-medium;
     @apply bg-tresr-bubble-bg;
-    @apply rounded-lg;
     @apply border border-tresr-input-border;
     @apply w-full;
     @apply sticky bottom-0;
     @apply z-[9999];
-    @apply space-x-2 space-y-2;
+    @apply justify-between;
+    @apply items-center;
+    @apply space-x-4;
   }
 
   /* Dark Mode */
@@ -458,12 +457,9 @@
     @apply border-tresr-input-border-dark;
   }
 
-  /*
-  Chat Input Box
-  */
-
   .chatbotUI-input-box {
-    @apply !m-0 !p-4;
+    @apply !m-0 !p-2;
+    @apply !space-x-4;
     @apply flex-grow;
     @apply rounded-l-lg;
     @apply bg-tresr-input-bg;
@@ -484,9 +480,10 @@
 
   /* Send Button in light mode */
   .chatbotUI-send-button {
-    @apply !m-0 !p-4;
-    @apply !rounded-full shadow-lg;
-    @apply cursor-pointer font-bold;
+    @apply !m-0 !p-2;
+    @apply !space-x-2;
+    @apply !rounded-full !shadow-lg;
+    @apply !cursor-pointer !font-bold;
     @apply transition duration-300 ease-in-out;
     @apply whitespace-nowrap;
     /* Colors */
@@ -626,12 +623,10 @@
   .chatbotUI-container--fullscreen {
     @apply bg-tresr-input-bg;
     @apply dark:bg-tresr-dark-background;
-    @apply w-full h-screen;
     @apply flex flex-col;
     @apply !opacity-100 scale-100;
     @apply !visible;
-    height: 100%;
-    min-height: 95vh;
+    @apply w-screen h-screen;
   }
 
   /*
@@ -649,16 +644,13 @@
   .chatbotUI-container--widget {
     @apply bg-tresr-input-bg;
     @apply dark:bg-tresr-dark-background;
-    @apply fixed w-96 max-w-sm;
     @apply bottom-16 right-5;
     @apply rounded-lg shadow-lg;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
-    @apply p-2;
+    @apply fixed w-96 max-w-sm;
     min-height: 75vh;
     max-height: 75vh;
-    min-width: 10vw;
-    max-width: 10vw;
   }
 
   /* Dark Mode */
@@ -670,8 +662,7 @@
   .chatbotUI-container--widget.show {
     @apply !opacity-100 !scale-100;
     @apply !visible;
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
   }
 
   /* Hide the Widget Container */
@@ -725,7 +716,7 @@
 
   /* Close Button for Widget Mode */
   .chatbotUI-close-button {
-    @apply p-2;
+    @apply p-4;
     @apply rounded-full shadow-sm;
     @apply text-sm;
     @apply bg-tresr-primary;
