@@ -2,10 +2,20 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
 let
+
+  pkgsUnstable = import inputs.nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+
   packages = with pkgs; [ ];
+
+  packagesUnstable = with pkgsUnstable; [
+    tailwindcss_4
+  ];
 
   devPackages = with pkgs; [
     astro-language-server
@@ -20,12 +30,11 @@ let
     just
     nodePackages.postcss
     nodePackages.postcss-cli
-    nodePackages.wrangler
     nss_latest
-    tailwindcss
     toml-cli
     trivy
     worker-build
+    wrangler
     yq-go
   ];
 in
@@ -39,9 +48,9 @@ in
   cachix = {
     pull = [
       "pre-commit-hooks"
-      "nftreasure-community"
+      "tresr-community"
     ];
-    push = "nftreasure-community";
+    push = "tresr-community";
   };
 
   devenv = {
@@ -53,7 +62,10 @@ in
     disableHint = false;
   };
 
-  packages = packages ++ lib.optionals (!config.container.isBuilding) devPackages;
+  packages =
+    packages
+    ++ packagesUnstable
+    ++ lib.optionals (!config.container.isBuilding || config.name == "devenv") devPackages;
 
   enterShell = ''
     figlet -f starwars -w 180 $PROJECT
