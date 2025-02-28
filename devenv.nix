@@ -30,11 +30,11 @@ let
     just
     nodePackages.postcss
     nodePackages.postcss-cli
-    nodePackages.wrangler
     nss_latest
     toml-cli
     trivy
     worker-build
+    wrangler
     yq-go
   ];
 in
