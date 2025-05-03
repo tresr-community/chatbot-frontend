@@ -34,7 +34,7 @@
     "postcss-nesting": "13.0.1",
     "prettier": "3.5.3",
     "prettier-plugin-astro": "0.14.1",
-    "tailwindcss": "4.1.4",
+    "tailwindcss": "4.1.5",
     "tsx": "4.19.3",
     "typescript-eslint": "8.31.0",
     "wrangler": "^4.0.0"
