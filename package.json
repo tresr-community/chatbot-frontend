@@ -4,7 +4,7 @@
     "@astrojs/cloudflare": "12.6.10",
     "@astrojs/tailwind": "6.0.2",
     "@typescript-eslint/parser": "8.46.2",
-    "astro": "5.14.6",
+    "astro": "5.15.1",
     "dompurify": "3.3.0",
     "marked": "16.4.1",
     "node-emoji": "2.2.0",
