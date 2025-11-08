@@ -3,7 +3,7 @@
     "@astrojs/check": "0.9.5",
     "@astrojs/cloudflare": "12.6.10",
     "@astrojs/tailwind": "6.0.2",
-    "@typescript-eslint/parser": "8.46.2",
+    "@typescript-eslint/parser": "8.46.3",
     "astro": "5.15.3",
     "dompurify": "3.3.0",
     "marked": "16.4.1",
