@@ -12,7 +12,7 @@
   },
   "description": "TRESR Community ChatBot frontend",
   "devDependencies": {
-    "@cloudflare/workers-types": "4.20251107.0",
+    "@cloudflare/workers-types": "4.20251115.0",
     "@eslint/js": "9.39.1",
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/forms": "0.5.10",
