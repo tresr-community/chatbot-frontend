@@ -140,15 +140,21 @@ jobs:
             echo "WRANGLER_ENVIRONMENT=preview" >> "${GITHUB_OUTPUT}"
           fi
 
+      - id: install_deps
+        name: Install Dependencies
+        shell: devenv shell --quiet bash -- -e {0}
+        run: |
+          bun install
+          bun run build
+
       - id: publish_worker
         name: Publish worker using Wrangler
         shell: devenv shell --quiet bash -- -e {0}
         env:
           CLOUDFLARE_API_TOKEN: ${{ env.CLOUDFLARE_TOKEN_WRANGLER }}
-        run: |
-          bun install
-          bun run build
-          wrangler deploy \
-            --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }} \
-            --minify \
-            --logpush
+        run: >-
+          wrangler
+          deploy
+          --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}
+          --minify
+          --logpush
