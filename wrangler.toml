@@ -18,6 +18,7 @@ compatibility_date = "2024-12-01"
 
 main = "./dist/_worker.js/index.js"
 assets = { directory = "./dist", binding = "ASSETS" }
+
 compatibility_flags = ["nodejs_compat_v2"]
 
 logpush = true
@@ -81,6 +82,7 @@ command = "bun run build"
 
 [env.preview.vars]
 
+DEBUG = false
 TITLE = "tresr community chatbot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -112,6 +114,7 @@ command = "bun run build"
 
 [env.production.vars]
 
+DEBUG = false
 TITLE = "tresr community chatbot (Production)"
 FOOTER_MESSAGE = "Ron Jay, serving the tresr community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."

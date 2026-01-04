@@ -2,11 +2,13 @@
 # Global
 ###########################################################################
 {
-	local_certs
 	auto_https disable_redirects
+	local_certs
+
 	admin localhost:2019 {
 		origins localhost localhost:9000 localhost:2019
 	}
+
 	log {
 		output file caddy.log
 		format console
@@ -103,7 +105,7 @@ localhost:9000 {
 
 	# Frontend routes
 	@frontend-routes {
-		path /api/* /embed /fullscreen /
+		path /api/* /embed /fullscreen
 	}
 	handle @frontend-routes {
 		reverse_proxy localhost:9100 {
