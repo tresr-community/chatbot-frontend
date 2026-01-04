@@ -230,7 +230,7 @@ export const ChatbotUtils = {
   */
   async sendMessage(
     chatbotAuthProxy: string,
-    chatbotAPI: string,
+    chatbotAPIBase: string,
     message: string,
     config: ChatbotConfig
   ) {
@@ -246,7 +246,7 @@ export const ChatbotUtils = {
           "Content-Type": "application/json; charset=utf-8",
         },
         body: JSON.stringify({
-          chatbotAPI,
+          chatbotAPIBase,
           message,
           version: config.apiVersion,
           backend: config.apiBackend,
@@ -347,8 +347,8 @@ export const ChatbotUtils = {
     // The Chatbot is proxied via a server-side authentication URL.
     const chatbotAuthProxy = `${config.baseUrl}/api/auth`;
     // The actual API endpoint for the chatbot.
-    const chatbotAPI = `${config.baseUrl}/ai`;
-    if (!chatbotAuthProxy || !chatbotAPI) {
+    const chatbotAPIBase = `${config.baseUrl}`;
+    if (!chatbotAuthProxy || !chatbotAPIBase) {
       console.error(
         "Both the Chatbot Auth Proxy URL and Chatbot API URL need to be set!"
       );
@@ -389,7 +389,7 @@ export const ChatbotUtils = {
         const {reply, error} = await ChatbotUtils.sendMessage.call(
           ChatbotUtils,
           chatbotAuthProxy,
-          chatbotAPI,
+          chatbotAPIBase,
           message,
           config
         );

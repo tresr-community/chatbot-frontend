@@ -53,7 +53,7 @@ const handler: APIRoute = async ({locals, request}) => {
   }
 
   // Target URL.
-  const targetPath = `${version}/${backend}`;
+  const targetPath = `/ai/${version}/${backend}`;
   let targetUrl;
   try {
     targetUrl = new URL(targetPath, chatbotAPI);
