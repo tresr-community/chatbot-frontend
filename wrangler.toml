@@ -5,7 +5,7 @@
 ##################################################
 
 ##################################################
-# Global settings
+# Global
 ##################################################
 
 name = "tresr-community-chatbot-frontend"
@@ -21,7 +21,7 @@ assets = { directory = "./dist", binding = "ASSETS" }
 
 compatibility_flags = ["nodejs_compat_v2"]
 
-logpush = true
+logpush = false
 
 [placement]
 

@@ -157,4 +157,3 @@ jobs:
           deploy
           --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}
           --minify
-          --logpush
