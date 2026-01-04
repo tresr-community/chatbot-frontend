@@ -30,13 +30,13 @@ const handler: APIRoute = async ({locals, request}) => {
     console.error(`[API/auth] JSON parse fail: ${e} → 400`);
     return new Response("Invalid JSON", {status: 400});
   }
-  const {chatbotAPI, message, version = "v1", backend} = json;
+  const {chatbotAPIBase, message, version = "v1", backend} = json;
   console.debug(
-    `[API/auth] parsed: API=${chatbotAPI}, msg_len=${message?.length}, v=${version}, b=${backend}`
+    `[API/auth] parsed: API=${chatbotAPIBase}, msg_len=${message?.length}, v=${version}, b=${backend}`
   );
 
   if (
-    typeof chatbotAPI !== "string" ||
+    typeof chatbotAPIBase !== "string" ||
     typeof message !== "string" ||
     !message.trim() ||
     !backend
@@ -56,7 +56,7 @@ const handler: APIRoute = async ({locals, request}) => {
   const targetPath = `/ai/${version}/${backend}`;
   let targetUrl;
   try {
-    targetUrl = new URL(targetPath, chatbotAPI);
+    targetUrl = new URL(targetPath, chatbotAPIBase);
     console.debug(`[API/auth] target: ${targetUrl.toString()}`);
   } catch (e) {
     console.error(`[API/auth] URL fail: ${e} → 400`);
