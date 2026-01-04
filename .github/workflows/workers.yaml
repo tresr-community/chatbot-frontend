@@ -68,6 +68,13 @@ env:
   BRANCH_NAME_CURRENT: ${{ github.head_ref || github.ref_name }}
   BRANCH_NAME_DEFAULT: ${{ github.event.repository.default_branch }}
 
+  # SecretSpec
+  SECRETSPEC_PROVIDER: env
+
+  # Dummy secrets needed for SecretSpec tests to pass.
+  # These are only needed for local development or for use by Wrangler.
+  AI_SECRET: DUMMY_AI_SECRET
+
 jobs:
   ##################################################
   # Build and Deploy Cloudflare Worker (Frontend)
@@ -113,6 +120,12 @@ jobs:
         name: Devenv install
         run: |
           nix profile install --accept-flake-config nixpkgs#devenv
+
+      - id: secretspec_check
+        name: "Secretspec Check 🔐"
+        shell: devenv shell --quiet bash -- -e {0}
+        run: |
+          secretspec check
 
       - id: get_environment
         name: Get Environment
