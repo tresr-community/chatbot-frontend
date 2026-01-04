@@ -78,9 +78,6 @@ jobs:
     timeout-minutes: 60
     continue-on-error: false
 
-    strategy:
-      fail-fast: false
-
     steps:
       - id: checkout_repository
         name: Checkout repository
@@ -109,10 +106,6 @@ jobs:
           useDaemon: true
           skipPush: false
 
-      - id: cache
-        name: Magic Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
       - id: devenv_install
         name: Devenv install
         run: |
@@ -138,4 +131,7 @@ jobs:
         run: |
           bun install
           bun run build
-          wrangler deploy --minify --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }}
+          wrangler deploy \
+            --env ${{ steps.get_environment.outputs.WRANGLER_ENVIRONMENT }} \
+            --minify \
+            --logpush

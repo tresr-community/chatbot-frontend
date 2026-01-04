@@ -1,22 +1,23 @@
 ---
+##################################################
+# Name: devenv.yaml
+# Description: Workflow for Developer Environment Testing
+##################################################
+
 name: Devenv
 
 # prettier-ignore
 on:  # yamllint disable-line rule:truthy
-  push:
-    branches:
-      - trunk
-
   pull_request:
     branches:
+      - "main"
+      - "master"
       - "trunk"
     paths:
       - .github/workflows/devenv.yaml
       - devenv.nix
       - devenv.yaml
       - devenv.lock
-      - devenv/**
-      - iac/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -36,6 +37,15 @@ env:
 
   # Nix
   NIXPKGS_ALLOW_UNFREE: 1
+
+  # SecretSpec
+  SECRETSPEC_PROVIDER: env
+
+  # Dummy secrets needed for SecretSpec tests to pass.
+  # These are only needed for local development or for use by Wrangler.
+  AI_SECRET: DUMMY_AI_SECRET
+  RAG_SECRET: DUMMY_RAG_SECRET
+  CF_AI_GATEWAY_TOKEN: DUMMY_CF_AI_GATEWAY_TOKEN
 
 defaults:
   run:
@@ -85,25 +95,16 @@ jobs:
           useDaemon: true
           skipPush: false
 
-      - id: cache
-        name: Magic Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
       - id: devenv_install
         name: Devenv install
         run: |
           nix profile install --accept-flake-config nixpkgs#devenv
 
-      - id: devenv_gc
-        name: Devenv gc
-        run: |
-          devenv gc
-
-      - id: devenv_bun_install
-        name: Bun install
+      - id: secretspec_check
+        name: "Secretspec Check 🔐"
         shell: devenv shell --quiet bash -- -e {0}
         run: |
-          bun install
+          secretspec check
 
       - id: devenv_test
         name: Devenv test
@@ -111,7 +112,7 @@ jobs:
           devenv test
 
       - id: devenv_status
-        name: Devenv (status)
+        name: Devenv status
         if: always()
         shell: devenv shell --quiet bash -- -e {0}
         env:
@@ -120,16 +121,17 @@ jobs:
           if [[ ${{ steps.devenv_test.outcome }} == 'success' ]];
           then
             RESULT="success"
-            DESCRIPTION="Devenv test passed"
+            DESCRIPTION="Devenv test passed!"
           else
             RESULT="failure"
-            DESCRIPTION="Devenv test failed"
+            DESCRIPTION="Devenv test failed!"
           fi
           gh api \
             repos/${{ github.repository }}/statuses/${{ github.sha }} \
             -f state=${RESULT} \
             -f context="${{ github.workflow }}" \
             -f description="${DESCRIPTION}" \
-            -f target_url="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" || {
-              echo "Failed to report devenv status"; exit 1;
+            -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || {
+              echo "Failed to report devenv status!"
+              exit 1
             }

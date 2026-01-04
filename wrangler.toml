@@ -51,6 +51,7 @@ command = "bun run build"
 [env.development.vars]
 
 DEBUG = true
+
 TITLE = "tresr community chatbot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -83,6 +84,7 @@ command = "bun run build"
 [env.preview.vars]
 
 DEBUG = false
+
 TITLE = "tresr community chatbot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -115,6 +117,7 @@ command = "bun run build"
 [env.production.vars]
 
 DEBUG = false
+
 TITLE = "tresr community chatbot (Production)"
 FOOTER_MESSAGE = "Ron Jay, serving the tresr community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
