@@ -75,6 +75,15 @@ const handler: APIRoute = async ({locals, request}) => {
     body: forwardBody,
   };
 
+  // Debug
+  console.debug(`[API/auth] 🔍 PROXY DEBUG:`);
+  console.debug(`[API/auth]   targetUrl: ${targetUrl.toString()}`);
+  console.debug(`[API/auth]   forwardBody: ${forwardBody}`);
+  console.debug(`[API/auth]   headers:`);
+  headers.forEach((value, key) => {
+    console.debug(`[API/auth]     ${key}: ${value}`);
+  });
+
   let backendResponse;
   try {
     backendResponse = await fetch(targetUrl, proxyInit);

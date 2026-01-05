@@ -83,7 +83,7 @@ command = "bun run build"
 
 [env.preview.vars]
 
-DEBUG = false
+DEBUG = true
 
 TITLE = "tresr community chatbot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
