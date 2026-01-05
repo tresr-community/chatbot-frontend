@@ -98,6 +98,12 @@ binding = "R2_ASSETS"
 bucket_name = "tresr-community-chatbot-preview"
 preview_bucket_name = "tresr-community-chatbot-preview"
 
+[[env.preview.services]]
+
+binding = "CHATBOT_BACKEND"
+service = "tresr-community-chatbot-backend-preview"
+env = "preview"
+
 #####################################################
 # Production environment
 #####################################################
@@ -130,3 +136,9 @@ ALLOWED_ORIGINS = '{ "allowed_origins": ["https://tresr.community","https://chat
 binding = "R2_ASSETS"
 bucket_name = "tresr-community-chatbot"
 preview_bucket_name = "tresr-community-chatbot"
+
+[[env.production.services]]
+
+binding = "CHATBOT_BACKEND"
+service = "tresr-community-chatbot-backend"
+env = "production"

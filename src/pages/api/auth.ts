@@ -96,10 +96,17 @@ const handler: APIRoute = async ({locals, request}) => {
 
   let backendResponse;
   try {
-    backendResponse = await fetch(targetUrl, proxyInit);
-    console.debug(
-      `[API/auth] fetch ${targetUrl}: status=${backendResponse.status}`
-    );
+    // Service binding fetch (fallback to HTTP for local dev)
+    const backendService = env.CHATBOT_BACKEND;
+    if (backendService) {
+      backendResponse = await backendService.fetch(targetUrl, proxyInit);
+      console.debug(
+        `[API/auth] service fetch: status=${backendResponse.status}`
+      );
+    } else {
+      backendResponse = await fetch(targetUrl, proxyInit);
+      console.debug(`[API/auth] http fetch: status=${backendResponse.status}`);
+    }
   } catch (e) {
     console.error(`[API/auth] fetch fail: ${e} → 502`);
     return new Response(`Backend fetch failed: ${e}`, {status: 502});
