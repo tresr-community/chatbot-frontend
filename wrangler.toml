@@ -102,7 +102,6 @@ preview_bucket_name = "tresr-community-chatbot-preview"
 
 binding = "CHATBOT_BACKEND"
 service = "tresr-community-chatbot-backend-preview"
-env = "preview"
 
 #####################################################
 # Production environment
@@ -140,5 +139,4 @@ preview_bucket_name = "tresr-community-chatbot"
 [[env.production.services]]
 
 binding = "CHATBOT_BACKEND"
-service = "tresr-community-chatbot-backend"
-env = "production"
+service = "tresr-community-chatbot-backend-production"
