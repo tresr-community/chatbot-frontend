@@ -5,7 +5,7 @@
 ##################################################
 
 ##################################################
-# Global settings
+# Global
 ##################################################
 
 name = "tresr-community-chatbot-frontend"
@@ -18,9 +18,10 @@ compatibility_date = "2024-12-01"
 
 main = "./dist/_worker.js/index.js"
 assets = { directory = "./dist", binding = "ASSETS" }
+
 compatibility_flags = ["nodejs_compat_v2"]
 
-logpush = true
+logpush = false
 
 [placement]
 
@@ -50,6 +51,7 @@ command = "bun run build"
 [env.development.vars]
 
 DEBUG = true
+
 TITLE = "tresr community chatbot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -81,6 +83,8 @@ command = "bun run build"
 
 [env.preview.vars]
 
+DEBUG = true
+
 TITLE = "tresr community chatbot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -93,6 +97,12 @@ ALLOWED_ORIGINS = '{ "allowed_origins": ["https://preview.tresr.community","http
 binding = "R2_ASSETS"
 bucket_name = "tresr-community-chatbot-preview"
 preview_bucket_name = "tresr-community-chatbot-preview"
+
+[[env.preview.services]]
+
+binding = "CHATBOT_BACKEND"
+service = "tresr-community-chatbot-backend-preview"
+env = "preview"
 
 #####################################################
 # Production environment
@@ -112,6 +122,8 @@ command = "bun run build"
 
 [env.production.vars]
 
+DEBUG = false
+
 TITLE = "tresr community chatbot (Production)"
 FOOTER_MESSAGE = "Ron Jay, serving the tresr community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
@@ -124,3 +136,9 @@ ALLOWED_ORIGINS = '{ "allowed_origins": ["https://tresr.community","https://chat
 binding = "R2_ASSETS"
 bucket_name = "tresr-community-chatbot"
 preview_bucket_name = "tresr-community-chatbot"
+
+[[env.production.services]]
+
+binding = "CHATBOT_BACKEND"
+service = "tresr-community-chatbot-backend"
+env = "production"
