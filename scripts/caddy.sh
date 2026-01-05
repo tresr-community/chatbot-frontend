@@ -4,6 +4,10 @@ set -euo pipefail
 
 ACTION=${1:-"start"}
 
+CADDY_PROTO=https
+CADDY_PORT=9000
+CADDY_LOG=caddy.log
+
 # Path to your Caddyfile
 CADDYFILE_PATH="$(pwd)/src/caddy/Caddyfile"
 
@@ -47,6 +51,10 @@ start_caddy_local() {
 
 	echo "Starting Caddy Server with local binary..."
 
+	if [[ -f ${CADDY_LOG} ]]; then
+		rm -f "${CADDY_LOG}" || true
+	fi
+
 	caddy run \
 		--config "${CADDYFILE_PATH}" \
 		--adapter caddyfile \
@@ -56,6 +64,16 @@ start_caddy_local() {
 
 	sleep 3
 	echo "Caddy Server has started with PID: ${CADDY_PID}"
+
+	echo "Trusting Caddy root certificate..."
+
+	sudo caddy trust \
+		--config "${CADDYFILE_PATH}" \
+		--adapter caddyfile ||
+		{
+			echo "Failed to trust Caddy root certificate!"
+			return 1
+		}
 
 	return 0
 
@@ -84,7 +102,7 @@ start_caddy_docker() {
 	# Wait for Caddy to start
 	COUNTER=0
 	while [ $COUNTER -lt 30 ]; do
-		if curl -s https://localhost:9000/health >/dev/null; then
+		if curl -s ${CADDY_PROTO}://localhost:${CADDY_PORT}/health >/dev/null; then
 			echo "Caddy started successfully"
 			docker logs -f caddy-server &
 			exit 0
