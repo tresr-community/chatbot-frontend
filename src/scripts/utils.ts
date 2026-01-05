@@ -89,20 +89,6 @@ export const ChatbotUtils = {
   },
 
   /*
-  Construct Chatbot API constructs the chatbot API URL.
-  */
-  constructChatbotAPI(config: ChatbotConfig) {
-    if (!config.baseUrl || !config.apiVersion || !config.apiBackend) {
-      console.error("Chatbot API version or backend not specified");
-      return null;
-    }
-
-    const chatbotURL = `${config.baseUrl}/ai/${config.apiVersion}/${config.apiBackend}`;
-    console.debug("Using chatbot API URL:", chatbotURL);
-    return chatbotURL;
-  },
-
-  /*
   Toggle Typing Indicator toggles the typing indicator.
   */
   toggleTypingIndicator(action: "show" | "hide") {
@@ -242,19 +228,30 @@ export const ChatbotUtils = {
   /*
   Send a message to the chatbot API.
   */
-  async sendMessage(chatbotAPI: string, message: string) {
+  async sendMessage(
+    chatbotAuthProxy: string,
+    chatbotAPIBase: string,
+    message: string,
+    config: ChatbotConfig
+  ) {
     console.debug("Sending message to chatbot API:", message);
 
     let errorMessage = null;
     let replyMessage = null;
 
     try {
-      const response = await fetch(chatbotAPI, {
+      const response = await fetch(chatbotAuthProxy, {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
+          Origin: window.location.origin,
         },
-        body: JSON.stringify({message}),
+        body: JSON.stringify({
+          chatbotAPIBase,
+          message,
+          version: config.apiVersion,
+          backend: config.apiBackend,
+        }),
       });
 
       if (!response.ok) {
@@ -348,10 +345,14 @@ export const ChatbotUtils = {
     sendButton: HTMLButtonElement,
     inputBox: HTMLInputElement
   ) {
-    // Where are we sending the message?
-    const chatbotAPI = ChatbotUtils.constructChatbotAPI(config);
-    if (!chatbotAPI) {
-      console.error("Chatbot API URL is not set");
+    // The Chatbot is proxied via a server-side authentication URL.
+    const chatbotAuthProxy = `${config.baseUrl}/api/auth`;
+    // The actual API endpoint for the chatbot.
+    const chatbotAPIBase = `${config.baseUrl}`;
+    if (!chatbotAuthProxy || !chatbotAPIBase) {
+      console.error(
+        "Both the Chatbot Auth Proxy URL and Chatbot API URL need to be set!"
+      );
       return;
     }
 
@@ -388,8 +389,10 @@ export const ChatbotUtils = {
         // Then try to send message to the chatbot API.
         const {reply, error} = await ChatbotUtils.sendMessage.call(
           ChatbotUtils,
-          chatbotAPI,
-          message
+          chatbotAuthProxy,
+          chatbotAPIBase,
+          message,
+          config
         );
 
         // Remove the typing indicator before adding the reply

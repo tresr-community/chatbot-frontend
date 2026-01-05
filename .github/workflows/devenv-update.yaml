@@ -1,23 +1,16 @@
 ---
 ##################################################
-# Name: devenv.yaml
-# Description: Workflow for Developer Environment Testing
+# Name: update.yaml
+# Description: Workflow for Updating Developer Environment
 ##################################################
 
-name: Devenv
+name: Devenv Update
 
 # prettier-ignore
 on:  # yamllint disable-line rule:truthy
-  pull_request:
-    branches:
-      - "main"
-      - "master"
-      - "trunk"
-    paths:
-      - .github/workflows/devenv.yaml
-      - devenv.nix
-      - devenv.yaml
-      - devenv.lock
+  schedule:
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -27,7 +20,7 @@ permissions:
   contents: write
   packages: write
   pull-requests: write
-  statuses: write
+  statuses: read
 
 env:
   # GitHub
@@ -51,15 +44,15 @@ defaults:
 
 jobs:
   ##################################################
-  # Test the Development environment shell
+  # Update
   ##################################################
 
-  test:
-    name: Test
+  update:
+    name: Update
 
     runs-on: ${{ matrix.os }}
 
-    timeout-minutes: 60
+    timeout-minutes: 30
     continue-on-error: false
 
     strategy:
@@ -104,32 +97,30 @@ jobs:
         run: |
           secretspec check
 
+      - id: devenv_update
+        name: Devenv update
+        run: |
+          devenv update
+
       - id: devenv_test
         name: Devenv test
         run: |
           devenv test
 
-      - id: devenv_status
-        name: Devenv status
-        if: always()
-        shell: devenv shell --quiet bash -- -e {0}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [[ ${{ steps.devenv_test.outcome }} == 'success' ]];
-          then
-            RESULT="success"
-            DESCRIPTION="Devenv test passed!"
-          else
-            RESULT="failure"
-            DESCRIPTION="Devenv test failed!"
-          fi
-          gh api \
-            repos/${{ github.repository }}/statuses/${{ github.sha }} \
-            -f state=${RESULT} \
-            -f context="${{ github.workflow }}" \
-            -f description="${DESCRIPTION}" \
-            -f target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || {
-              echo "Failed to report devenv status!"
-              exit 1
-            }
+      - id: create_pull_request
+        name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: Update devenv.lock"
+          title: "chore: Update devenv.lock"
+          body: "This PR updates the devenv input dependencies"
+          branch: "update-devenv-lock"
+          base: ${{ env.BRANCH_NAME_DEFAULT }}
+          labels: "dependencies"
+          assignees: "MAHDTech"
+          reviewers: "MAHDTech"
+          draft: false
+          signoff: true
+          delete-branch: true
+          sign-commits: true
