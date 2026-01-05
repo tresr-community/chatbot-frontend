@@ -290,7 +290,8 @@ in
           ;;
           "update" )
             echo "Updating chatbot frontend..."
-            bun update
+            bun update --force --save
+            devenv update
           ;;
           * )
             echo "Invalid action"
