@@ -29,8 +29,8 @@ let
     jq
     just
     nodePackages.postcss
-    nodePackages.postcss-cli
     nss_latest
+    secretspec
     toml-cli
     trivy
     worker-build
@@ -43,6 +43,11 @@ in
 
   env = {
     PROJECT = config.name;
+
+    # Chatbot Frontend
+    inherit (config.secretspec.secrets)
+      AI_SECRET
+      ;
   };
 
   cachix = {
@@ -154,7 +159,14 @@ in
       };
       mixed-line-endings.enable = true;
       nixfmt-rfc-style.enable = true;
-      pre-commit-hook-ensure-sops.enable = true;
+      pre-commit-hook-ensure-sops = {
+        enable = true;
+        excludes = [
+          ".*\\.toml" # Ignore TOML files from sops
+          ".*\\.env*" # Ignore dotenv files from sops
+          ".*\\.json" # Ignore JSON files from sops
+        ];
+      };
       prettier = {
         enable = true;
         settings = {
@@ -236,6 +248,54 @@ in
       exec = ''
         bun install
         eslint src/
+      '';
+    };
+    chatbot-frontend = {
+      package = pkgs.bash;
+      description = "Perform actions on the chatbot frontend.";
+      exec = ''
+        ACTION="''${1:-help}"
+        clear
+        case "''${ACTION,,}" in
+          "help" )
+            USAGE="
+            ----------------
+            Usage
+            ----------------
+
+            chatbot-frontend <action>
+
+            ----------------
+            Actions
+            ----------------
+
+            start - Start the chatbot frontend
+            stop - Stop the chatbot frontend
+            update - Update the chatbot frontend
+            "
+            echo "$USAGE"
+          ;;
+          "start" )
+            echo "Starting chatbot frontend..."1
+            bun install
+            bun run clean
+            bun run build
+            ./scripts/caddy.sh start
+            bun run preview
+          ;;
+          "stop" )
+            echo "Stopping chatbot frontend..."
+            ./scripts/caddy.sh stop
+            pkill -f "bun run preview"
+          ;;
+          "update" )
+            echo "Updating chatbot frontend..."
+            bun update
+          ;;
+          * )
+            echo "Invalid action"
+          ;;
+        esac
       '';
     };
   };

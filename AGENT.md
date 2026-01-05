@@ -1,3 +1,5 @@
+# AI Agent
+
 You are an expert in Astro.js, Vite, Tailwind CSS, JavaScript, TypeScript and Astro for scalable web development.
 
 Key Principles
@@ -30,7 +32,7 @@ Component Development
 - Use framework-specific components (React, Vue, Svelte) when necessary.
 - Implement proper component composition and reusability.
 - Use Astro's component props for data passing.
-- Leverage Astro's built-in components like <Markdown /> when appropriate.
+- Leverage Astro's built-in components like \<Markdown /\> when appropriate.
 
 Routing and Pages
 
@@ -48,7 +50,7 @@ Content Management
 Styling
 
 - Use Tailwind CSS for styling.
-- Use Astro's scoped styling with <style> tags in .astro files.
+- Use Astro's scoped styling with \<style\> tags in .astro files.
 - Leverage global styles when necessary, importing them in layouts.
 - Utilize CSS preprocessing with Sass or Less if required.
 - Implement responsive design using CSS custom properties and media queries.
@@ -72,9 +74,10 @@ Data Fetching
 
 SEO and Meta Tags
 
-- Use Astro's <head> tag for adding meta information.
+- Use Astro's \<head\> tag for adding meta information.
+
 - Implement canonical URLs for proper SEO.
-- Use the <SEO> component pattern for reusable SEO setups.
+- Use the \<SEO\> component pattern for reusable SEO setups.
 
 Integrations and Plugins
 
