@@ -8,30 +8,22 @@ It is made with :heart: _love_ :heart: for the tresr community.
 
 ## How to run locally
 
+- Enter the development shell
+
 ```bash
-# Build
-bun run build
-
-# Preview (Frontend only)
-bun run preview
-
-# Or,
-
-# Preview (Frontend and Backend via Caddy)
-#   1. Make sure the backend is running in one terminal.
-#   2. Start the Worker in another terminal
-bun run preview
-#   3. Start Caddy in another terminal
-./scripts/caddy start
-#   4. Stop Caddy when done
-./scripts/caddy stop
+devenv shell
 ```
 
-## How to update locally
+- Run the helper script
 
 ```bash
-# Update the frontend
-bun run update
+chatbot-frontend start
+```
+
+## How to update dependencies
+
+```bash
+chatbot-frontend update
 ```
 
 ## How to test locally
@@ -43,6 +35,9 @@ There are a few URLs that you can use to test the chatbot locally depending on t
 Caddy Server can be used to proxy the chatbot requests to the correct worker.
 
 One you have started the script from this repository, access Caddy at: [https://localhost:9000](https://localhost:9000)
+
+- [Chat Widget](https://localhost:9000)
+- [Chat Fullscreen](https://localhost:9000/fullscreen)
 
 ### Frontend
 
@@ -56,6 +51,6 @@ The frontend worker embeds the UI Widget worker on the main page behind a button
 
 The backend worker is managed in a separate repository and is responsible for handling the chatbot API requests and responses.
 
-The source code for the backend worker can be found [here](https://github.com/tresr-community/chatbot-backend).
+The source code for the backend worker can be found [chatbot-backend repository](https://github.com/tresr-community/chatbot-backend).
 
 Once you have the chatbot backend running, access to the Worker is via Caddy at: [https://localhost:9000/api](https://localhost:9000/api) -> [http://localhost:9200](http://localhost:9200)

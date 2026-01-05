@@ -79,6 +79,7 @@ devenv.local.nix
 
 # Ignore dotenv
 .env
+.env.development
 .env.preview
 .env.production
 .dev.vars
