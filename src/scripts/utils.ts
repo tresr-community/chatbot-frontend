@@ -244,6 +244,7 @@ export const ChatbotUtils = {
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
+          Origin: window.location.origin,
         },
         body: JSON.stringify({
           chatbotAPIBase,

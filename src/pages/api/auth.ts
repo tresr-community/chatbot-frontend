@@ -14,6 +14,7 @@ const handler: APIRoute = async ({locals, request}) => {
 
   const env = locals.runtime.env as any;
   console.debug("[API/auth] env keys:", Object.keys(env || {}));
+
   const aiSecret = env.AI_SECRET;
   console.debug(`[API/auth] AI_SECRET available: ${!!aiSecret}`);
   if (!aiSecret) {
@@ -64,25 +65,34 @@ const handler: APIRoute = async ({locals, request}) => {
   }
 
   // Proxy fetch.
-  const headers = new Headers(request.headers);
-  headers.set("Authorization", "Bearer [REDACTED]"); // Log safe.
-  headers.set("Origin", request.headers.get("Origin") || "");
+  // Create fresh headers to avoid CF-Ray loops/522s.
+  const proxyHeaders = new Headers();
+  proxyHeaders.set("Content-Type", "application/json");
+  proxyHeaders.set("Authorization", `Bearer ${aiSecret}`);
+  proxyHeaders.set(
+    "Origin",
+    request.headers.get("Origin") || new URL(chatbotAPIBase).origin
+  );
+  proxyHeaders.set(
+    "User-Agent",
+    request.headers.get("User-Agent") || "TresrChatbot/1.0"
+  );
 
   const forwardBody = JSON.stringify({message: message.trim()});
-  const proxyInit: RequestInit = {
-    method: "POST",
-    headers,
-    body: forwardBody,
-  };
 
-  // Debug
+  // Debug Log
   console.debug(`[API/auth] 🔍 PROXY DEBUG:`);
   console.debug(`[API/auth]   targetUrl: ${targetUrl.toString()}`);
-  console.debug(`[API/auth]   forwardBody: ${forwardBody}`);
-  console.debug(`[API/auth]   headers:`);
-  headers.forEach((value, key) => {
-    console.debug(`[API/auth]     ${key}: ${value}`);
-  });
+  console.debug(
+    `[API/auth]   headers:`,
+    Object.fromEntries(proxyHeaders.entries())
+  );
+
+  const proxyInit: RequestInit = {
+    method: "POST",
+    headers: proxyHeaders,
+    body: forwardBody,
+  };
 
   let backendResponse;
   try {
@@ -92,7 +102,7 @@ const handler: APIRoute = async ({locals, request}) => {
     );
   } catch (e) {
     console.error(`[API/auth] fetch fail: ${e} → 502`);
-    return new Response("Backend fetch failed", {status: 502});
+    return new Response(`Backend fetch failed: ${e}`, {status: 502});
   }
 
   const response = new Response(backendResponse.body, {
