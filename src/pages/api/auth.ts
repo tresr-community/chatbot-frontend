@@ -2,6 +2,34 @@ import type {APIRoute} from "astro";
 
 export const prerender = false;
 
+type Fetcher = {
+  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+};
+
+const getEnvString = (env: unknown, key: string): string => {
+  if (typeof env !== "object" || env === null) {
+    throw new Error("Invalid environment object");
+  }
+  const envObj = env as Record<string, unknown>;
+  const value = envObj[key];
+  if (typeof value !== "string") {
+    throw new Error(`Environment variable ${key} must be a string`);
+  }
+  return value;
+};
+
+const getEnvFetcher = (env: unknown, key: string): Fetcher | undefined => {
+  if (typeof env !== "object" || env === null) {
+    return undefined;
+  }
+  const envObj = env as Record<string, unknown>;
+  const value = envObj[key];
+  if (typeof value === "object" && value !== null && "fetch" in value) {
+    return value as Fetcher;
+  }
+  return undefined;
+};
+
 const handler: APIRoute = async ({locals, request}) => {
   console.debug(
     `[API/auth] POST from ${request.headers.get("Origin")} | method=${request.method}`
@@ -12,10 +40,10 @@ const handler: APIRoute = async ({locals, request}) => {
     return new Response("Method Not Allowed", {status: 405});
   }
 
-  const env = locals.runtime.env as any;
+  const env = locals.runtime.env as unknown;
   console.debug("[API/auth] env keys:", Object.keys(env || {}));
 
-  const aiSecret = env.AI_SECRET;
+  const aiSecret = getEnvString(env, "AI_SECRET");
   console.debug(`[API/auth] AI_SECRET available: ${!!aiSecret}`);
   if (!aiSecret) {
     console.error("[API/auth] MISSING AI_SECRET → 500");
@@ -44,13 +72,6 @@ const handler: APIRoute = async ({locals, request}) => {
   ) {
     console.error("[API/auth] invalid body → 400");
     return new Response("Missing chatbotAPI/message/backend", {status: 400});
-  }
-
-  // Disable TLS verification if set.
-  const tlsVerify = env.TLS_VERIFY;
-  if (tlsVerify === "false") {
-    console.debug("TLS Verification is being disabled as TLS_VERIFY is false");
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   }
 
   // Target URL.
@@ -97,7 +118,7 @@ const handler: APIRoute = async ({locals, request}) => {
   let backendResponse;
   try {
     // Service binding fetch (fallback to HTTP for local dev)
-    const backendService = env.CHATBOT_BACKEND;
+    const backendService = getEnvFetcher(env, "CHATBOT_BACKEND");
     if (backendService) {
       backendResponse = await backendService.fetch(targetUrl, proxyInit);
       console.debug(

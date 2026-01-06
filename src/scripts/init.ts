@@ -10,7 +10,7 @@ import {Chatbot} from "./chatbot";
 
 declare global {
   interface Window {
-    initChatbot: (config: ChatbotConfig) => void;
+    initChatbot: (_config: ChatbotConfig) => void;
   }
 }
 
