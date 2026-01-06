@@ -48,8 +48,8 @@
   /* Links */
   --color-tresr-link: #3b82f6;
   --color-tresr-link-hover: #1d4ed8;
-  --color-tresr-link-dark: #60a5fa;
-  --color-tresr-link-hover-dark: #93c5fd;
+  --color-tresr-link-dark: #1d4ed8;
+  --color-tresr-link-hover-dark: #1e40af;
 
   /* Loader */
   --color-tresr-loader-start: #fcd34d;
@@ -429,6 +429,7 @@
 
   /* Markdown Links in Chat */
   .chatbotUI-messages a {
+    @apply underline;
     @apply text-tresr-link;
     @apply hover:text-tresr-link-hover;
     @apply dark:text-tresr-link-dark;
