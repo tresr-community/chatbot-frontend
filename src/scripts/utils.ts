@@ -10,6 +10,14 @@ import {marked} from "marked";
 import DOMPurify from "dompurify";
 import {emojify} from "node-emoji";
 
+// Configure DOMPurify to force all links to open in a new tab
+DOMPurify.addHook("afterSanitizeAttributes", (node) => {
+  if (node.tagName === "A") {
+    node.setAttribute("target", "_blank");
+    node.setAttribute("rel", "noopener noreferrer");
+  }
+});
+
 export const ChatbotUtils = {
   /*
   Variables
