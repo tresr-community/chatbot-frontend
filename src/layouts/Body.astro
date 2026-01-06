@@ -33,9 +33,15 @@ const isChatWidgetOpen = chatbotShowButton ? false : true;
       enableQuotes && (
         <div class="container-ron-jay">
           <img src="/images/tresr.png" alt="tresr" class="logo" />
-          <img src="/images/ron_jay.png" alt="Ron Jay" class="image-ron-jay" />
-          <div id="speech-bubble" class="speech-bubble">
-            <div id="quoteText">{welcomeMessage}</div>
+          <div class="ron-wrapper">
+            <img
+              src="/images/ron_jay.png"
+              alt="Ron Jay"
+              class="image-ron-jay"
+            />
+            <div id="comic-bubble" class="comic-bubble">
+              <div id="quoteText">{welcomeMessage}</div>
+            </div>
           </div>
         </div>
       )

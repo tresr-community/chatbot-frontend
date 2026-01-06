@@ -38,6 +38,7 @@ One you have started the script from this repository, access Caddy at: [https://
 
 - [Chat Widget](https://localhost:9000)
 - [Chat Fullscreen](https://localhost:9000/fullscreen)
+- [Chat Embed](https://localhost:9000/test/embed.html)
 
 ### Frontend
 

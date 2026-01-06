@@ -99,6 +99,7 @@ localhost:9000 {
 		header {
 			Service-Worker-Allowed "/"
 			Content-Type "application/javascript"
+			Cache-Control "no-cache, no-store, must-revalidate"
 		}
 		reverse_proxy localhost:9100
 	}
@@ -114,6 +115,18 @@ localhost:9000 {
 			header_up X-Forwarded-Host localhost:9000
 			header_up X-Forwarded-Proto https
 		}
+	}
+
+	# Loader script (dynamic)
+	@loader {
+		path /loader.js
+	}
+	handle @loader {
+		header {
+			Content-Type "application/javascript"
+			Cache-Control "no-cache, no-store, must-revalidate"
+		}
+		reverse_proxy localhost:9100
 	}
 
 	###########################################################################
