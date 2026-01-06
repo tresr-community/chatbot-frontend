@@ -123,7 +123,7 @@ command = "bun run build"
 
 DEBUG = false
 
-TITLE = "TRESR Community ChatBot (Production)"
+TITLE = "TRESR Community ChatBot"
 FOOTER_MESSAGE = "Ron Jay, serving the TRESR community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_BACKEND = "grok"
