@@ -1,6 +1,7 @@
 /*
 #########################
-Unified Chatbot
+Name: chatbot.ts
+Description: Unified Chatbot for fullscreen or widget
 #########################
 */
 

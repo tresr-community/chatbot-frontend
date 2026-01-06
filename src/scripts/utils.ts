@@ -1,6 +1,7 @@
 /*
 #########################
-Common Utilities
+Name: utils.ts
+Description: Common Utilities for the chatbot.
 #########################
 */
 
@@ -22,7 +23,7 @@ export const ChatbotUtils = {
   */
   getConfig() {
     const scriptTag = (document.currentScript ||
-      document.querySelector('script[src*="chatbot.js"]')) as HTMLScriptElement;
+      document.querySelector("script[data-api-version]")) as HTMLScriptElement;
 
     if (!scriptTag) {
       console.error("Script tag not found. Aborting chatbot load.");
@@ -30,23 +31,23 @@ export const ChatbotUtils = {
     }
 
     // Verify that the chatbot type is either "widget" or "fullscreen"
-    const chatbotType = scriptTag.dataset.chatbotType;
-    if (!chatbotType || !["widget", "fullscreen"].includes(chatbotType)) {
+    const type = scriptTag.dataset.type;
+    if (!type || !["widget", "fullscreen"].includes(type)) {
       console.error("Chatbot type not specified. Aborting chatbot load.");
       return null;
     }
 
     // Verify that the chatbot style is either "light" or "dark" or default to "light"
     if (
-      !scriptTag.dataset.chatbotStyle ||
-      !["light", "dark"].includes(scriptTag.dataset.chatbotStyle)
+      !scriptTag.dataset.style ||
+      !["light", "dark"].includes(scriptTag.dataset.style)
     ) {
       console.warn("Chatbot style not specified. Defaulting to light.");
-      scriptTag.dataset.chatbotStyle = "light";
+      scriptTag.dataset.style = "light";
     }
 
     // Verify that the chatbot API version is specified
-    if (!scriptTag.dataset.chatbotApiVersion) {
+    if (!scriptTag.dataset.apiVersion) {
       console.error(
         "Chatbot API version not specified. Aborting chatbot load."
       );
@@ -54,7 +55,7 @@ export const ChatbotUtils = {
     }
 
     // Verify that the chatbot API backend is specified
-    if (!scriptTag.dataset.chatbotApiBackend) {
+    if (!scriptTag.dataset.apiBackend) {
       console.error(
         "Chatbot API backend not specified. Aborting chatbot load."
       );
@@ -62,29 +63,29 @@ export const ChatbotUtils = {
     }
 
     // Verify that the chatbot enable loading spinner is specified or default to true
-    if (!scriptTag.dataset.chatbotEnableLoadingSpinner) {
+    if (!scriptTag.dataset.enableLoadingSpinner) {
       console.debug(
         "Chatbot enable loading spinner not specified. Defaulting to true."
       );
-      scriptTag.dataset.chatbotEnableLoadingSpinner = "true";
+      scriptTag.dataset.enableLoadingSpinner = "true";
     }
 
     // Verify that the chatbot debug is specified or default to false
-    if (!scriptTag.dataset.chatbotDebug) {
+    if (!scriptTag.dataset.debug) {
       console.debug("Chatbot debug not specified. Defaulting to false.");
-      scriptTag.dataset.chatbotDebug = "false";
+      scriptTag.dataset.debug = "false";
     }
 
     const scriptUrl = new URL(scriptTag.src);
     return {
-      type: scriptTag.dataset.chatbotType,
+      type: scriptTag.dataset.type,
       baseUrl: scriptUrl.origin,
-      apiVersion: scriptTag.dataset.chatbotApiVersion,
-      apiBackend: scriptTag.dataset.chatbotApiBackend,
-      style: scriptTag.dataset.chatbotStyle,
-      showButton: scriptTag.dataset.chatbotShowButton,
-      enableLoadingSpinner: scriptTag.dataset.chatbotEnableLoadingSpinner,
-      debug: scriptTag.dataset.chatbotDebug,
+      apiVersion: scriptTag.dataset.apiVersion,
+      apiBackend: scriptTag.dataset.apiBackend,
+      style: scriptTag.dataset.style,
+      showButton: scriptTag.dataset.showButton === "true",
+      enableLoadingSpinner: scriptTag.dataset.enableLoadingSpinner === "true",
+      debug: scriptTag.dataset.debug === "true",
     };
   },
 

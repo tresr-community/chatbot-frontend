@@ -1,3 +1,10 @@
+/*
+#########################
+Name: types.ts
+Description: Types for the chatbot.
+#########################
+*/
+
 export interface ChatbotConfig {
   type: "widget" | "fullscreen";
   style: "light" | "dark";

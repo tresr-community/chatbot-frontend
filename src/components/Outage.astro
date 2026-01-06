@@ -11,6 +11,7 @@
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       /** @type {string[]} */
       const quotes = await response.json();
 
@@ -30,6 +31,6 @@
 
   setTimeout(() => {
     fetchQuote();
-    setInterval(fetchQuote, 5000);
-  }, 5000);
+    setInterval(fetchQuote, 10000);
+  }, 10000);
 </script>

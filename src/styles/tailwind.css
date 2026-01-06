@@ -19,7 +19,7 @@
   --color-tresr-border-color: #fcd34d;
 
   /* Speech Bubble Light */
-  --color-tresr-bubble-bg: #f5f5f4;
+  --color-tresr-bubble-bg: #e2e8f0;
   --color-tresr-bubble-text: #020617;
 
   /* Dark Theme */
@@ -36,7 +36,7 @@
   --color-tresr-dark-bubble-text: #020617;
 
   /* UI Elements */
-  --color-tresr-input-bg: #ffffff;
+  --color-tresr-input-bg: #f1f5f9;
   --color-tresr-input-bg-dark: #1e293b;
   --color-tresr-input-border: #d1d5db;
   --color-tresr-input-border-dark: #111827;
@@ -48,8 +48,8 @@
   /* Links */
   --color-tresr-link: #3b82f6;
   --color-tresr-link-hover: #1d4ed8;
-  --color-tresr-link-dark: #60a5fa;
-  --color-tresr-link-hover-dark: #93c5fd;
+  --color-tresr-link-dark: #1d4ed8;
+  --color-tresr-link-hover-dark: #1e40af;
 
   /* Loader */
   --color-tresr-loader-start: #fcd34d;
@@ -57,6 +57,7 @@
 
   /* Overlay */
   --color-tresr-overlay: rgba(4, 28, 101, 0.788);
+  --color-tresr-overlay-light: rgba(255, 255, 255, 0.85);
 
   /* Font Family */
   --font-sans:
@@ -65,31 +66,16 @@
     sans-serif;
 }
 
-@layer base {
-  @font-face {
-    font-family: "Jost";
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url(https://fonts.gstatic.com/s/jost/v14/92zJtA7BzP6G6RMEV130Z82B.woff2)
-      format("woff2");
-    unicode-range:
-      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-      U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-      U+FEFF, U+FFFD;
-  }
-}
-
 @layer utilities {
   /*
   ########################
-  Common
+  Common Layout
   ########################
   */
 
   body {
     @apply flex flex-col;
-    @apply bg-center bg-no-repeat bg-cover;
+    @apply bg-cover bg-center bg-no-repeat;
     @apply font-sans antialiased;
     @apply bg-tresr-background;
     @apply text-tresr-text-color;
@@ -102,8 +88,8 @@
   }
 
   .bg-container {
-    @apply bg-center bg-no-repeat bg-cover;
-    @apply flex flex-col flex-1;
+    @apply bg-cover bg-center bg-no-repeat;
+    @apply flex flex-1 flex-col;
     @apply w-full;
     @apply z-10;
     background-image: url("/images/banner.jpg");
@@ -111,24 +97,28 @@
   }
 
   .bg-container::before {
-    @apply bg-center bg-no-repeat bg-cover;
-    @apply flex flex-col flex-1;
+    @apply bg-cover bg-center bg-no-repeat;
+    @apply flex flex-1 flex-col;
     @apply absolute inset-0;
     @apply z-10;
-    @apply bg-tresr-overlay;
+    @apply bg-tresr-overlay-light;
     content: "";
+  }
+
+  .dark .bg-container::before {
+    @apply bg-tresr-overlay;
   }
 
   .content {
     @apply relative;
     @apply z-20;
-    @apply flex flex-col flex-1;
+    @apply flex flex-1 flex-col;
   }
 
   .theme-switcher-button {
     @apply transition duration-150 ease-in-out;
     @apply hover:bg-tresr-dark-light/90 focus:ring-2 focus:ring-offset-2 focus:outline-none;
-    @apply fixed p-4 transition-colors duration-300 rounded-full cursor-pointer top-4 right-4;
+    @apply fixed top-4 right-4 cursor-pointer rounded-full p-4 transition-colors duration-300;
     @apply bg-tresr-dark-light;
     @apply text-tresr-light;
     @apply z-50;
@@ -143,97 +133,39 @@
   }
 
   .logo {
-    @apply fixed w-20 top-2 left-2 sm:w-48 md:w-48 lg:w-48 xl:w-48 2xl:w-48;
+    @apply fixed top-2 left-2 w-20 sm:w-48 md:w-48 lg:w-48 xl:w-48 2xl:w-48;
     @apply z-50;
   }
 
   /*
   ########################
-  End Common
-  ########################
-  */
-
-  /*
-  ########################
-  Home
+  Home (Index Page)
   ########################
   */
 
   /* The container for the image of Ron Jay */
   .container-ron-jay {
-    @apply relative flex items-end;
+    @apply relative flex items-end justify-center;
     @apply min-h-screen pb-[60px];
-    @apply w-full max-w-7xl mx-auto;
+    @apply mx-auto w-full max-w-7xl;
     @apply px-4 md:px-6 lg:px-8;
     @apply z-30;
+  }
+
+  /* Wrapper for Image and Bubble to keep them together */
+  .ron-wrapper {
+    @apply relative;
+    @apply flex flex-col-reverse items-center;
+    @apply w-full max-w-lg md:max-w-xl lg:max-w-2xl;
   }
 
   /* The image of Ron Jay */
   .image-ron-jay {
     @apply relative;
-    @apply h-[50vh] sm:h-[75vh];
-    @apply w-auto;
-    @apply flex-shrink-0;
-    @apply self-end;
+    @apply h-auto w-full;
+    @apply max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh];
+    @apply object-contain object-bottom;
     @apply z-40;
-    @apply -mb-[60px];
-    @apply object-contain;
-    @apply object-bottom;
-    @apply min-w-[200px];
-  }
-
-  /* Speech Bubble */
-  .speech-bubble {
-    @apply absolute;
-    @apply rounded-tl-xl rounded-tr-xl rounded-br-xl;
-    @apply shadow-lg;
-    @apply !m-0 !p-4;
-    @apply bg-tresr-bubble-bg text-tresr-bubble-text;
-    @apply dark:bg-tresr-dark-bubble-bg dark:text-tresr-dark-bubble-text;
-    @apply z-30;
-    @apply flex items-center justify-center;
-    animation: fadeIn 0.5s ease-in;
-    left: 45%;
-    bottom: 40%;
-    transform: translateY(-50%);
-    max-width: 50%;
-    min-width: 200px;
-  }
-
-  /* Tail for Speech Bubble */
-  .speech-bubble::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: 10px solid transparent;
-    border-top-color: var(--color-tresr-bubble-bg);
-    bottom: -20px;
-    left: 20%;
-  }
-
-  /* Dark mode tail */
-  .dark .speech-bubble::after {
-    border-top-color: var(--color-tresr-dark-bubble-bg);
-  }
-
-  /* Fade in animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  /* Text inside bubble */
-  #quoteText {
-    @apply text-sm sm:text-base md:text-lg lg:text-xl;
-    @apply leading-relaxed;
-    @apply text-tresr-bubble-text;
-    @apply dark:text-tresr-dark-bubble-text;
-    @apply text-center;
   }
 
   /* Footer */
@@ -241,7 +173,7 @@
     content: "";
     background-color: var(--color-tresr-bubble-bg);
     color: var(--color-tresr-bubble-text);
-    @apply fixed inset-x-0 bottom-0 w-full p-4 italic font-semibold text-center md:p-4;
+    @apply fixed inset-x-0 bottom-0 w-full p-4 text-center font-semibold italic md:p-4;
     @apply text-sm md:text-lg xl:text-xl;
     @apply bg-tresr-gold;
     @apply text-tresr-navy;
@@ -255,71 +187,185 @@
 
   /*
   ########################
-  End Home
+  Index Page comic book quotes
   ########################
   */
+
+  /* Comic Bubble */
+  .comic-bubble {
+    @apply relative;
+    @apply rounded-xl;
+    @apply border-4 border-black;
+    @apply shadow-[6px_6px_0px_0px_rgba(0,0,0,1)];
+    @apply !m-0 !p-6;
+    @apply bg-yellow-400 text-black;
+    @apply z-50;
+    @apply flex items-center justify-center;
+    @apply font-bold tracking-wide uppercase;
+
+    /* Mobile Positioning */
+    @apply w-[90%] max-w-[300px];
+    @apply mb-8;
+    animation: fadeInMobile 0.5s ease-out forwards;
+
+    /* Desktop Positioning */
+    @media (min-width: 1024px) {
+      @apply absolute;
+      @apply top-0 left-[65%];
+      @apply w-auto max-w-[350px] min-w-[250px];
+      @apply mb-0;
+      transform: none;
+      animation: fadeInDesktop 0.5s ease-out forwards;
+    }
+  }
+
+  .dark .comic-bubble {
+    @apply bg-yellow-400 text-black;
+  }
+
+  /* Tail - Inner (Yellow) */
+  .comic-bubble::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    z-index: 60;
+
+    /* Mobile: Bottom Center */
+    border-top-color: #facc15;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Desktop: Left Side */
+    @media (min-width: 1024px) {
+      border-top-color: transparent;
+      border-right-color: #facc15;
+      bottom: 20px;
+      left: -20px;
+      top: auto;
+      transform: none;
+    }
+  }
+
+  /* Tail - Outer (Black Border) */
+  .comic-bubble::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    z-index: 59;
+
+    /* Mobile: Bottom Center */
+    border-top-color: #000;
+    bottom: -27px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* Desktop: Left Side */
+    @media (min-width: 1024px) {
+      border-top-color: transparent;
+      border-right-color: #000;
+      bottom: 17px;
+      left: -27px;
+      top: auto;
+      transform: none;
+    }
+  }
+
+  /* Animations including transforms in the center */
+  @keyframes fadeInMobile {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInDesktop {
+    from {
+      opacity: 0;
+      transform: translate(-20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  /* Text inside bubble */
+  #quoteText {
+    @apply text-sm sm:text-base md:text-lg;
+    @apply leading-relaxed;
+    @apply text-black;
+    @apply text-center;
+  }
+
+  .dark #quoteText {
+    @apply text-black;
+  }
 
   /*
   ########################
-  Start Avatar & Message Bubble
+  Avatar images
   ########################
   */
 
+  /* Shared Avatar Styles */
+  .avatarImg {
+    @apply rounded-full;
+    @apply !h-10 !w-10 md:!h-14 md:!w-14 lg:!h-16 lg:!w-16 xl:!h-20 xl:!w-20;
+    @apply object-cover;
+    @apply flex-shrink-0;
+  }
+
   /* Left aligned avatar */
   .avatarImg-left {
-    @apply rounded-full;
-    width: 32px;
-    height: 32px;
-
-    /* Responsive sizes */
-    @apply sm:w-16 sm:h-16;
-    @apply md:w-16 md:h-16;
-    @apply lg:w-16 lg:h-16;
-    @apply xl:w-16 xl:h-16;
-    @apply 2xl:w-16 2xl:h-16;
-
-    /* Left aligned */
-    @apply float-left clear-left mr-2;
-    @apply flex-row;
-    @apply self-start;
+    @apply self-start; /* Flex alignment */
   }
 
   /* Right aligned avatar */
   .avatarImg-right {
-    @apply rounded-full;
-    width: 24px;
-    height: 24px;
-
-    /* Responsive sizes */
-    @apply sm:w-16 sm:h-16;
-    @apply md:w-16 md:h-16;
-    @apply lg:w-16 lg:h-16;
-    @apply xl:w-16 xl:h-16;
-    @apply 2xl:w-16 2xl:h-16;
-
-    /* Right aligned */
-    @apply float-right clear-right ml-2;
-    @apply flex-row-reverse;
-    @apply self-end;
+    @apply self-end; /* Flex alignment */
   }
+
+  /*
+  ########################
+  Message Bubbles (Chat Widget and Fullscreen)
+  ########################
+  */
 
   .messageBubble-container {
     @apply flex;
-    @apply items-start;
-    @apply gap-2.5 ml-4 mr-4;
+    @apply items-end;
+    @apply px-2 py-1 md:px-4 md:py-2;
+    @apply gap-2 md:gap-4;
+    @apply w-full;
   }
 
   .messageBubble {
-    @apply !m-2 !p-2;
-    @apply leading-relaxed shadow;
-    @apply flex flex-col;
+    @apply relative;
+    @apply !px-6 !py-5 md:!px-8 md:!py-6;
+    @apply rounded-2xl;
+    @apply shadow-sm;
     @apply bg-tresr-bubble-bg;
     @apply text-tresr-bubble-text;
-    @apply dark:bg-tresr-dark-bubble-bg;
-    @apply dark:text-tresr-dark-bubble-text;
-    @apply z-50;
-    min-width: 25%;
-    max-width: 75%;
+    @apply text-sm md:text-base lg:text-lg;
+    @apply z-10;
+
+    /* Sizing - optimized for mobile and desktop */
+    @apply max-w-[85%] md:max-w-[70%] lg:max-w-[60%];
+    @apply min-w-[60px];
+
+    /* Text handling */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
   }
 
   .dark .messageBubble {
@@ -327,51 +373,54 @@
     @apply text-tresr-dark-bubble-text;
   }
 
-  .messageBubble-left p,
-  .messageBubble-right p {
-    @apply !m-0 !p-4;
+  .messageBubble p {
+    @apply m-0;
+    @apply leading-relaxed;
   }
 
-  /* Message bubble for left-side conversation */
+  /* Message bubble for left-side (User) conversation */
   .messageBubble-left {
-    @apply rounded-tl-xl rounded-tr-xl rounded-br-xl;
-    @apply self-start;
+    @apply rounded-bl-none;
+    /* User bubble styling can be added here if needed */
   }
 
-  /* Message bubble for right-side conversation */
+  /* Message bubble for right-side (Bot) conversation */
   .messageBubble-right {
-    @apply rounded-tr-xl rounded-bl-xl rounded-tl-xl;
-    @apply self-end;
+    @apply rounded-br-none;
+    /* Bot bubble styling */
   }
 
   /*
-  Typing indicator
+  ########################
+  Typing Indicators
+  ########################
   */
+
   .typing-bubble {
-    @apply !m-0 !p-4;
-    @apply min-w-16;
-    @apply min-h-8;
-    @apply flex-row;
-    @apply items-center;
-    @apply gap-2;
+    @apply !p-3;
+    @apply w-16;
+    @apply h-10;
+    @apply flex;
+    @apply items-center justify-center;
+    @apply gap-1;
   }
 
   .typing-dot {
-    @apply w-3 h-3;
+    @apply h-2 w-2;
     @apply bg-current;
     @apply rounded-full;
     opacity: 0.4;
-    animation-name: typingAnimation;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+    animation: typingAnimation 1s infinite ease-in-out;
   }
 
+  .typing-dot:nth-child(1) {
+    animation-delay: 0s;
+  }
   .typing-dot:nth-child(2) {
-    animation-delay: 0.3s;
+    animation-delay: 0.2s;
   }
-
   .typing-dot:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.4s;
   }
 
   @keyframes typingAnimation {
@@ -388,106 +437,113 @@
 
   /*
   ########################
-  End Avatar & Message Bubble
-  ########################
-  */
-
-  /*
-  ########################
   Start Chat Bot Common
   ########################
   */
 
   .chatbotUI-header {
-    @apply !m-0 !p-4;
-    @apply h-16;
+    @apply !m-0 !px-4 !py-2;
+    @apply h-14 md:h-16;
     @apply flex;
     @apply text-sm font-semibold;
-    @apply bg-tresr-gold;
+    @apply bg-tresr-gold/90 backdrop-blur-md;
     @apply text-tresr-navy;
     @apply justify-between;
     @apply items-center;
+    @apply z-50 shadow-sm;
   }
 
   /* Dark Mode */
   .dark .chatbotUI-header {
-    @apply bg-tresr-gray;
+    @apply bg-tresr-gray/90;
     @apply text-tresr-cream;
   }
 
   /* Chat Body */
   .chatbotUI-body {
     @apply flex-grow;
-    @apply !m-0 !p-4;
+    @apply !m-0 !p-2 md:!p-4;
     @apply overflow-y-auto;
+    @apply overflow-x-hidden;
+    @apply scroll-smooth;
   }
 
   /* Chat Messages */
   .chatbotUI-messages {
-    @apply !m-0 !p-4;
+    @apply !m-0;
+    @apply flex flex-col gap-4;
+    @apply pb-4;
   }
 
   /* Markdown Links in Chat */
   .chatbotUI-messages a {
+    @apply font-bold !underline decoration-2 underline-offset-2;
     @apply text-tresr-link;
     @apply hover:text-tresr-link-hover;
-    @apply dark:text-tresr-link-dark;
-    @apply dark:hover:text-tresr-link-hover-dark;
     @apply transition-colors duration-200;
+    @apply break-words; /* Prevent link overflow */
+  }
+
+  .dark .chatbotUI-messages a {
+    @apply text-tresr-link-dark;
+    @apply hover:text-tresr-link-hover-dark;
   }
 
   /* Chat Input Form */
   .chatbotUI-input-form {
-    @apply !m-0 !p-4;
-    @apply h-16;
+    @apply !m-0 !p-2 md:!p-4;
+    @apply min-h-[64px];
     @apply flex;
     @apply text-sm font-medium;
-    @apply bg-tresr-bubble-bg;
-    @apply border border-tresr-input-border;
+    @apply !bg-white/95 !backdrop-blur-md;
+    @apply !border-x-0 !border-t !border-b-0;
+    @apply !border-tresr-input-border;
+    @apply gap-2;
     @apply w-full;
     @apply sticky bottom-0;
     @apply z-[9999];
     @apply justify-between;
     @apply items-center;
-    @apply space-x-4;
   }
 
-  /* Dark Mode */
   .dark .chatbotUI-input-form {
-    @apply border-tresr-input-border-dark;
-    @apply bg-tresr-dark-light;
-    @apply border-tresr-input-border-dark;
+    @apply !bg-tresr-dark-background/95;
+    @apply !border-tresr-input-border-dark;
   }
 
   .chatbotUI-input-box {
-    @apply !m-0 !p-2;
-    @apply !space-x-4;
+    @apply !m-0 !px-4 !py-2.5;
     @apply flex-grow;
-    @apply rounded-l-lg;
+    @apply w-full;
+    @apply rounded-full;
     @apply bg-tresr-input-bg;
     @apply text-tresr-input-text;
-    @apply focus:outline-none focus:ring-2;
+    @apply focus:ring-2 focus:outline-none;
     @apply focus:ring-tresr-link;
     @apply placeholder-tresr-placeholder;
     @apply border;
     @apply border-tresr-input-border;
+    @apply text-sm md:text-base; /* Readable font size on mobile */
+    /* Prevent zoom on focus in iOS by using 16px min size if needed, but text-base usually handles it */
   }
 
   .dark .chatbotUI-input-box {
-    @apply bg-tresr-dark-background;
-    @apply border-tresr-input-border-dark;
+    @apply !bg-[#111827];
+    @apply !border-white/20;
     @apply placeholder-tresr-placeholder-dark;
     @apply text-tresr-input-text-dark;
   }
 
   /* Send Button in light mode */
   .chatbotUI-send-button {
-    @apply !m-0 !p-2;
-    @apply !space-x-2;
+    @apply !m-0 !px-4 !py-2;
+    @apply h-[42px];
+    @apply flex items-center justify-center;
     @apply !rounded-full !shadow-lg;
     @apply !cursor-pointer !font-bold;
     @apply transition duration-300 ease-in-out;
     @apply whitespace-nowrap;
+    @apply text-sm md:text-base;
     /* Colors */
     @apply hover:!bg-tresr-gold;
     @apply hover:!text-tresr-navy;
@@ -527,9 +583,9 @@
     align-items: center;
 
     /* 3D effects */
-    -webkit-backface-visibility: hidden; /* Hide backface */
-    -moz-backface-visibility: hidden; /* Hide backface */
-    backface-visibility: hidden; /* Hide backface */
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
     transform-style: preserve-3d;
 
     /* Animation */
@@ -546,7 +602,10 @@
     );
     color: var(--color-tresr-dark-text-color);
     content: "₿";
-    font-size: 5rem;
+    font-size: 3rem; /* Scaled down for safety */
+    @media (min-width: 768px) {
+      font-size: 5rem;
+    }
     border-radius: 50%;
     width: 100%;
     height: 100%;
@@ -573,7 +632,10 @@
     );
     content: "₿";
     color: var(--color-tresr-dark-text-color);
-    font-size: 5rem;
+    font-size: 3rem; /* Scaled down for safety */
+    @media (min-width: 768px) {
+      font-size: 5rem;
+    }
     border-radius: 50%;
     width: 100%;
     height: 100%;
@@ -624,11 +686,15 @@
 
   .chatbotUI-container--fullscreen {
     @apply bg-tresr-input-bg;
-    @apply dark:bg-tresr-dark-background;
     @apply flex flex-col;
-    @apply !opacity-100 scale-100;
+    @apply scale-100 !opacity-100;
     @apply !visible;
-    @apply w-screen h-screen;
+    @apply h-screen w-screen;
+    @apply overflow-hidden; /* Prevent body scroll */
+  }
+
+  .dark .chatbotUI-container--fullscreen {
+    @apply bg-tresr-dark-background;
   }
 
   /*
@@ -645,54 +711,59 @@
 
   .chatbotUI-container--widget {
     @apply bg-tresr-input-bg;
-    @apply dark:bg-tresr-dark-background;
-    @apply bottom-16 right-5;
-    @apply rounded-lg shadow-lg;
+    @apply right-5 bottom-24; /* Adjusted to clear mobile floating buttons */
+    @apply rounded-xl shadow-2xl;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
-    @apply fixed w-96 max-w-sm;
-    min-height: 75vh;
+    @apply fixed w-[360px] max-w-[90vw];
+    min-height: 500px;
     max-height: 75vh;
+    @apply flex flex-col;
+    @apply border-tresr-border/20 border;
   }
 
   /* Dark Mode */
   .dark .chatbotUI-container--widget {
     @apply bg-tresr-dark-background;
+    @apply border-tresr-dark-border/20;
   }
 
   /* Show the Widget Container */
   .chatbotUI-container--widget.show {
-    @apply !opacity-100 !scale-100;
+    @apply !scale-100 !opacity-100;
     @apply !visible;
-    @apply flex flex-col;
   }
 
   /* Hide the Widget Container */
   .chatbotUI-container--widget.hide {
-    @apply !opacity-0 !scale-0;
-    @apply !hidden;
-    display: none;
+    @apply !scale-95 !opacity-0; /* Slight scale down for better exit anim */
+    @apply !invisible;
+    @apply pointer-events-none;
   }
 
   /* Mobile Optimization */
   @media (max-width: 640px) {
     /* Widget Mode */
     .chatbotUI-container--widget {
-      @apply w-full h-full bottom-0;
+      @apply right-0 bottom-0 left-0;
+      @apply h-full max-h-full w-full max-w-full;
       @apply rounded-none;
+      @apply border-none;
     }
   }
 
   /* Chatbot UI toggle button for the widget */
   .chatbotUI-toggle-button {
-    @apply fixed bottom-20 right-5;
-    @apply rounded-full shadow-sm;
+    @apply fixed right-5 bottom-8;
+    @apply rounded-full shadow-lg;
     @apply text-sm;
     @apply text-tresr-dark-text-color;
     @apply bg-tresr-primary;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
-    @apply p-4;
+    @apply h-14 w-14;
+    @apply flex items-center justify-center;
+    @apply hover:scale-110 active:scale-95;
     font-size: 24px;
     font-family: "Noto Color Emoji", sans-serif;
   }
@@ -706,25 +777,25 @@
   .chatbotUI-toggle-button.show {
     @apply !opacity-100;
     @apply !visible;
-    display: block;
+    @apply translate-y-0;
   }
 
   /* Hide the toggle button */
   .chatbotUI-toggle-button.hide {
     @apply !opacity-0;
-    @apply !hidden;
-    display: none;
+    @apply !invisible;
+    @apply translate-y-10; /* Slide down animation */
   }
 
   /* Close Button for Widget Mode */
   .chatbotUI-close-button {
-    @apply p-4;
-    @apply rounded-full shadow-sm;
-    @apply text-sm;
-    @apply bg-tresr-primary;
-    @apply text-tresr-title-color;
-    @apply hover:text-tresr-light;
+    @apply p-2;
+    @apply flex h-8 w-8 items-center justify-center;
+    @apply rounded-full;
+    @apply bg-tresr-primary/10 hover:bg-tresr-primary/20;
+    @apply text-tresr-navy dark:text-tresr-cream;
     @apply cursor-pointer;
+    @apply transition-colors;
   }
 
   /*
@@ -732,4 +803,65 @@
   End Chat Bot Widget Mode
   ########################
   */
+
+  /*
+  ########################
+  PWA Toast
+  ########################
+  */
+
+  .pwa-toast {
+    @apply fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-24;
+    @apply bg-slate-800 text-white;
+    @apply rounded-lg p-4 shadow-lg;
+    @apply z-[10000];
+    @apply flex flex-col gap-3;
+    @apply opacity-0;
+    @apply w-[90%] max-w-[400px];
+    @apply border border-slate-700;
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .pwa-toast.show {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .pwa-message {
+    @apply flex flex-col gap-1;
+  }
+
+  .pwa-title {
+    @apply text-[0.95rem] font-semibold;
+  }
+
+  .pwa-text {
+    @apply text-sm text-gray-400;
+  }
+
+  .pwa-actions {
+    @apply flex justify-end gap-2;
+  }
+
+  .pwa-button {
+    @apply rounded-md px-4 py-2 text-sm font-medium;
+    @apply cursor-pointer transition-colors duration-200;
+  }
+
+  .pwa-button.primary {
+    @apply border-none bg-blue-500 text-white;
+    @apply hover:bg-blue-600;
+  }
+
+  .pwa-button.secondary {
+    @apply border border-gray-600 bg-transparent text-gray-300;
+    @apply hover:bg-slate-700;
+  }
+
+  @media (min-width: 640px) {
+    .pwa-toast {
+      @apply right-5 bottom-5 left-auto;
+      @apply translate-x-0;
+      @apply w-auto;
+    }
+  }
 }

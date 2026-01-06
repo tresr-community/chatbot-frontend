@@ -1,6 +1,7 @@
 /*
 #########################
-Initialize
+Name: init.ts
+Description: Initialize the chatbot.
 #########################
 */
 

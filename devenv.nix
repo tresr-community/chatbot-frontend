@@ -269,25 +269,41 @@ in
             Actions
             ----------------
 
-            start - Start the chatbot frontend
-            stop - Stop the chatbot frontend
-            update - Update the chatbot frontend
-            check - Check the chatbot frontend
+            dev - Start the chatbot frontend in astro development mode
+            preview - Start the chatbot frontend in wrangler preview mode
+            stop - Stop the chatbot frontend in either development or preview mode
+            update - Update the chatbot frontend dependencies
+            check - Check the chatbot frontend source code
             "
             echo "$USAGE"
           ;;
-          "start" )
-            echo "Starting chatbot frontend..."1
+          "dev" )
+            echo "Starting chatbot frontend in astro development mode..."
             bun install
             bun run clean
             bun run build
             ./scripts/caddy.sh start
-            bun run preview
+            bun run dev -- --port 9100 &
+            tput reset
+            echo "Chatbot frontend started in development mode"
+          ;;
+          "preview" )
+            echo "Starting chatbot frontend in wrangler preview mode..."
+            bun install
+            bun run clean
+            bun run build
+            ./scripts/caddy.sh start
+            bun run preview &
+            tput reset
+            echo "Chatbot frontend started in preview mode"
           ;;
           "stop" )
             echo "Stopping chatbot frontend..."
             ./scripts/caddy.sh stop
-            pkill -f "bun run preview"
+            pkill -f "bun run preview" || true
+            pkill -f "bun run dev" || true
+            tput reset
+            echo "Chatbot frontend stopped"
           ;;
           "update" )
             echo "Updating chatbot frontend..."

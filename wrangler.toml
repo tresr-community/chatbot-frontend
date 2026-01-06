@@ -52,7 +52,7 @@ command = "bun run build"
 
 DEBUG = true
 
-TITLE = "tresr community chatbot (Development)"
+TITLE = "TRESR Community ChatBot (Development)"
 FOOTER_MESSAGE = "*** DEVELOPMENT ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_VERSION = "v1"
@@ -85,7 +85,7 @@ command = "bun run build"
 
 DEBUG = true
 
-TITLE = "tresr community chatbot (Preview)"
+TITLE = "TRESR Community ChatBot (Preview)"
 FOOTER_MESSAGE = "*** PREVIEW ENVIRONMENT ***"
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_VERSION = "v1"
@@ -123,8 +123,8 @@ command = "bun run build"
 
 DEBUG = false
 
-TITLE = "tresr community chatbot (Production)"
-FOOTER_MESSAGE = "Ron Jay, serving the tresr community since 2024."
+TITLE = "TRESR Community ChatBot (Production)"
+FOOTER_MESSAGE = "Ron Jay, serving the TRESR community since 2024."
 WELCOME_MESSAGE = "Hi, I'm Ron Jay."
 AI_BACKEND = "grok"
 AI_VERSION = "v1"

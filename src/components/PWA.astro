@@ -1,6 +1,22 @@
 ---
-// No frontmatter needed.
+// PWA.astro
+// Handles Service Worker registration and update notifications
 ---
+
+<div id="pwa-toast" class="pwa-toast" role="alert" aria-hidden="true">
+  <div class="pwa-content">
+    <div class="pwa-message">
+      <span class="pwa-title">Update Available</span>
+      <span class="pwa-text"
+        >A new version is available. Refresh to update.</span
+      >
+    </div>
+  </div>
+  <div class="pwa-actions">
+    <button id="pwa-refresh" class="pwa-button primary">Refresh</button>
+    <button id="pwa-dismiss" class="pwa-button secondary">Dismiss</button>
+  </div>
+</div>
 
 <script is:inline>
   if ("serviceWorker" in navigator) {
@@ -13,15 +29,49 @@
             registration.scope
           );
 
-          // Handle updates
+          // Function to show the update toast
+          function showUpdateToast(worker) {
+            const toast = document.getElementById("pwa-toast");
+            const refreshBtn = document.getElementById("pwa-refresh");
+            const dismissBtn = document.getElementById("pwa-dismiss");
+
+            if (!toast || !refreshBtn || !dismissBtn) return;
+
+            toast.classList.add("show");
+            toast.setAttribute("aria-hidden", "false");
+
+            refreshBtn.onclick = () => {
+              // Post message to SW to skip waiting if implemented
+              worker.postMessage({type: "SKIP_WAITING"});
+              // Reload the page
+              setTimeout(() => {
+                window.location.reload();
+              }, 100);
+            };
+
+            dismissBtn.onclick = () => {
+              toast.classList.remove("show");
+              toast.setAttribute("aria-hidden", "true");
+            };
+          }
+
+          // Check if there's already a waiting worker
+          if (registration.waiting) {
+            showUpdateToast(registration.waiting);
+          }
+
+          // Listen for new updates
           registration.addEventListener("updatefound", () => {
             const newWorker = registration.installing;
             if (newWorker) {
               newWorker.addEventListener("statechange", () => {
                 if (newWorker.state === "installed") {
-                  if (registration.active) {
+                  if (navigator.serviceWorker.controller) {
+                    // New update available
                     console.log("New content is available; please refresh.");
+                    showUpdateToast(newWorker);
                   } else {
+                    // Content is cached for offline use
                     console.log("Content is cached for offline use.");
                   }
                 }
@@ -32,6 +82,15 @@
         .catch((err) => {
           console.error("ServiceWorker registration failed: ", err);
         });
+
+      // Handle controller change (reload page when new SW takes over)
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
     });
   }
 </script>

@@ -1,9 +1,10 @@
 ---
 interface Props {
   isOpen: boolean;
+  title?: string;
 }
 
-const {isOpen} = Astro.props;
+const {isOpen, title = "Chat with Ron"} = Astro.props;
 ---
 
 <!-- Character Set for emoji support -->
@@ -24,7 +25,7 @@ const {isOpen} = Astro.props;
   class:list={["chatbotUI-container--widget", isOpen ? "show" : "hide"]}
 >
   <div class="chatbotUI-header">
-    <h3 class="chatbotUI-title">Chat with Ron</h3>
+    <h3 class="chatbotUI-title">{title}</h3>
     <button id="chatbot-close-button" aria-label="Close chat">×</button>
   </div>
 
