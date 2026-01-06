@@ -272,6 +272,7 @@ in
             start - Start the chatbot frontend
             stop - Stop the chatbot frontend
             update - Update the chatbot frontend
+            check - Check the chatbot frontend
             "
             echo "$USAGE"
           ;;
@@ -292,6 +293,12 @@ in
             echo "Updating chatbot frontend..."
             bun update --force --save
             devenv update
+          ;;
+          "check" )
+            echo "Checking chatbot frontend..."
+            rm -rf dist .astro || true
+            eslint-check
+            astro check
           ;;
           * )
             echo "Invalid action"
