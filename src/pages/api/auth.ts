@@ -12,7 +12,7 @@ const handler: APIRoute = async ({locals, request}) => {
     return new Response("Method Not Allowed", {status: 405});
   }
 
-  const env = locals.runtime.env as any;
+  const env = locals.runtime.env as unknown;
   console.debug("[API/auth] env keys:", Object.keys(env || {}));
 
   const aiSecret = env.AI_SECRET;
