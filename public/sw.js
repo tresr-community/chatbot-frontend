@@ -86,29 +86,67 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
 self.addEventListener("fetch", (event) => {
+  const url = new URL(event.request.url);
+
+  // Exclude API requests and chrome extensions from caching
   if (
     event.request.method !== "GET" ||
-    event.request.url.startsWith("chrome-extension://")
+    url.pathname.startsWith("/api/") ||
+    url.protocol.startsWith("chrome-extension")
   ) {
     return;
   }
 
+  // Handle Navigation Requests (HTML pages)
+  // Network First, Fallback to Cache
   if (event.request.mode === "navigate") {
-    return event.respondWith(fetch(event.request));
-  } else {
     event.respondWith(
-      (async () => {
-        const cachedResponse = await caches.match(event.request);
-        const networkFetch = fetch(event.request).then((response) => {
-          const cacheClone = response.clone();
+      fetch(event.request)
+        .then((response) => {
+          // If we got a valid response, clone and cache it
+          const responseClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, cacheClone);
+            cache.put(event.request, responseClone);
           });
           return response;
-        });
-        return cachedResponse || networkFetch;
-      })()
+        })
+        .catch(() => {
+          // If network fails, try to return the cached page
+          return caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            // If the specific page isn't cached, return a boiler plate response.
+            return new Response("You are offline.", {
+              status: 503,
+              statusText: "Service Unavailable",
+            });
+          });
+        })
     );
+    return;
   }
+
+  // Handle Static Assets (Images, CSS, JS)
+  // Stale-While-Revalidate: Return cache immediately, then update cache in background
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(event.request).then((networkResponse) => {
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+        });
+        return networkResponse;
+      });
+
+      // Return cached response if available, otherwise wait for network
+      return cachedResponse || fetchPromise;
+    })
+  );
 });

@@ -1,10 +1,14 @@
 ---
+interface Props {
+  title?: string;
+}
 
+const {title = "Chat with Ron"} = Astro.props;
 ---
 
 <div id="chatbot-fullscreen" class="chatbotUI-container--fullscreen">
   <div class="chatbotUI-header">
-    <h3 class="chatbotUI-title">Chat with Ron</h3>
+    <h3 class="chatbotUI-title">{title}</h3>
   </div>
 
   <div id="chatbot-body" class="chatbotUI-body">

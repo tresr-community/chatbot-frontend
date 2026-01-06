@@ -46,27 +46,26 @@ const {
   </head>
   <body>
     <Body
+      title={title}
       chatbotShowButton={chatbotShowButton}
       enableLoadingSpinner={enableLoadingSpinner}
       enableQuotes={enableQuotes}
       welcomeMessage={welcomeMessage}
     />
-    <scripts>
-      <PWA />
-      <Theme />
+    <PWA />
+    <Theme />
 
-      {enableQuotes && <Crypto />}
-      <ChatBot
-        title={title}
-        apiBackend={chatbotApiBackend}
-        apiVersion={chatbotApiVersion}
-        showButton={chatbotShowButton}
-        style={chatbotStyle}
-        type={chatbotType}
-        enableLoadingSpinner={enableLoadingSpinner}
-        debug={debug}
-      />
-    </scripts>
+    {enableQuotes && <Crypto />}
+    <ChatBot
+      title={title}
+      apiBackend={chatbotApiBackend}
+      apiVersion={chatbotApiVersion}
+      showButton={chatbotShowButton}
+      style={chatbotStyle}
+      type={chatbotType}
+      enableLoadingSpinner={enableLoadingSpinner}
+      debug={debug}
+    />
     {
       enableQuotes && (
         <footer>

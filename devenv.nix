@@ -283,11 +283,15 @@ in
             bun run build
             ./scripts/caddy.sh start
             bun run preview &
+            tput reset
+            echo "Chatbot frontend started"
           ;;
           "stop" )
             echo "Stopping chatbot frontend..."
             ./scripts/caddy.sh stop
             pkill -f "bun run preview"
+            tput reset
+            echo "Chatbot frontend stopped"
           ;;
           "update" )
             echo "Updating chatbot frontend..."

@@ -1,6 +1,7 @@
 /*
 #########################
-Widget
+Name: widget.ts
+Description: Widget chatbot functions.
 #########################
 */
 
@@ -32,6 +33,9 @@ export function setupWidget(config: ChatbotConfig) {
     toggleButton.addEventListener("click", () => {
       console.debug("Opening chatbot widget...");
 
+      // Notify parent window
+      window.parent.postMessage({type: "chatbot-open"}, "*");
+
       // Hide the button
       console.debug("Hiding toggle button...");
       toggleButton.classList.remove("show");
@@ -59,6 +63,9 @@ export function setupWidget(config: ChatbotConfig) {
 
     closeButton.addEventListener("click", () => {
       console.debug("Closing chatbot widget...");
+
+      // Notify parent window
+      window.parent.postMessage({type: "chatbot-close"}, "*");
 
       // Hide the widget
       console.debug("Hiding widget...");

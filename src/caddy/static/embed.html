@@ -1,16 +1,14 @@
 <!doctype html>
-
 <!--
   This is an example of how to embed the chatbot in a static HTML page.
 
   URL Parameters:
-  - title: The title of the chatbot
-  - style: The style of the chatbot (light or dark)
-  - apiVersion: The version of the API to use
-  - apiBackend: The backend to use
-  - debug: Whether to enable debug mode
+  - data-title: The title of the chatbot
+  - data-style: The style of the chatbot (light or dark)
+  - data-api-version: The version of the API to use
+  - data-api-backend: The backend to use
+  - data-debug: Whether to enable debug mode
 -->
-
 <html lang="en">
   <head>
     <title>chatbot Embed Test</title>
@@ -20,22 +18,18 @@
     <h1>Chatbot</h1>
     <p>This is a test page that embeds the chatbot</p>
 
-    <!-- Chatbot Container -->
-    <div id="chatbot-container"></div>
-
     <footer>
       <p>This is an example footer</p>
     </footer>
-  </body>
 
-  <script
-    src="https://localhost:9000/embed"
-    title="Chatbot"
-    style="dark"
-    apiVersion="v1"
-    apiBackend="chatbot"
-    debug="true"
-    type="module"
-    defer
-  ></script>
+    <script
+      src="https://localhost:9000/loader.js"
+      data-title="Chatbot"
+      data-style="dark"
+      data-api-version="v1"
+      data-api-backend="chatbot"
+      data-debug="true"
+      defer
+    ></script>
+  </body>
 </html>

@@ -1,6 +1,28 @@
 ---
 // Layouts
 import EmbedLayout from "../layouts/Embed.astro";
+
+// Get query parameters
+const {searchParams} = Astro.url;
+
+const title = searchParams.get("title") || undefined;
+const styleParam = searchParams.get("style");
+const style =
+  styleParam === "light" || styleParam === "dark" ? styleParam : undefined;
+const apiVersion = searchParams.get("apiVersion") || undefined;
+const apiBackend = searchParams.get("apiBackend") || undefined;
+
+// Parse debug parameter
+let debug: boolean | undefined = undefined;
+if (searchParams.has("debug")) {
+  debug = searchParams.get("debug") === "true";
+}
 ---
 
-<EmbedLayout />
+<EmbedLayout
+  title={title}
+  style={style}
+  apiVersion={apiVersion}
+  apiBackend={apiBackend}
+  debug={debug}
+/>

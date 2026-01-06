@@ -1,0 +1,115 @@
+/*
+########################
+Common Layout
+########################
+*/
+
+body {
+  @apply flex flex-col;
+  @apply bg-cover bg-center bg-no-repeat;
+  @apply font-sans antialiased;
+  @apply bg-tresr-background;
+  @apply text-tresr-text-color;
+  @apply z-0;
+}
+
+.dark body {
+  @apply bg-tresr-dark-background;
+  @apply text-tresr-dark-text-color;
+}
+
+.bg-container {
+  @apply bg-cover bg-center bg-no-repeat;
+  @apply flex flex-1 flex-col;
+  @apply w-full;
+  @apply z-10;
+  background-image: url("/images/banner.jpg");
+  background-attachment: fixed;
+}
+
+.bg-container::before {
+  @apply bg-cover bg-center bg-no-repeat;
+  @apply flex flex-1 flex-col;
+  @apply absolute inset-0;
+  @apply z-10;
+  @apply bg-tresr-overlay-light;
+  content: "";
+}
+
+.dark .bg-container::before {
+  @apply bg-tresr-overlay;
+}
+
+.content {
+  @apply relative;
+  @apply z-20;
+  @apply flex flex-1 flex-col;
+}
+
+.theme-switcher-button {
+  @apply transition duration-150 ease-in-out;
+  @apply hover:bg-tresr-dark-light/90 focus:ring-2 focus:ring-offset-2 focus:outline-none;
+  @apply fixed top-4 right-4 cursor-pointer rounded-full p-4 transition-colors duration-300;
+  @apply bg-tresr-dark-light;
+  @apply text-tresr-light;
+  @apply z-50;
+  font-size: 24px;
+  font-family: "Noto Color Emoji", sans-serif;
+}
+
+.dark .theme-switcher-button {
+  @apply hover:bg-tresr-light/75;
+  @apply bg-tresr-light;
+  @apply text-tresr-dark-light;
+}
+
+.logo {
+  @apply fixed top-2 left-2 w-20 sm:w-48 md:w-48 lg:w-48 xl:w-48 2xl:w-48;
+  @apply z-50;
+}
+
+/*
+########################
+Home
+########################
+*/
+
+/* The container for the image of Ron Jay */
+.container-ron-jay {
+  @apply relative flex items-end;
+  @apply min-h-screen pb-[60px];
+  @apply mx-auto w-full max-w-7xl;
+  @apply px-4 md:px-6 lg:px-8;
+  @apply z-30;
+}
+
+/* The image of Ron Jay */
+.image-ron-jay {
+  @apply relative;
+  @apply h-[50vh] sm:h-[75vh];
+  @apply w-auto;
+  @apply flex-shrink-0;
+  @apply self-end;
+  @apply z-40;
+  @apply -mb-[60px];
+  @apply object-contain;
+  @apply object-bottom;
+  @apply min-w-[200px];
+}
+
+/* Footer */
+.footer-message {
+  content: "";
+  background-color: var(--color-tresr-bubble-bg);
+  color: var(--color-tresr-bubble-text);
+  @apply fixed inset-x-0 bottom-0 w-full p-4 text-center font-semibold italic md:p-4;
+  @apply text-sm md:text-lg xl:text-xl;
+  @apply bg-tresr-gold;
+  @apply text-tresr-navy;
+  @apply z-50;
+}
+
+.dark .footer-message {
+  @apply bg-tresr-navy;
+  @apply text-tresr-gold;
+}

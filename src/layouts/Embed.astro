@@ -8,11 +8,11 @@ import ChatBot from "../components/ChatBot.astro";
 
 // Data attributes
 export interface Props {
-  title?: string;
-  style?: "light" | "dark";
-  apiVersion?: string;
-  apiBackend?: string;
-  debug?: boolean;
+  title?: string | undefined;
+  style?: "light" | "dark" | undefined;
+  apiVersion?: string | undefined;
+  apiBackend?: string | undefined;
+  debug?: boolean | undefined;
 }
 
 const {
@@ -28,19 +28,55 @@ const chatbotType = "widget";
 const enableLoadingSpinner = false;
 ---
 
-<div id="chatbot-container">
-  <Widget isOpen={false} />
-</div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style is:global>
+      html,
+      body {
+        background-color: transparent !important;
+        background-image: none !important;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-<scripts>
-  <ChatBot
-    type={chatbotType}
-    showButton={chatbotShowButton}
-    enableLoadingSpinner={enableLoadingSpinner}
-    debug={debug as boolean}
-    title={title}
-    style={style as "light" | "dark"}
-    apiVersion={apiVersion}
-    apiBackend={apiBackend}
-  />
-</scripts>
+      .chatbotUI-toggle-button {
+        position: fixed !important;
+        bottom: 0 !important;
+        right: 0 !important;
+      }
+
+      .chatbotUI-container--widget {
+        position: fixed !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        min-height: 0 !important;
+        border-radius: 0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chatbot-container">
+      <Widget isOpen={false} title={title} />
+    </div>
+
+    <ChatBot
+      type={chatbotType}
+      showButton={chatbotShowButton}
+      enableLoadingSpinner={enableLoadingSpinner}
+      debug={debug as boolean}
+      title={title}
+      style={style as "light" | "dark"}
+      apiVersion={apiVersion}
+      apiBackend={apiBackend}
+    />
+  </body>
+</html>

@@ -1,6 +1,7 @@
 /*
 #########################
-Fullscreen
+Name: fullscreen.ts
+Description: Fullscreen chatbot functions.
 #########################
 */
 

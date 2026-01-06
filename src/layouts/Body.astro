@@ -4,6 +4,7 @@ import Widget from "../components/Widget.astro";
 import Fullscreen from "../components/Fullscreen.astro";
 
 interface Props {
+  title?: string;
   welcomeMessage: string;
   enableQuotes: boolean;
   enableLoadingSpinner: boolean;
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const {
+  title = "Chat with Ron",
   welcomeMessage = "Welcome Message goes here",
   enableQuotes = true,
   enableLoadingSpinner = true,
@@ -48,11 +50,11 @@ const isChatWidgetOpen = chatbotShowButton ? false : true;
     {
       chatbotShowButton ? (
         <div id="chatbot-container">
-          <Widget isOpen={isChatWidgetOpen} />
+          <Widget isOpen={isChatWidgetOpen} title={title} />
         </div>
       ) : (
         <div id="chatbot-container">
-          <Fullscreen />
+          <Fullscreen title={title} />
         </div>
       )
     }
