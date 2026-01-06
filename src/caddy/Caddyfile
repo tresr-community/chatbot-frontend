@@ -105,7 +105,7 @@ localhost:9000 {
 
 	# Frontend routes
 	@frontend-routes {
-		path /api/* /embed /fullscreen
+		path / /api/* /embed /fullscreen
 	}
 	handle @frontend-routes {
 		reverse_proxy localhost:9100 {

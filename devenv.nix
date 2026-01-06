@@ -282,7 +282,7 @@ in
             bun run clean
             bun run build
             ./scripts/caddy.sh start
-            bun run preview
+            bun run preview &
           ;;
           "stop" )
             echo "Stopping chatbot frontend..."
