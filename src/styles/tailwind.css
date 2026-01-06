@@ -89,7 +89,7 @@
 
   body {
     @apply flex flex-col;
-    @apply bg-center bg-no-repeat bg-cover;
+    @apply bg-cover bg-center bg-no-repeat;
     @apply font-sans antialiased;
     @apply bg-tresr-background;
     @apply text-tresr-text-color;
@@ -102,8 +102,8 @@
   }
 
   .bg-container {
-    @apply bg-center bg-no-repeat bg-cover;
-    @apply flex flex-col flex-1;
+    @apply bg-cover bg-center bg-no-repeat;
+    @apply flex flex-1 flex-col;
     @apply w-full;
     @apply z-10;
     background-image: url("/images/banner.jpg");
@@ -111,8 +111,8 @@
   }
 
   .bg-container::before {
-    @apply bg-center bg-no-repeat bg-cover;
-    @apply flex flex-col flex-1;
+    @apply bg-cover bg-center bg-no-repeat;
+    @apply flex flex-1 flex-col;
     @apply absolute inset-0;
     @apply z-10;
     @apply bg-tresr-overlay;
@@ -122,13 +122,13 @@
   .content {
     @apply relative;
     @apply z-20;
-    @apply flex flex-col flex-1;
+    @apply flex flex-1 flex-col;
   }
 
   .theme-switcher-button {
     @apply transition duration-150 ease-in-out;
     @apply hover:bg-tresr-dark-light/90 focus:ring-2 focus:ring-offset-2 focus:outline-none;
-    @apply fixed p-4 transition-colors duration-300 rounded-full cursor-pointer top-4 right-4;
+    @apply fixed top-4 right-4 cursor-pointer rounded-full p-4 transition-colors duration-300;
     @apply bg-tresr-dark-light;
     @apply text-tresr-light;
     @apply z-50;
@@ -143,7 +143,7 @@
   }
 
   .logo {
-    @apply fixed w-20 top-2 left-2 sm:w-48 md:w-48 lg:w-48 xl:w-48 2xl:w-48;
+    @apply fixed top-2 left-2 w-20 sm:w-48 md:w-48 lg:w-48 xl:w-48 2xl:w-48;
     @apply z-50;
   }
 
@@ -163,7 +163,7 @@
   .container-ron-jay {
     @apply relative flex items-end;
     @apply min-h-screen pb-[60px];
-    @apply w-full max-w-7xl mx-auto;
+    @apply mx-auto w-full max-w-7xl;
     @apply px-4 md:px-6 lg:px-8;
     @apply z-30;
   }
@@ -241,7 +241,7 @@
     content: "";
     background-color: var(--color-tresr-bubble-bg);
     color: var(--color-tresr-bubble-text);
-    @apply fixed inset-x-0 bottom-0 w-full p-4 italic font-semibold text-center md:p-4;
+    @apply fixed inset-x-0 bottom-0 w-full p-4 text-center font-semibold italic md:p-4;
     @apply text-sm md:text-lg xl:text-xl;
     @apply bg-tresr-gold;
     @apply text-tresr-navy;
@@ -272,11 +272,11 @@
     height: 32px;
 
     /* Responsive sizes */
-    @apply sm:w-16 sm:h-16;
-    @apply md:w-16 md:h-16;
-    @apply lg:w-16 lg:h-16;
-    @apply xl:w-16 xl:h-16;
-    @apply 2xl:w-16 2xl:h-16;
+    @apply sm:h-16 sm:w-16;
+    @apply md:h-16 md:w-16;
+    @apply lg:h-16 lg:w-16;
+    @apply xl:h-16 xl:w-16;
+    @apply 2xl:h-16 2xl:w-16;
 
     /* Left aligned */
     @apply float-left clear-left mr-2;
@@ -291,11 +291,11 @@
     height: 24px;
 
     /* Responsive sizes */
-    @apply sm:w-16 sm:h-16;
-    @apply md:w-16 md:h-16;
-    @apply lg:w-16 lg:h-16;
-    @apply xl:w-16 xl:h-16;
-    @apply 2xl:w-16 2xl:h-16;
+    @apply sm:h-16 sm:w-16;
+    @apply md:h-16 md:w-16;
+    @apply lg:h-16 lg:w-16;
+    @apply xl:h-16 xl:w-16;
+    @apply 2xl:h-16 2xl:w-16;
 
     /* Right aligned */
     @apply float-right clear-right ml-2;
@@ -306,7 +306,7 @@
   .messageBubble-container {
     @apply flex;
     @apply items-start;
-    @apply gap-2.5 ml-4 mr-4;
+    @apply mr-4 ml-4 gap-2.5;
   }
 
   .messageBubble {
@@ -340,7 +340,7 @@
 
   /* Message bubble for right-side conversation */
   .messageBubble-right {
-    @apply rounded-tr-xl rounded-bl-xl rounded-tl-xl;
+    @apply rounded-tl-xl rounded-tr-xl rounded-bl-xl;
     @apply self-end;
   }
 
@@ -357,7 +357,7 @@
   }
 
   .typing-dot {
-    @apply w-3 h-3;
+    @apply h-3 w-3;
     @apply bg-current;
     @apply rounded-full;
     opacity: 0.4;
@@ -429,12 +429,15 @@
 
   /* Markdown Links in Chat */
   .chatbotUI-messages a {
-    @apply underline;
+    @apply font-bold underline;
     @apply text-tresr-link;
     @apply hover:text-tresr-link-hover;
-    @apply dark:text-tresr-link-dark;
-    @apply dark:hover:text-tresr-link-hover-dark;
     @apply transition-colors duration-200;
+  }
+
+  .dark .chatbotUI-messages a {
+    @apply text-tresr-link-dark;
+    @apply hover:text-tresr-link-hover-dark;
   }
 
   /* Chat Input Form */
@@ -444,7 +447,7 @@
     @apply flex;
     @apply text-sm font-medium;
     @apply bg-tresr-bubble-bg;
-    @apply border border-tresr-input-border;
+    @apply border-tresr-input-border border;
     @apply w-full;
     @apply sticky bottom-0;
     @apply z-[9999];
@@ -467,7 +470,7 @@
     @apply rounded-l-lg;
     @apply bg-tresr-input-bg;
     @apply text-tresr-input-text;
-    @apply focus:outline-none focus:ring-2;
+    @apply focus:ring-2 focus:outline-none;
     @apply focus:ring-tresr-link;
     @apply placeholder-tresr-placeholder;
     @apply border;
@@ -627,9 +630,9 @@
     @apply bg-tresr-input-bg;
     @apply dark:bg-tresr-dark-background;
     @apply flex flex-col;
-    @apply !opacity-100 scale-100;
+    @apply scale-100 !opacity-100;
     @apply !visible;
-    @apply w-screen h-screen;
+    @apply h-screen w-screen;
   }
 
   /*
@@ -647,7 +650,7 @@
   .chatbotUI-container--widget {
     @apply bg-tresr-input-bg;
     @apply dark:bg-tresr-dark-background;
-    @apply bottom-16 right-5;
+    @apply right-5 bottom-16;
     @apply rounded-lg shadow-lg;
     @apply transform transition-all duration-300 ease-in-out;
     @apply z-[9999];
@@ -663,14 +666,14 @@
 
   /* Show the Widget Container */
   .chatbotUI-container--widget.show {
-    @apply !opacity-100 !scale-100;
+    @apply !scale-100 !opacity-100;
     @apply !visible;
     @apply flex flex-col;
   }
 
   /* Hide the Widget Container */
   .chatbotUI-container--widget.hide {
-    @apply !opacity-0 !scale-0;
+    @apply !scale-0 !opacity-0;
     @apply !hidden;
     display: none;
   }
@@ -679,14 +682,14 @@
   @media (max-width: 640px) {
     /* Widget Mode */
     .chatbotUI-container--widget {
-      @apply w-full h-full bottom-0;
+      @apply bottom-0 h-full w-full;
       @apply rounded-none;
     }
   }
 
   /* Chatbot UI toggle button for the widget */
   .chatbotUI-toggle-button {
-    @apply fixed bottom-20 right-5;
+    @apply fixed right-5 bottom-20;
     @apply rounded-full shadow-sm;
     @apply text-sm;
     @apply text-tresr-dark-text-color;
