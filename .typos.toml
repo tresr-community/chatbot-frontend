@@ -14,7 +14,10 @@ extend-ignore-re = [
 hodling = "hodling"
 decentralize = "decentralize"
 decentralized = "decentralized"
+decentralization = "decentralization"
 decentralizing = "decentralizing"
+FOMO = "FOMO"
+FOM = "FOM"
 
 # HTML American spelling.
 analyzer = "analyzer"
@@ -54,10 +57,12 @@ serialize = "serialize"
 serialized = "serialized"
 serializing = "serializing"
 synchronize = "synchronize"
+synchronizing = "synchronizing"
 unauthorized = "unauthorized"
 utilize = "utilize"
 utilized = "utilized"
 utilizing = "utilizing"
+visualizing = "visualizing"
 
 [files]
 
