@@ -20,7 +20,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "@types/postcss-import": "14.0.3",
     "@typescript-eslint/eslint-plugin": "8.54.0",
-    "@typescript-eslint/utils": "8.54.0",
+    "@typescript-eslint/utils": "8.55.0",
     "autoprefixer": "10.4.24",
     "cssnano": "7.1.2",
     "eslint": "10.0.0",
