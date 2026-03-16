@@ -245,8 +245,8 @@ export const ChatbotUtils = {
   ) {
     console.debug("Sending message to chatbot API:", message);
 
-    let errorMessage = null;
-    let replyMessage = null;
+    let errorMessage!: string | null;
+    let replyMessage!: string | null;
 
     try {
       const response = await fetch(chatbotAuthProxy, {
@@ -267,7 +267,10 @@ export const ChatbotUtils = {
         errorMessage = `HTTP error! status: ${response.status}`;
         replyMessage = errorMessage;
       } else {
-        const data = await response.json();
+        const data = (await response.json()) as {
+          error?: string;
+          reply?: string;
+        };
         if (data.error) {
           errorMessage = data.error;
         }

@@ -2,14 +2,16 @@
 // Layouts
 import Layout from "../layouts/Layout.astro";
 
+import {env} from "cloudflare:workers";
+
 // Cloudflare Environment Variables
-const env = Astro.locals.runtime.env;
-const title = env.TITLE;
-const footerMessage = env.FOOTER_MESSAGE;
-const welcomeMessage = env.WELCOME_MESSAGE;
-const chatbotApiVersion = env.AI_VERSION;
-const chatbotApiBackend = env.AI_BACKEND;
-const debug = env.DEBUG;
+const title = env.TITLE ?? "TRESR Community ChatBot";
+const footerMessage =
+  env.FOOTER_MESSAGE ?? "Ron Jay, serving the TRESR community since 2024.";
+const welcomeMessage = env.WELCOME_MESSAGE ?? "Hi, I'm Ron Jay.";
+const chatbotApiVersion = env.AI_VERSION ?? "v1";
+const chatbotApiBackend = env.AI_BACKEND ?? "chatbot";
+const debug = env.DEBUG ?? false;
 
 // chatbot Configuration
 const chatbotType = "fullscreen";

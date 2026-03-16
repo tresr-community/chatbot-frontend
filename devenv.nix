@@ -21,7 +21,7 @@ let
     astro-language-server
     cacert
     caddy
-    certbot-full
+    #certbot-full
     direnv
     figlet
     git

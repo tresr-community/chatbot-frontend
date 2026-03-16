@@ -1,4 +1,3 @@
----
 inputs:
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
@@ -9,13 +8,17 @@ inputs:
     inputs:
       nixpkgs:
         follows: nixpkgs
+  git-hooks:
+    url: github:cachix/git-hooks.nix
+    inputs:
+      nixpkgs:
+        follows: nixpkgs
 allowUnfree: true
 clean:
   enabled: false
   keep:
     - EDITOR
     - USER
-impure: true
 
 # Not setting provider or profile here to allow user to configure it
 # in the ~/.config/secretspec/config.toml

@@ -74,5 +74,6 @@ extend-exclude = [
   ".direnv",
   ".git",
   "secrets",
-  "vendor"
+  "vendor",
+  "worker-configuration.d.ts"
 ]
