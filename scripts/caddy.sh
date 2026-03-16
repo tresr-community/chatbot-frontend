@@ -9,7 +9,7 @@ CADDY_PORT=9000
 CADDY_LOG=caddy.log
 
 # Path to your Caddyfile
-CADDYFILE_PATH="$(pwd)/src/caddy/Caddyfile"
+CADDYFILE_PATH="$(pwd)/caddy/Caddyfile"
 
 # The Docker image of Caddy
 CADDY_DOCKER_IMAGE="docker.io/caddy:latest"
@@ -93,7 +93,7 @@ start_caddy_docker() {
 		--rm \
 		--detach \
 		-p 9000:9000 \
-		-v "$(pwd)/config/Caddyfile:/etc/caddy/Caddyfile" \
+		-v "$(pwd)/caddy/Caddyfile:/etc/caddy/Caddyfile" \
 		-v caddy_data:/data \
 		-v caddy_config:/config \
 		--add-host=host.docker.internal:host-gateway \

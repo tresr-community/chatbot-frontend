@@ -1,2 +1,4 @@
 # Ignore the caddy example page.
-src/caddy/static/embed.html
+caddy/static/embed.html
+# Generated Cloudflare worker types
+worker-configuration.d.ts

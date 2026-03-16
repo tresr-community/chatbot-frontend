@@ -58,8 +58,13 @@ export default tseslint.config(
       },
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": ["warn", {argsIgnorePattern: "^_"}],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {argsIgnorePattern: "^_", varsIgnorePattern: "^_"},
+      ],
+      "no-unused-vars": "off",
       "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/triple-slash-reference": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "prettier/prettier": "error",
     },
@@ -159,7 +164,10 @@ export default tseslint.config(
       },
     },
     rules: {
-      "no-unused-vars": "warn",
+      "no-unused-vars": [
+        "warn",
+        {argsIgnorePattern: "^_", varsIgnorePattern: "^_"},
+      ],
       "no-console": ["warn", {allow: ["warn", "error", "debug"]}],
     },
   }

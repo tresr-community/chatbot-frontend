@@ -1,9 +1,17 @@
 import type {APIRoute} from "astro";
+import {env} from "cloudflare:workers";
 
 export const prerender = false;
 
 type Fetcher = {
-  fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response>;
+  fetch(_input: RequestInfo | URL, _init?: RequestInit): Promise<Response>;
+};
+
+type ChatRequestBody = {
+  chatbotAPIBase: string;
+  message: string;
+  version?: string;
+  backend: string;
 };
 
 const getEnvString = (env: unknown, key: string): string => {
@@ -30,7 +38,7 @@ const getEnvFetcher = (env: unknown, key: string): Fetcher | undefined => {
   return undefined;
 };
 
-const handler: APIRoute = async ({locals, request}) => {
+const handler: APIRoute = async ({request}) => {
   console.debug(
     `[API/auth] POST from ${request.headers.get("Origin")} | method=${request.method}`
   );
@@ -40,7 +48,7 @@ const handler: APIRoute = async ({locals, request}) => {
     return new Response("Method Not Allowed", {status: 405});
   }
 
-  const env = locals.runtime.env as unknown;
+  // env is imported from cloudflare:workers
   console.debug("[API/auth] env keys:", Object.keys(env || {}));
 
   const aiSecret = getEnvString(env, "AI_SECRET");
@@ -59,7 +67,12 @@ const handler: APIRoute = async ({locals, request}) => {
     console.error(`[API/auth] JSON parse fail: ${e} → 400`);
     return new Response("Invalid JSON", {status: 400});
   }
-  const {chatbotAPIBase, message, version = "v1", backend} = json;
+  const {
+    chatbotAPIBase,
+    message,
+    version = "v1",
+    backend,
+  } = json as ChatRequestBody;
   console.debug(
     `[API/auth] parsed: API=${chatbotAPIBase}, msg_len=${message?.length}, v=${version}, b=${backend}`
   );

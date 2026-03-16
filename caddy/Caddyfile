@@ -67,7 +67,7 @@ localhost:9000 {
 
 	handle /test/* {
 		uri strip_prefix /test
-		root * src/caddy/static
+		root * caddy/static
 		file_server {
 			browse
 		}
