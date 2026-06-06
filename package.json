@@ -37,7 +37,7 @@
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "4.3.0",
     "tsx": "4.22.0",
-    "typescript-eslint": "8.59.3",
+    "typescript-eslint": "8.60.1",
     "wrangler": "^4.74.0"
   },
   "name": "chatbot-frontend",
