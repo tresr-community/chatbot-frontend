@@ -5,7 +5,7 @@
     "@astrojs/tailwind": "6.0.2",
     "@typescript-eslint/parser": "8.61.0",
     "astro": "6.4.6",
-    "dompurify": "3.4.10",
+    "dompurify": "3.4.11",
     "marked": "18.0.5",
     "node-emoji": "2.2.0",
     "typescript": "6.0.3"
