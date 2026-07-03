@@ -28,7 +28,7 @@ let
     hello
     jq
     just
-    nodePackages.postcss
+    postcss
     nss_latest
     secretspec
     toml-cli
@@ -51,8 +51,8 @@ in
   };
 
   cachix = {
+    enable = false;
     pull = [
-      "pre-commit-hooks"
       "tresr-community"
     ];
     push = "tresr-community";
@@ -127,7 +127,12 @@ in
       check-symlinks.enable = true;
       check-yaml.enable = true;
       commitizen.enable = true;
-      convco.enable = true;
+      convco = {
+        enable = true;
+        settings = {
+          configPath = ".versionrc";
+        };
+      };
       deadnix.enable = true;
       editorconfig-checker.enable = true;
       eslint.enable = false;
@@ -158,7 +163,7 @@ in
         };
       };
       mixed-line-endings.enable = true;
-      nixfmt-rfc-style.enable = true;
+      nixfmt.enable = true;
       pre-commit-hook-ensure-sops = {
         enable = true;
         excludes = [
