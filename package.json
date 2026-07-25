@@ -19,7 +19,7 @@
     "@tailwindcss/typography": "0.5.20",
     "@tailwindcss/vite": "^4.2.1",
     "@types/postcss-import": "14.0.3",
-    "@typescript-eslint/eslint-plugin": "8.64.0",
+    "@typescript-eslint/eslint-plugin": "8.65.0",
     "@typescript-eslint/utils": "8.64.0",
     "autoprefixer": "10.5.2",
     "cssnano": "8.0.2",
