@@ -6,7 +6,7 @@
     "@typescript-eslint/parser": "8.66.0",
     "astro": "7.1.6",
     "dompurify": "3.4.13",
-    "marked": "18.0.7",
+    "marked": "18.0.9",
     "node-emoji": "2.2.0",
     "typescript": "7.0.2"
   },
