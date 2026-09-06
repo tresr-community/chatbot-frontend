@@ -17,7 +17,7 @@
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/forms": "0.5.11",
     "@tailwindcss/typography": "0.5.20",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/postcss-import": "14.0.3",
     "@typescript-eslint/eslint-plugin": "8.69.0",
     "@typescript-eslint/utils": "8.68.0",
@@ -38,7 +38,7 @@
     "tailwindcss": "4.3.3",
     "tsx": "4.23.13",
     "typescript-eslint": "8.69.0",
-    "wrangler": "^4.74.0"
+    "wrangler": "^4.129.0"
   },
   "name": "chatbot-frontend",
   "private": true,
