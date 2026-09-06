@@ -30,7 +30,6 @@ let
     just
     postcss
     nss_latest
-    secretspec
     toml-cli
     trivy
     worker-build
